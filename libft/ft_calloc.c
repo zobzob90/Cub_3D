@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 14:17:14 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/01 14:48:38 by ertrigna         ###   ########.fr       */
+/*   Created: 2025/05/19 14:12:24 by ertrigna          #+#    #+#             */
+/*   Updated: 2025/05/19 14:12:44 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../libft.h"
 
-int	main(int ac, char *av[])
+void	*ft_calloc(size_t nmemb, size_t size)
 {
+	void	*s;
 
+	if (size && (nmemb > SIZE_MAX / size))
+		return (NULL);
+	s = malloc(nmemb * size);
+	if (!s)
+		return (NULL);
+	ft_bzero (s, nmemb * size);
+	return (s);
 }

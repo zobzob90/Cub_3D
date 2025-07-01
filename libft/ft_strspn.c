@@ -1,18 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strspn.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 14:17:14 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/01 14:48:38 by ertrigna         ###   ########.fr       */
+/*   Created: 2025/06/09 13:50:04 by ertrigna          #+#    #+#             */
+/*   Updated: 2025/06/09 14:23:09 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int ac, char *av[])
+size_t	ft_strspn(const char *s, const char *accept)
 {
+	size_t	i;
+	size_t	j;
 
+	i = 0;
+	while (s[i])
+	{
+		j = 0;
+		while (accept[j])
+		{
+			if (s[i] == accept[j])
+				break ;
+			j++;
+		}
+		if (!accept[j])
+			break ;
+		i++;
+	}
+	return (i);
 }

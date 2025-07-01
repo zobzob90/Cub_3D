@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vdeliere <vdeliere@student.42.fr>          #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 14:17:14 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/01 14:48:38 by ertrigna         ###   ########.fr       */
+/*   Created: 2025-05-21 09:13:10 by vdeliere          #+#    #+#             */
+/*   Updated: 2025-05-21 09:13:10 by vdeliere         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int ac, char *av[])
+char	*ft_strcpy(char *dest, char *src)
 {
+	int	i;
 
+	i = 0;
+	while (src[i])
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	return (dest);
 }

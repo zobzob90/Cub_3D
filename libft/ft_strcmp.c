@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 14:17:14 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/01 14:48:38 by ertrigna         ###   ########.fr       */
+/*   Created: 2025/03/10 12:57:55 by ertrigna          #+#    #+#             */
+/*   Updated: 2025/03/10 12:58:55 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int ac, char *av[])
+int	ft_strcmp(const char *s1, const char *s2)
 {
+	int	i;
 
+	i = 0;
+	while (s1[i] && s2[i] && (s1[i] == s2[i]))
+		i++;
+	return (s1[i] - s2[i]);
 }

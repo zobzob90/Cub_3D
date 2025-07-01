@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 14:17:14 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/01 14:48:38 by ertrigna         ###   ########.fr       */
+/*   Created: 2025/03/10 11:34:08 by ertrigna          #+#    #+#             */
+/*   Updated: 2025/03/10 11:35:08 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	main(int ac, char *av[])
+void	ft_putendl_fd(char *s, int fd)
 {
-
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }

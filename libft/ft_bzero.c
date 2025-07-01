@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 14:17:14 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/01 14:48:38 by ertrigna         ###   ########.fr       */
+/*   Created: 2025/05/19 14:12:07 by ertrigna          #+#    #+#             */
+/*   Updated: 2025/05/19 14:12:17 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../libft.h"
 
-int	main(int ac, char *av[])
+void	ft_bzero(void *s, size_t n)
 {
+	size_t			i;
+	unsigned char	*scopy;
 
+	i = 0;
+	scopy = (unsigned char *)s;
+	while (i < n)
+	{
+		scopy[i] = '\0';
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:10:47 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/01 15:15:19 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/04 11:07:00 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,17 @@ typedef struct s_map
 	t_color		ceiling;
 	t_player	player;
 } t_map;
+
+
+/*INIT*/
+void	init_color(t_color *color);
+void	init_texture(t_texture *texture);
+void	init_player(t_player *player);
+void	init_map(t_map *map);
+
+/*FREE*/
+void	free_texture(t_texture *texture);
+void	free_map(t_map *map);
+void	free_all(t_map *map);
 
 #endif

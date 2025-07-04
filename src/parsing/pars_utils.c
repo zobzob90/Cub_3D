@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:16:35 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/04 13:08:58 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/04 14:47:27 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ bool	is_texture(const char *line)
 	while (*line == ' ' || *line == '\t')
 		line++;
 	if (!ft_strncmp(line, "NO", 3) || !ft_strncmp(line, "SO", 3)
-		|| !ft_strncmp(line, "EA", 3) || ft_strncmp(line, "WE", 3))
+		|| !ft_strncmp(line, "EA", 3) || !ft_strncmp(line, "WE", 3))
 		return (true);
 	return (false);
 }

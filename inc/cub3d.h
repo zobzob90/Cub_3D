@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:10:47 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/04 11:07:00 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/04 15:37:16 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,13 @@ typedef struct s_player
 	char	orientation;
 } t_player;
 
+typedef struct s_door
+{
+	int		x;
+	int		y;
+	bool	open;
+} t_door;
+
 typedef struct s_map
 {
 	char		**grid;
@@ -76,8 +83,21 @@ typedef struct s_map
 	t_color		floor;
 	t_color		ceiling;
 	t_player	player;
+	t_door		door;
+	int			num_door;
 } t_map;
 
+/*PARS UTILS*/
+char	**read_files(char *path);
+bool	is_texture(const char *line);
+bool	is_color(const char *line);
+bool	is_map(const char *line);
+
+/*PARSE_TEXTURE*/
+bool	parse_texture(char *line, t_map *map);
+
+/*PARSE_COLORS*/
+bool	parse_color(char *line, t_map *map);
 
 /*INIT*/
 void	init_color(t_color *color);

@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:08:55 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/04 14:46:13 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/04 16:21:29 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ bool	parse_texture(char *line, t_map *map)
 		map->texture.so = path;
 	else if (!ft_strncmp(tokens[0], "EA", 3))
 		map->texture.ea = path;
+	else if (!ft_strncmp(tokens[0], "WE", 3))
+		map->texture.we = path;
 	else
 	{
 		free(path);

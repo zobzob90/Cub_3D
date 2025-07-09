@@ -12,11 +12,52 @@
 
 #include "cub3d.h"
 
-int	main(int ac, char *av[])
+void	init_map(t_game *game)
 {
-	if (ac != 2)
+	char	tmp[MAP_HEIGHT][MAP_WIDTH + 1] = {
+		"111111",
+		"100001",
+		"100001",
+		"1000N1",
+		"111111"
+	};
+	int		i;
+	int		j;
+
+	i = 0;
+	while (i < MAP_HEIGHT)
 	{
-		ft_putstr_fd("Usage: ./cub3d maps/valid/map1.cub\n", 2);
-		return (1);
+		j = 0;
+		while (j < MAP_WIDTH)
+		{
+			game->map[i][j] = tmp[i][j];
+			j++;
+		}
+		i++;
 	}
+}
+
+void	init_game(t_game *game)
+{
+	game->mlx = mlx_init();
+	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "Cub3D Lite");
+	init_map(game);
+	game->player.x = 3.5;
+	game->player.y = 3.5;
+	game->player.dir_x = -1;
+	game->player.dir_y = 0;
+	game->player.plane_x = 0;
+	game->player.plane_y = FOV;
+}
+
+int	main(void)
+{
+	t_game	game;
+
+	init_game(&game);
+	draw_scene(&game);
+	mlx_hook(game.win, 2, 1L << 0, handle_key, &game);
+	mlx_hook(game.win, 17, 0, close_win, &game);
+	mlx_loop(game.mlx);
+	return (0);
 }

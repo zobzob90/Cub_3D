@@ -13,18 +13,31 @@
 #ifndef CUB_H
 #define CUB_H
 
-# include "libft/libft.h"
+# include "libft.h"
 # include <stdbool.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include <minilibx-linux/mlx.h>
+# include "../mlx/mlx.h"
+
+/*pi*/
+# define PI 3.1415926535
 
 /*screen*/
-# define WIDTH 800
-# define HEIGHT 800
+# define WIDTH 1280
+# define HEIGHT 720
+# define FOV 0.66
+
+/*map*/
+# define MAP_WIDTH 6
+# define MAP_HEIGHT 5
+# define TILE_SIZE 1
+
+/*speed*/
+# define SPEED 0.1
+# define ROT_SPEED 0.05
 
 /*key*/
 # define ESC 65307
@@ -64,6 +77,8 @@ typedef struct s_player
 	double	y;
 	double	dir_x;
 	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 	char	orientation;
 } t_player;
 
@@ -86,6 +101,14 @@ typedef struct s_map
 	t_door		door;
 	int			num_door;
 } t_map;
+
+typedef struct s_game
+{
+	void		*mlx;
+	void		*win;
+	char		map[MAP_HEIGHT][MAP_WIDTH + 1];
+	t_player	player;
+} t_game;
 
 /*PARS UTILS*/
 char	**read_files(char *path);

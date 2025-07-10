@@ -123,4 +123,5 @@ void	draw_scene(t_game *g)
 		cast_single_ray(g, x);
 		x++;
 	}
+	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);
 }

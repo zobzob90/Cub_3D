@@ -40,13 +40,13 @@ int	handle_key(int key, t_game *g)
 {
 	if (key == ESC)
 		close_win(g);
-	if (key == W && g->map[(int)(g->player.y)]
+	if ((key == W || key == UP) && g->map[(int)(g->player.y)]
 		[(int)(g->player.x + g->player.dir_x * SPEED)] != '1')
 		g->player.x += g->player.dir_x * SPEED;
-	if (key == W && g->map[(int)(g->player.y + g->player.dir_y * SPEED)]
+	if ((key == W || key == UP) && g->map[(int)(g->player.y + g->player.dir_y * SPEED)]
 		[(int)(g->player.x)] != '1')
 		g->player.y += g->player.dir_y * SPEED;
-	if (key == 's')
+	if (key == S || key == DOWN)
 	{
 		if (g->map[(int)(g->player.y)]
 			[(int)(g->player.x - g->player.dir_x * SPEED)] != '1')
@@ -55,11 +55,10 @@ int	handle_key(int key, t_game *g)
 			[(int)(g->player.x)] != '1')
 			g->player.y -= g->player.dir_y * SPEED;
 	}
-	if (key == 'a' || key == 65361)
+	if (key == A || key == LEFT)
 		rotate(g, ROT_SPEED);
-	if (key == 'd' || key == 65363)
+	if (key == D || key == RIGHT)
 		rotate(g, -ROT_SPEED);
-	mlx_clear_window(g->mlx, g->win);
 	draw_scene(g);
 	return (0);
 }

@@ -41,6 +41,8 @@ void	init_game(t_game *game)
 {
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "Cub3D Lite");
+	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	game->img_data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian);
 	init_map(game);
 	game->player.x = 3.5;
 	game->player.y = 3.5;

@@ -28,11 +28,8 @@
 /*screen*/
 # define WIDTH 1280
 # define HEIGHT 720
-# define FOV 0.66
 
 /*map*/
-# define MAP_WIDTH 6
-# define MAP_HEIGHT 5
 # define TILE_SIZE 1
 
 /*speed*/
@@ -50,6 +47,11 @@
 # define S 115
 # define D 100
 # define SPACE 32
+
+/*raycasting optimizations*/
+# define FOV 0.66
+# define MAP_WIDTH 6
+# define MAP_HEIGHT 5
 
 /*MOUSE KEY*/
 # define MOUSE_LEFT 1
@@ -124,6 +126,11 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
+	void		*img;
+	char		*img_data;
+	int			bpp;
+	int			size_line;
+	int			endian;
 	char		map[MAP_HEIGHT][MAP_WIDTH + 1];
 	t_player	player;
 } t_game;

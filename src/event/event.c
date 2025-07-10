@@ -12,9 +12,22 @@
 
 #include "cub3d.h"
 
+void	cleanup_game(t_game *game)
+{
+	if (game->img)
+		mlx_destroy_image(game->mlx, game->img);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+}
+
 int	close_win(t_game *game)
 {
-	mlx_destroy_window(game->mlx, game->win);
+	cleanup_game(game);
 	exit(0);
 	return (0);
 }

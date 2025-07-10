@@ -154,6 +154,7 @@ void	init_player(t_player *player);
 //void	init_map(t_map *map);
 
 /*EVENT*/
+void	cleanup_game(t_game *game);
 int		close_win(t_game *game);
 void	rotate(t_game *g, double angle);
 

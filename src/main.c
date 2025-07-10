@@ -16,7 +16,7 @@ void	init_map(t_game *game)
 {
 	char	tmp[MAP_HEIGHT][MAP_WIDTH + 1] = {
 		"111111",
-		"100001",
+		"100011",
 		"101001",
 		"1000N1",
 		"111111"
@@ -40,8 +40,22 @@ void	init_map(t_game *game)
 void	init_game(t_game *game)
 {
 	game->mlx = mlx_init();
+	if (!game->mlx)
+		exit(1);
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "Cub3D Lite");
+	if (!game->win)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+		exit(1);
+	}
 	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
+	if (!game->img)
+	{
+		mlx_destroy_window(game->mlx, game->win);
+		mlx_destroy_display(game->mlx);
+		(free(game->mlx), exit(1));
+	}
 	game->img_data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian);
 	init_map(game);
 	game->player.x = 3.5;

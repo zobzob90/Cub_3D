@@ -12,6 +12,7 @@
 
 #include "cub3d.h"
 
+/*Initialise the parameters of one ray for the x column*/
 static void	init_ray_vars(t_game *g, t_ray *r, int x)
 {
 	r->camera_x = 2 * x / (double)WIDTH - 1;
@@ -30,7 +31,7 @@ static void	init_ray_vars(t_game *g, t_ray *r, int x)
 	r->hit = 0;
 }
 
-
+/*Calculate the direction and the distance until the next grid intersection*/
 static void	init_step_and_side(t_game *g, t_ray *r)
 {
 	if (r->ray_dir_x < 0)
@@ -55,6 +56,7 @@ static void	init_step_and_side(t_game *g, t_ray *r)
 	}
 }
 
+/*DDA (Digital Differential Analyzer) algorithm*/
 static void	perform_dda(t_game *g, t_ray *r)
 {
 	while (!r->hit)
@@ -75,7 +77,7 @@ static void	perform_dda(t_game *g, t_ray *r)
 			r->hit = 1;
 	}
 }
-
+/*Calculate the perpendicular distance to the wall in order to avoid the fish-eye effect*/
 static void calculate_distance(t_game *g, t_ray *r)
 {
 	if (r->side == 0)
@@ -86,6 +88,7 @@ static void calculate_distance(t_game *g, t_ray *r)
 			/ r->ray_dir_y;
 }
 
+/*Throw a complete ray for a x column*/
 static void	cast_single_ray(t_game *g, int x)
 {
 	t_ray	ray;
@@ -112,7 +115,7 @@ static void	cast_single_ray(t_game *g, int x)
 	draw_vertical_line(g, x, start, end, color);
 
 }
-
+/*Main function of the raycasting. Draw the scene*/
 void	draw_scene(t_game *g)
 {
 	int		x;

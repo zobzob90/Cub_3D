@@ -12,6 +12,7 @@
 
 #include "cub3d.h"
 
+/*Put a pixel inside the image buffer*/
 void	put_pixel_to_img(t_game *game, int x, int y, int color)
 {
 	char	*dst;
@@ -23,27 +24,23 @@ void	put_pixel_to_img(t_game *game, int x, int y, int color)
 	}
 }
 
+/*Draw a vertical line in the screen(roof + floor + wall)*/
 void	draw_vertical_line(t_game *game, int x, int start, int end, int color)
 {
 	int	y;
 
-	// Dessiner le plafond (noir)
 	y = 0;
 	while (y < start)
 	{
 		put_pixel_to_img(game, x, y, 0x000000);
 		y++;
 	}
-	
-	// Dessiner le mur
 	y = start;
 	while (y < end)
 	{
 		put_pixel_to_img(game, x, y, color);
 		y++;
 	}
-	
-	// Dessiner le sol (gris foncé)
 	y = end;
 	while (y < HEIGHT)
 	{

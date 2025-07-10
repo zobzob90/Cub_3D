@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 15:14:51 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/04 10:32:58 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/10 14:56:05 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	init_player(t_player *player)
 	player->y = 0;
 	player->dir_x = 0;
 	player->dir_y = 0;
+	player->plane_x = 0;
+	player->plane_y = 0;
 	player->orientation = '\0';
 }
 

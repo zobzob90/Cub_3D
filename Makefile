@@ -20,6 +20,9 @@ define progress_bar
 endef
 
 SRCS = 	src/main.c \
+		src/event/event.c \
+		src/raycasting/raycaster.c \
+		src/raycasting/draw.c \
 		# src/parsing/pars_utils.c \
 		# src/parsing/parse_color.c \
 		# src/parsing/parse_file.c \

@@ -102,6 +102,24 @@ typedef struct s_map
 	int			num_door;
 } t_map;
 
+typedef struct s_ray
+{
+	double		camera_x;
+	double		ray_dir_x;
+	double		ray_dir_y;
+	int			map_x;
+	int			map_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	int			step_x;
+	int			step_y;
+	int			hit;
+	int			side;
+	double		perp_wall_dist;
+} t_ray;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -126,7 +144,16 @@ bool	parse_color(char *line, t_map *map);
 void	init_color(t_color *color);
 void	init_texture(t_texture *texture);
 void	init_player(t_player *player);
-void	init_map(t_map *map);
+//void	init_map(t_map *map);
+
+/*EVENT*/
+int		close_win(t_game *game);
+void	rotate(t_game *g, double angle);
+
+/*RAYCASTING*/
+void	draw_scene(t_game *g);
+int		handle_key(int key, t_game *g);
+void	draw_vertical_line(t_game *game, int x, int start, int end, int color);
 
 /*FREE*/
 void	free_texture(t_texture *texture);

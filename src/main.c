@@ -17,7 +17,7 @@ void	init_map(t_game *game)
 	char	tmp[MAP_HEIGHT][MAP_WIDTH + 1] = {
 		"111111",
 		"100001",
-		"100001",
+		"101001",
 		"1000N1",
 		"111111"
 	};
@@ -56,8 +56,8 @@ int	main(void)
 
 	init_game(&game);
 	draw_scene(&game);
-	mlx_hook(game.win, 2, 1L << 0, handle_key, &game);
-	mlx_hook(game.win, 17, 0, close_win, &game);
+	mlx_hook(game.win, 2, 1L << 0, &handle_key, &game);
+	mlx_hook(game.win, 17, 0, &close_win, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

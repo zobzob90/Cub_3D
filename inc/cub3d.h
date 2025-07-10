@@ -71,6 +71,8 @@ typedef struct s_texture
 	char	*so;
 	char	*ea;
 	char	*we;
+	double	x;
+	double	y;
 } t_texture;
 
 typedef struct s_player

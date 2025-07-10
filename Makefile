@@ -23,6 +23,7 @@ SRCS = 	src/main.c \
 		src/event/event.c \
 		src/raycasting/raycaster.c \
 		src/raycasting/draw.c \
+		src/raycasting/texture.c \
 		# src/parsing/pars_utils.c \
 		# src/parsing/parse_color.c \
 		# src/parsing/parse_file.c \

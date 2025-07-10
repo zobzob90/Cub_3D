@@ -57,6 +57,7 @@ void	init_game(t_game *game)
 		(free(game->mlx), exit(1));
 	}
 	game->img_data = mlx_get_data_addr(game->img, &game->bpp, &game->size_line, &game->endian);
+	load_textures(game);
 	init_map(game);
 	game->player.x = 3.5;
 	game->player.y = 3.5;

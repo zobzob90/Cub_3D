@@ -86,6 +86,18 @@ static void calculate_distance(t_game *g, t_ray *r)
 	else
 		r->perp_wall_dist = (r->map_y - g->player.y + (1 - r->step_y) / 2.0)
 			/ r->ray_dir_y;
+
+	// Calculer la coordonnée exacte où le rayon frappe le mur
+	if (r->side == 0)
+		r->wall_x = g->player.y + r->perp_wall_dist * r->ray_dir_y;
+	else
+		r->wall_x = g->player.x + r->perp_wall_dist * r->ray_dir_x;
+	r->wall_x -= floor(r->wall_x);
+
+	// Calculer la coordonnée X de la texture
+	r->tex_x = (int)(r->wall_x * (double)TEX_WIDTH);
+	if ((r->side == 0 && r->ray_dir_x > 0) || (r->side == 1 && r->ray_dir_y < 0))
+		r->tex_x = TEX_WIDTH - r->tex_x - 1;
 }
 
 /*Throw a complete ray for a x column*/
@@ -95,7 +107,6 @@ static void	cast_single_ray(t_game *g, int x)
 	int		line_height;
 	int		start;
 	int		end;
-	int		color;
 
 	init_ray_vars(g, &ray, x);
 	init_step_and_side(g, &ray);
@@ -107,14 +118,10 @@ static void	cast_single_ray(t_game *g, int x)
 		start = 0;
 	end = line_height / 2 + HEIGHT / 2;
 	if (end >= HEIGHT)
-		end = HEIGHT - 1;
-	if (ray.side == 1)
-		color = 0x888888;
-	else
-		color = 0xAAAAAA;
-	draw_vertical_line(g, x, start, end, color);
-
+		end = HEIGHT - 1;	
+	draw_textured_line(g, x, start, end, &ray);
 }
+
 /*Main function of the raycasting. Draw the scene*/
 void	draw_scene(t_game *g)
 {

@@ -52,6 +52,8 @@
 # define FOV 0.66
 # define MAP_WIDTH 6
 # define MAP_HEIGHT 5
+# define TEX_WIDTH 64
+# define TEX_HEIGHT 64
 
 /*MOUSE KEY*/
 # define MOUSE_LEFT 1
@@ -122,6 +124,9 @@ typedef struct s_ray
 	int			hit;
 	int			side;
 	double		perp_wall_dist;
+	double		wall_x;
+	int			tex_x;
+	int			tex_y;
 } t_ray;
 
 typedef struct s_game
@@ -135,6 +140,20 @@ typedef struct s_game
 	int			endian;
 	char		map[MAP_HEIGHT][MAP_WIDTH + 1];
 	t_player	player;
+	// Textures temporaires
+	void		*tex_north;
+	void		*tex_south;
+	void		*tex_east;
+	void		*tex_west;
+	char		*tex_north_data;
+	char		*tex_south_data;
+	char		*tex_east_data;
+	char		*tex_west_data;
+	int			tex_width;
+	int			tex_height;
+	int			tex_bpp;
+	int			tex_size_line;
+	int			tex_endian;
 } t_game;
 
 /*PARS UTILS*/
@@ -161,9 +180,11 @@ int		close_win(t_game *game);
 void	rotate(t_game *g, double angle);
 
 /*RAYCASTING*/
+void	load_textures(t_game *g);
 void	draw_scene(t_game *g);
 int		handle_key(int key, t_game *g);
-void	draw_vertical_line(t_game *game, int x, int start, int end, int color);
+void	draw_textured_line(t_game *game, int x, int start, int end, t_ray *ray);
+int		get_texture_pixel(t_game *game, int tex_num, int tex_x, int tex_y);
 
 /*FREE*/
 void	free_texture(t_texture *texture);

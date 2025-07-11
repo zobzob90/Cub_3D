@@ -20,6 +20,11 @@ define progress_bar
 endef
 
 SRCS = 	src/main.c \
+		src/event/event.c \
+		src/raycasting/raycaster.c \
+		src/raycasting/draw.c \
+		src/raycasting/texture.c \
+		src/collision/collision.c \
 		src/parsing/pars_utils.c \
 		src/parsing/parse_color.c \
 		src/parsing/parse_file.c \
@@ -66,7 +71,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) fclean -C $(LIBFT_DIR)
-	@$(MAKE) fclean -C $(MLX_DIR)
+	@$(MAKE) clean -C $(MLX_DIR)
 	@echo "🗑️ Suppression de $(NAME) terminée."
 
 re: fclean all

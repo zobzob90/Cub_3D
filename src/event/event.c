@@ -12,9 +12,32 @@
 
 #include "cub3d.h"
 
+void	cleanup_game(t_game *game)
+{
+	// Libérer les textures
+	if (game->tex_north)
+		mlx_destroy_image(game->mlx, game->tex_north);
+	if (game->tex_south)
+		mlx_destroy_image(game->mlx, game->tex_south);
+	if (game->tex_east)
+		mlx_destroy_image(game->mlx, game->tex_east);
+	if (game->tex_west)
+		mlx_destroy_image(game->mlx, game->tex_west);
+	// Libérer l'image principale
+	if (game->img)
+		mlx_destroy_image(game->mlx, game->img);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+}
+
 int	close_win(t_game *game)
 {
-	mlx_destroy_window(game->mlx, game->win);
+	cleanup_game(game);
 	exit(0);
 	return (0);
 }
@@ -40,25 +63,13 @@ int	handle_key(int key, t_game *g)
 {
 	if (key == ESC)
 		close_win(g);
-	
-	// Mouvement simplifié pour le test (sans collision)
-	if (key == W)
-	{
-		g->player.x += g->player.dir_x * SPEED;
-		g->player.y += g->player.dir_y * SPEED;
-	}
-	if (key == S)
-	{
-		g->player.x -= g->player.dir_x * SPEED;
-		g->player.y -= g->player.dir_y * SPEED;
-	}
+	if (key == W || key == UP)
+		move_player_safe(g, g->player.dir_x * SPEED, g->player.dir_y * SPEED);
+	if (key == S || key == DOWN)
+		move_player_safe(g, -g->player.dir_x * SPEED, -g->player.dir_y * SPEED);
 	if (key == A || key == LEFT)
 		rotate(g, ROT_SPEED);
 	if (key == D || key == RIGHT)
 		rotate(g, -ROT_SPEED);
-	
-	mlx_clear_window(g->mlx, g->win);
-	// draw_scene(g); // TODO: Implémenter le rendu
-	printf("Player position: (%.2f, %.2f)\n", g->player.x, g->player.y);
 	return (0);
 }

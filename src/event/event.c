@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdeliere <vdeliere@student.42.fr>          #+#  +:+       +#+        */
+/*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-07-09 15:31:53 by vdeliere          #+#    #+#             */
-/*   Updated: 2025-07-09 15:31:53 by vdeliere         ###   ########.fr       */
+/*   Created: 2025/07/09 15:31:53 by vdeliere          #+#    #+#             */
+/*   Updated: 2025/07/11 16:30:06 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,5 @@ int	handle_key(int key, t_game *g)
 		rotate(g, ROT_SPEED);
 	if (key == D || key == RIGHT)
 		rotate(g, -ROT_SPEED);
-	draw_scene(g);
 	return (0);
 }

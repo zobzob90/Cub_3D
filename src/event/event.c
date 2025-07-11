@@ -63,21 +63,10 @@ int	handle_key(int key, t_game *g)
 {
 	if (key == ESC)
 		close_win(g);
-	if ((key == W || key == UP) && g->map[(int)(g->player.y)]
-		[(int)(g->player.x + g->player.dir_x * SPEED)] != '1')
-		g->player.x += g->player.dir_x * SPEED;
-	if ((key == W || key == UP) && g->map[(int)(g->player.y + g->player.dir_y * SPEED)]
-		[(int)(g->player.x)] != '1')
-		g->player.y += g->player.dir_y * SPEED;
+	if (key == W || key == UP)
+		move_player_safe(g, g->player.dir_x * SPEED, g->player.dir_y * SPEED);
 	if (key == S || key == DOWN)
-	{
-		if (g->map[(int)(g->player.y)]
-			[(int)(g->player.x - g->player.dir_x * SPEED)] != '1')
-			g->player.x -= g->player.dir_x * SPEED;
-		if (g->map[(int)(g->player.y - g->player.dir_y * SPEED)]
-			[(int)(g->player.x)] != '1')
-			g->player.y -= g->player.dir_y * SPEED;
-	}
+		move_player_safe(g, -g->player.dir_x * SPEED, -g->player.dir_y * SPEED);
 	if (key == A || key == LEFT)
 		rotate(g, ROT_SPEED);
 	if (key == D || key == RIGHT)

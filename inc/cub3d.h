@@ -26,15 +26,17 @@
 # define PI 3.1415926535
 
 /*screen*/
-# define WIDTH 1280
-# define HEIGHT 720
+# define WIDTH 800
+# define HEIGHT 600
 
 /*map*/
 # define TILE_SIZE 1
 
-/*speed*/
+/*player parameters*/
 # define SPEED 0.1
 # define ROT_SPEED 0.05
+# define PLAYER_MARGIN 0.1
+# define COLLISION_EPSILON 0.001
 
 /*key*/
 # define ESC 65307
@@ -178,6 +180,12 @@ void	init_player(t_player *player);
 void	cleanup_game(t_game *game);
 int		close_win(t_game *game);
 void	rotate(t_game *g, double angle);
+
+/*COLLISION*/
+bool	is_valid_position(t_game *game, double x, double y);
+bool	can_move_to(t_game *game, double new_x, double new_y);
+void	move_player_safe(t_game *game, double delta_x, double delta_y);
+bool	check_wall_collision(t_game *game, double x, double y, double margin);
 
 /*RAYCASTING*/
 void	load_textures(t_game *g);

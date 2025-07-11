@@ -96,8 +96,18 @@ static void calculate_distance(t_game *g, t_ray *r)
 
 	// Calculer la coordonnée X de la texture
 	r->tex_x = (int)(r->wall_x * (double)TEX_WIDTH);
-	if ((r->side == 0 && r->ray_dir_x > 0) || (r->side == 1 && r->ray_dir_y < 0))
+	
+	// Inverser la texture pour certains murs pour éviter l'effet miroir
+	if (r->side == 0 && r->ray_dir_x > 0)
 		r->tex_x = TEX_WIDTH - r->tex_x - 1;
+	if (r->side == 1 && r->ray_dir_y < 0)
+		r->tex_x = TEX_WIDTH - r->tex_x - 1;
+	
+	// S'assurer que tex_x est dans les limites
+	if (r->tex_x < 0)
+		r->tex_x = 0;
+	if (r->tex_x >= TEX_WIDTH)
+		r->tex_x = TEX_WIDTH - 1;
 }
 
 /*Throw a complete ray for a x column*/

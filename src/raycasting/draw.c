@@ -99,14 +99,23 @@ static void	draw_wall_texture(t_game *game, int x, int start, int end, t_ray *ra
 	int		color;
 	double	step;
 	double	tex_pos;
+	int		line_height;
 
 	tex_num = get_texture_num(ray);
-	step = 1.0 * TEX_HEIGHT / (end - start);
-	tex_pos = (start - HEIGHT / 2 + (end - start) / 2) * step;
+	line_height = end - start;
+	step = 1.0 * TEX_HEIGHT / line_height;
+	tex_pos = (start - HEIGHT / 2 + line_height / 2) * step;
+	if (tex_pos < 0)
+		tex_pos = 0;
+	
 	y = start;
 	while (y < end)
 	{
-		tex_y = (int)tex_pos & (TEX_HEIGHT - 1);
+		tex_y = (int)tex_pos;
+		if (tex_y < 0)
+			tex_y = 0;
+		if (tex_y >= TEX_HEIGHT)
+			tex_y = TEX_HEIGHT - 1;
 		tex_pos += step;
 		color = get_texture_pixel(game, tex_num, ray->tex_x, tex_y);
 		put_pixel_to_img(game, x, y, color);

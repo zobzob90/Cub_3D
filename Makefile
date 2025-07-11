@@ -20,12 +20,12 @@ define progress_bar
 endef
 
 SRCS = 	src/main.c \
-		# src/parsing/pars_utils.c \
-		# src/parsing/parse_color.c \
-		# src/parsing/parse_file.c \
-		# src/parsing/parse_map.c \
-		# src/parsing/parse_texture.c \
-		# src/parsing/valid_map.c \
+		src/parsing/pars_utils.c \
+		src/parsing/parse_color.c \
+		src/parsing/parse_file.c \
+		src/parsing/parse_map.c \
+		src/parsing/parse_texture.c \
+		src/parsing/valid_map.c \
 		src/utils/free.c \
 		src/utils/init.c 
 

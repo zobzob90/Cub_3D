@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:13:33 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/10 16:40:55 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/11 10:52:37 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static bool	check_borders(t_map *map)
 	i = 0;
 	while (i < widht)
 	{
-		if (map->grid[i][height - 1] != '1' && map->grid[i][height - 1] != ' ')
+		if (map->grid[height - 1][i] != '1' && map->grid[height - 1][i] != ' ')
 			return (false);
 		i++;
 	}
@@ -52,18 +52,38 @@ static bool	check_sides(t_map *map)
 		width = ft_strlen(map->grid[y]);
 		if (map->grid[y][0] != '1' && map->grid[y][0] != ' ')
 			return (false);
-		if (map->grid[y][width - 1] != -1 && map->grid[y][width - 1] != ' ')
+		if (map->grid[y][width - 1] != '1' && map->grid[y][width - 1] != ' ')
 			return (false);
 	}
 	return (true);
 }
 
-bool	check_spaces(t_map *map)
+static bool	check_inside(t_map *map)
 {
+	int	i;
+	int	j;
 
+	i = 1;
+	while (i < map->height - 1)
+	{
+		j = 1;
+		while (j < map->width - 1)
+		{
+			if (map->grid[i][j] == '0' || map->grid[i][j] == 'N' || map->grid[i][j] == 'S'
+				|| map->grid[i][j] == 'O' || map->grid[i][j] == 'E' || map->grid[i][j] == 'D')
+			{
+				if (map->grid[i - 1][j] == ' ' || map->grid[i + 1][j] == ' '
+					|| map->grid[i][j - 1] == ' ' || map->grid[i][j + 1] == ' ')
+					return (false);
+			}
+			j++;
+		}
+		i++;
+	}
+	return (true);
 }
 
 bool	is_valid_map(t_map *map)
 {
-
+	return (check_borders(map) && check_inside(map) && check_sides(map));
 }

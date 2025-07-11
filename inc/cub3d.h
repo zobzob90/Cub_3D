@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:10:47 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/04 15:37:16 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/11 10:53:57 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,9 @@ bool	parse_texture(char *line, t_map *map);
 
 /*PARSE_COLORS*/
 bool	parse_color(char *line, t_map *map);
+
+/*VALID_MAP*/
+bool	is_valid_map(t_map *map);
 
 /*INIT*/
 void	init_color(t_color *color);

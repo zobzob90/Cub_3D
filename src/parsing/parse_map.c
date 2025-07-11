@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:08:48 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/11 15:53:37 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/11 16:51:33 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	extract_map_grid(char **lines, int start, t_map *map)
 
 	map->grid = malloc(sizeof(char *) * map->height);
 	if (!map->grid)
-		return (NULL);
+		return (0);
 	i = 0;
 	while (i < map->height)
 	{
@@ -78,7 +78,7 @@ static int	extract_map_grid(char **lines, int start, t_map *map)
 			while (--i >= 0)
 				free(map->grid[i]);
 			free(map->grid);
-			return (NULL);
+			return (0);
 		}
 		line_lenght = ft_strlen(lines[start + i]);
 		j = 0;
@@ -93,7 +93,7 @@ static int	extract_map_grid(char **lines, int start, t_map *map)
 		map->grid[i][map->width] = '\0';
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
 static int	find_player(t_map *map)

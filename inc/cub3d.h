@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:10:47 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/11 16:18:06 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/11 16:30:01 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
-	char		map[MAP_HEIGHT][MAP_WIDTH + 1];
 	t_player	player;
+	t_map		*map;  // Pointeur vers la map parsée
 } t_game;
 
 /*PARS UTILS*/
@@ -128,6 +128,11 @@ int		parse_map(char **lines, t_map *map);
 
 /*PRINCIPAL PARSE*/
 int		parse_file(char *filename, t_map *map);
+
+/*KEY*/
+int		close_win(t_game *game);
+void	rotate(t_game *g, double angle);
+int		handle_key(int key, t_game *g);
 
 /*INIT*/
 void	init_color(t_color *color);

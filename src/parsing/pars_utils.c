@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:16:35 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/10 13:22:47 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/11 16:47:26 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,13 @@ char	**read_files(char *path)
 	line = get_next_line(fd);
 	while (line)
 	{
-		content = ft_strjoin_free(content, line);
-		free(line);
+		if (!content)
+		{
+			content = ft_strdup(line);
+			free(line);
+		}
+		else
+			content = ft_strjoin_free(content, line);
 		line = get_next_line(fd);
 	}
 	close(fd);
@@ -47,8 +52,11 @@ bool	is_texture(const char *line)
 		return (false);
 	while (*line == ' ' || *line == '\t')
 		line++;
-	if (!ft_strncmp(line, "NO", 3) || !ft_strncmp(line, "SO", 3)
-		|| !ft_strncmp(line, "EA", 3) || !ft_strncmp(line, "WE", 3))
+	
+	if ((!ft_strncmp(line, "NO", 2) && (line[2] == ' ' || line[2] == '\t')) ||
+		(!ft_strncmp(line, "SO", 2) && (line[2] == ' ' || line[2] == '\t')) ||
+		(!ft_strncmp(line, "EA", 2) && (line[2] == ' ' || line[2] == '\t')) ||
+		(!ft_strncmp(line, "WE", 2) && (line[2] == ' ' || line[2] == '\t')))
 		return (true);
 	return (false);
 }

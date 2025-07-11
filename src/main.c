@@ -6,58 +6,40 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:17:14 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/04 16:23:15 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/11 17:09:33 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_map(t_game *game)
-{
-	char	tmp[MAP_HEIGHT][MAP_WIDTH + 1] = {
-		"111111",
-		"100001",
-		"100001",
-		"1000N1",
-		"111111"
-	};
-	int		i;
-	int		j;
-
-	i = 0;
-	while (i < MAP_HEIGHT)
-	{
-		j = 0;
-		while (j < MAP_WIDTH)
-		{
-			game->map[i][j] = tmp[i][j];
-			j++;
-		}
-		i++;
-	}
-}
-
 void	init_game(t_game *game)
 {
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "Cub3D Lite");
-	init_map(game);
-	game->player.x = 3.5;
-	game->player.y = 3.5;
-	game->player.dir_x = -1;
-	game->player.dir_y = 0;
-	game->player.plane_x = 0;
-	game->player.plane_y = FOV;
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_game	game;
+	t_map	map;
 
+	if (argc != 2)
+	{
+		ft_putstr_fd("Usage: ./cub3D <map.cub>\n", 2);
+		return (1);
+	}
+	if (!parse_file(argv[1], &map))
+	{
+		ft_putstr_fd("Error: Failed to parse file\n", 2);
+		return (1);
+	}
+	game.player = map.player;
+	game.map = &map;  // Pointer vers la map parsée
 	init_game(&game);
-	draw_scene(&game);
+	printf("Map parsed successfully!\n");
 	mlx_hook(game.win, 2, 1L << 0, handle_key, &game);
 	mlx_hook(game.win, 17, 0, close_win, &game);
 	mlx_loop(game.mlx);
+	free_map(&map);
 	return (0);
 }

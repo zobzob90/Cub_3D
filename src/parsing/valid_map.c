@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:13:33 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/11 10:52:37 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/11 16:51:05 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static bool	check_sides(t_map *map)
 			return (false);
 		if (map->grid[y][width - 1] != '1' && map->grid[y][width - 1] != ' ')
 			return (false);
+		y++;
 	}
 	return (true);
 }
@@ -85,5 +86,11 @@ static bool	check_inside(t_map *map)
 
 bool	is_valid_map(t_map *map)
 {
-	return (check_borders(map) && check_inside(map) && check_sides(map));
+	if (!check_borders(map))
+		return (false);
+	if (!check_sides(map))
+		return (false);
+	if (!check_inside(map))
+		return (false);
+	return (true);
 }

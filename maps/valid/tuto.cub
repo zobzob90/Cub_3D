@@ -1,9 +1,11 @@
-NO
-SO
-WE
-EA
-F
-C
+NO ./texture/xpm/wall_futur.xpm
+SO ./texture/xpm/wall_futur.xpm
+WE ./texture/xpm/wall_futur.xpm
+EA ./texture/xpm/wall_futur.xpm
+
+F 220,100,0
+C 225,30,0
+
 111111111111111111111111111111111111111111
 111111111111111111111111111111111111000001
 100000S00000001111111111111111111111000001

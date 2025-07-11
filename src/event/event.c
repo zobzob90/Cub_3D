@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdeliere <vdeliere@student.42.fr>          #+#  +:+       +#+        */
+/*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-07-09 15:31:53 by vdeliere          #+#    #+#             */
-/*   Updated: 2025-07-09 15:31:53 by vdeliere         ###   ########.fr       */
+/*   Created: 2025/07/09 15:31:53 by vdeliere          #+#    #+#             */
+/*   Updated: 2025/07/11 16:30:06 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,25 @@ int	handle_key(int key, t_game *g)
 {
 	if (key == ESC)
 		close_win(g);
-	if (key == W && g->map[(int)(g->player.y)]
-		[(int)(g->player.x + g->player.dir_x * SPEED)] != '1')
-		g->player.x += g->player.dir_x * SPEED;
-	if (key == W && g->map[(int)(g->player.y + g->player.dir_y * SPEED)]
-		[(int)(g->player.x)] != '1')
-		g->player.y += g->player.dir_y * SPEED;
-	if (key == 's')
+	
+	// Mouvement simplifié pour le test (sans collision)
+	if (key == W)
 	{
-		if (g->map[(int)(g->player.y)]
-			[(int)(g->player.x - g->player.dir_x * SPEED)] != '1')
-			g->player.x -= g->player.dir_x * SPEED;
-		if (g->map[(int)(g->player.y - g->player.dir_y * SPEED)]
-			[(int)(g->player.x)] != '1')
-			g->player.y -= g->player.dir_y * SPEED;
+		g->player.x += g->player.dir_x * SPEED;
+		g->player.y += g->player.dir_y * SPEED;
 	}
-	if (key == 'a' || key == 65361)
+	if (key == S)
+	{
+		g->player.x -= g->player.dir_x * SPEED;
+		g->player.y -= g->player.dir_y * SPEED;
+	}
+	if (key == A || key == LEFT)
 		rotate(g, ROT_SPEED);
-	if (key == 'd' || key == 65363)
+	if (key == D || key == RIGHT)
 		rotate(g, -ROT_SPEED);
+	
 	mlx_clear_window(g->mlx, g->win);
-	draw_scene(g);
+	// draw_scene(g); // TODO: Implémenter le rendu
+	printf("Player position: (%.2f, %.2f)\n", g->player.x, g->player.y);
 	return (0);
 }

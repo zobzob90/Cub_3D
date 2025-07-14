@@ -48,16 +48,26 @@ int	get_texture_pixel(t_game *game, int tex_num, int tex_x, int tex_y)
 	char	*tex_data;
 	char	*pixel;
 
+	// Vérifier les limites et s'assurer qu'elles sont valides
 	if (tex_x < 0 || tex_x >= TEX_WIDTH || tex_y < 0 || tex_y >= TEX_HEIGHT)
-		return (0x000000);
+		return (0x666666); // Couleur de fallback
+	
+	// Sélectionner la texture appropriée
 	if (tex_num == 0)
 		tex_data = game->tex_north_data;
 	else if (tex_num == 1)
 		tex_data = game->tex_south_data;
 	else if (tex_num == 2)
 		tex_data = game->tex_east_data;
-	else
+	else if (tex_num == 3)
 		tex_data = game->tex_west_data;
+	else
+		return (0x666666); // Couleur de fallback
+	
+	// Vérifier que les données de texture existent
+	if (!tex_data)
+		return (0x666666);
+	
 	pixel = tex_data + (tex_y * game->tex_size_line + tex_x * (game->tex_bpp / 8));
 	return (*(unsigned int*)pixel);
 }

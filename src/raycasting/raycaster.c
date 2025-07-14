@@ -103,7 +103,7 @@ static void calculate_distance(t_game *g, t_ray *r)
 	if (r->side == 1 && r->ray_dir_y < 0)
 		r->tex_x = TEX_WIDTH - r->tex_x - 1;
 	
-	// S'assurer que tex_x est dans les limites
+	// S'assurer que tex_x est dans les limites valides
 	if (r->tex_x < 0)
 		r->tex_x = 0;
 	if (r->tex_x >= TEX_WIDTH)
@@ -122,13 +122,21 @@ static void	cast_single_ray(t_game *g, int x)
 	init_step_and_side(g, &ray);
 	perform_dda(g, &ray);
 	calculate_distance(g, &ray);
-	line_height = (int)(HEIGHT / ray.perp_wall_dist);
+	
+	// Calculer la hauteur de ligne correctement
+	if (ray.perp_wall_dist > 0)
+		line_height = (int)(HEIGHT / ray.perp_wall_dist);
+	else
+		line_height = HEIGHT;
+	
+	// Calculer le début et la fin de la ligne
 	start = -line_height / 2 + HEIGHT / 2;
 	if (start < 0)
 		start = 0;
 	end = line_height / 2 + HEIGHT / 2;
 	if (end >= HEIGHT)
-		end = HEIGHT - 1;	
+		end = HEIGHT - 1;
+	
 	draw_textured_line(g, x, start, end, &ray);
 }
 

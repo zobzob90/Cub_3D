@@ -70,11 +70,15 @@ static int	get_texture_num(t_ray *ray)
 static void	draw_ceiling(t_game *game, int x, int start)
 {
 	int	y;
+	int	ceiling_color;
 
+	// Utiliser la couleur du plafond parsée
+	ceiling_color = (game->map->ceiling.r << 16) | (game->map->ceiling.g << 8) | game->map->ceiling.b;
+	
 	y = 0;
 	while (y < start)
 	{
-		put_pixel_to_img(game, x, y, 0x000000);
+		put_pixel_to_img(game, x, y, ceiling_color);
 		y++;
 	}
 }
@@ -82,11 +86,15 @@ static void	draw_ceiling(t_game *game, int x, int start)
 static void	draw_floor(t_game *game, int x, int end)
 {
 	int	y;
+	int	floor_color;
 
+	// Utiliser la couleur du sol parsée
+	floor_color = (game->map->floor.r << 16) | (game->map->floor.g << 8) | game->map->floor.b;
+	
 	y = end;
 	while (y < HEIGHT)
 	{
-		put_pixel_to_img(game, x, y, 0x444444);
+		put_pixel_to_img(game, x, y, floor_color);
 		y++;
 	}
 }
@@ -100,23 +108,33 @@ static void	draw_wall_texture(t_game *game, int x, int start, int end, t_ray *ra
 	double	step;
 	double	tex_pos;
 	int		line_height;
+	int		draw_start;
+	int		draw_end;
 
 	tex_num = get_texture_num(ray);
-	line_height = end - start;
+	
+	// Calculer la vraie hauteur de ligne avant clipping
+	line_height = (int)(HEIGHT / ray->perp_wall_dist);
+	
+	// Calculer les vraies positions de début et fin
+	draw_start = -line_height / 2 + HEIGHT / 2;
+	draw_end = line_height / 2 + HEIGHT / 2;
+	
+	// Calculer le step pour la texture
 	step = 1.0 * TEX_HEIGHT / line_height;
-	tex_pos = (start - HEIGHT / 2 + line_height / 2) * step;
-	if (tex_pos < 0)
-		tex_pos = 0;
+	
+	// Position de départ de la texture basée sur la position réelle
+	tex_pos = (start - draw_start) * step;
 	
 	y = start;
 	while (y < end)
 	{
-		tex_y = (int)tex_pos;
+		tex_y = (int)tex_pos % TEX_HEIGHT;
 		if (tex_y < 0)
 			tex_y = 0;
-		if (tex_y >= TEX_HEIGHT)
-			tex_y = TEX_HEIGHT - 1;
+		
 		tex_pos += step;
+		
 		color = get_texture_pixel(game, tex_num, ray->tex_x, tex_y);
 		put_pixel_to_img(game, x, y, color);
 		y++;

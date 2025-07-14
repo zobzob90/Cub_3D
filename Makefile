@@ -31,7 +31,6 @@ SRCS = 	src/main.c \
 		src/parsing/parse_map.c \
 		src/parsing/parse_texture.c \
 		src/parsing/valid_map.c \
-		src/event/event.c \
 		src/utils/free.c \
 		src/utils/init.c 
 

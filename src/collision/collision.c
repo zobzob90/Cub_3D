@@ -14,8 +14,8 @@
 
 bool	is_valid_position(t_game *game, double x, double y)
 {
-	if (x >= 0 && x < MAP_WIDTH && y >= 0 && y < MAP_HEIGHT)
-		if (game->map[(int)y][(int)x] != '1')
+	if (x >= 0 && x < game->map->width && y >= 0 && y < game->map->height)
+		if (game->map->grid[(int)y][(int)x] != '1')
 			return(true);
 	return(false);
 }
@@ -54,22 +54,19 @@ bool	check_wall_collision(t_game *g, double x, double y, double margin)
 	int	check_y_min;
 	int	check_y_max;
 
-	// Calculer les limites à vérifier
 	check_x_min = (int)(x - margin);
 	check_x_max = (int)(x + margin);
 	check_y_min = (int)(y - margin);
 	check_y_max = (int)(y + margin);
 
-	// Vérifier les limites pour éviter les accès invalides
-	if (check_x_min < 0 || check_x_max >= MAP_WIDTH ||
-		check_y_min < 0 || check_y_max >= MAP_HEIGHT)
+	if (check_x_min < 0 || check_x_max >= g->map->width ||
+		check_y_min < 0 || check_y_max >= g->map->height)
 		return (true);
 
-	// Vérifier les 4 coins de la hitbox
-	if (g->map[check_y_min][check_x_min] == '1' ||
-		g->map[check_y_min][check_x_max] == '1' ||
-		g->map[check_y_max][check_x_min] == '1' ||
-		g->map[check_y_max][check_x_max] == '1')
+	if (g->map->grid[check_y_min][check_x_min] == '1' ||
+		g->map->grid[check_y_min][check_x_max] == '1' ||
+		g->map->grid[check_y_max][check_x_min] == '1' ||
+		g->map->grid[check_y_max][check_x_max] == '1')
 		return (true);
 	
 	return (false);

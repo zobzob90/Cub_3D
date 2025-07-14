@@ -12,6 +12,7 @@
 
 #include "cub3d.h"
 
+/*Free the textures and the main image*/
 void	cleanup_game(t_game *game)
 {
 	// Libérer les textures
@@ -26,6 +27,8 @@ void	cleanup_game(t_game *game)
 	// Libérer l'image principale
 	if (game->img)
 		mlx_destroy_image(game->mlx, game->img);
+	if (game->map)
+		free(game->map);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx)
@@ -35,6 +38,7 @@ void	cleanup_game(t_game *game)
 	}
 }
 
+/*Clean close of the game*/
 int	close_win(t_game *game)
 {
 	cleanup_game(game);
@@ -42,6 +46,7 @@ int	close_win(t_game *game)
 	return (0);
 }
 
+/*Handle the rotation moves*/
 void	rotate(t_game *g, double angle)
 {
 	double	old_dir_x;
@@ -59,6 +64,7 @@ void	rotate(t_game *g, double angle)
 		+ g->player.plane_y * cos(angle);
 }
 
+/*Handle the keyboard events*/
 int	handle_key(int key, t_game *g)
 {
 	if (key == ESC)
@@ -68,8 +74,9 @@ int	handle_key(int key, t_game *g)
 	if (key == S || key == DOWN)
 		move_player_safe(g, -g->player.dir_x * SPEED, -g->player.dir_y * SPEED);
 	if (key == A || key == LEFT)
-		rotate(g, ROT_SPEED);
-	if (key == D || key == RIGHT)
 		rotate(g, -ROT_SPEED);
+	if (key == D || key == RIGHT)
+		rotate(g, ROT_SPEED);
+	draw_scene(g);
 	return (0);
 }

@@ -73,7 +73,7 @@ static void	perform_dda(t_game *g, t_ray *r)
 			r->map_y += r->step_y;
 			r->side = 1;
 		}
-		if (g->map[r->map_y][r->map_x] == '1')
+		if (g->map->grid[r->map_y][r->map_x] == '1')
 			r->hit = 1;
 	}
 }

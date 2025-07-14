@@ -29,14 +29,10 @@
 # define WIDTH 800
 # define HEIGHT 600
 
-/*map*/
-# define TILE_SIZE 1
-
 /*player parameters*/
 # define SPEED 0.1
 # define ROT_SPEED 0.05
 # define PLAYER_MARGIN 0.1
-# define COLLISION_EPSILON 0.001
 
 /*key*/
 # define ESC 65307
@@ -52,8 +48,6 @@
 
 /*raycasting optimizations*/
 # define FOV 0.66
-# define MAP_WIDTH 6
-# define MAP_HEIGHT 5
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 
@@ -75,8 +69,6 @@ typedef struct s_texture
 	char	*so;
 	char	*ea;
 	char	*we;
-	double	x;
-	double	y;
 } t_texture;
 
 typedef struct s_player
@@ -140,9 +132,7 @@ typedef struct s_game
 	int			bpp;
 	int			size_line;
 	int			endian;
-	char		map[MAP_HEIGHT][MAP_WIDTH + 1];
 	t_player	player;
-	// Textures temporaires
 	void		*tex_north;
 	void		*tex_south;
 	void		*tex_east;
@@ -156,8 +146,7 @@ typedef struct s_game
 	int			tex_bpp;
 	int			tex_size_line;
 	int			tex_endian;
-	t_player	player;
-	t_map		*map;  // Pointeur vers la map parsée
+	t_map		*map;
 } t_game;
 
 /*PARS UTILS*/
@@ -188,12 +177,11 @@ int		handle_key(int key, t_game *g);
 void	init_color(t_color *color);
 void	init_texture(t_texture *texture);
 void	init_player(t_player *player);
-//void	init_map(t_map *map);
+void	init_player_from_map(t_player *player);
+void	init_map(t_map *map);
 
 /*EVENT*/
 void	cleanup_game(t_game *game);
-int		close_win(t_game *game);
-void	rotate(t_game *g, double angle);
 
 /*COLLISION*/
 bool	is_valid_position(t_game *game, double x, double y);
@@ -204,13 +192,11 @@ bool	check_wall_collision(t_game *game, double x, double y, double margin);
 /*RAYCASTING*/
 void	load_textures(t_game *g);
 void	draw_scene(t_game *g);
-int		handle_key(int key, t_game *g);
 void	draw_textured_line(t_game *game, int x, int start, int end, t_ray *ray);
 int		get_texture_pixel(t_game *game, int tex_num, int tex_x, int tex_y);
 
 /*FREE*/
 void	free_texture(t_texture *texture);
 void	free_map(t_map *map);
-void	free_all(t_map *map);
 
 #endif

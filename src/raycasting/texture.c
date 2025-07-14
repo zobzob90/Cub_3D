@@ -14,14 +14,16 @@
 
 void	load_textures(t_game *g)
 {
-	g->tex_north = mlx_xpm_file_to_image(g->mlx, "texture/xpm/wall_north.xpm", 
+	g->tex_north = mlx_xpm_file_to_image(g->mlx, g->map->texture.no, 
 		&g->tex_width, &g->tex_height);
-	g->tex_south = mlx_xpm_file_to_image(g->mlx, "texture/xpm/wall_south.xpm", 
+	g->tex_south = mlx_xpm_file_to_image(g->mlx, g->map->texture.so, 
 		&g->tex_width, &g->tex_height);
-	g->tex_east = mlx_xpm_file_to_image(g->mlx, "texture/xpm/wall_east.xpm", 
+	g->tex_east = mlx_xpm_file_to_image(g->mlx, g->map->texture.ea, 
 		&g->tex_width, &g->tex_height);
-	g->tex_west = mlx_xpm_file_to_image(g->mlx, "texture/xpm/wall_west.xpm", 
+	g->tex_west = mlx_xpm_file_to_image(g->mlx, g->map->texture.we, 
 		&g->tex_width, &g->tex_height);
+	
+	// Créer des images par défaut si le chargement échoue
 	if (!g->tex_north)
 		g->tex_north = mlx_new_image(g->mlx, TEX_WIDTH, TEX_HEIGHT);
 	if (!g->tex_south)
@@ -30,6 +32,7 @@ void	load_textures(t_game *g)
 		g->tex_east = mlx_new_image(g->mlx, TEX_WIDTH, TEX_HEIGHT);
 	if (!g->tex_west)
 		g->tex_west = mlx_new_image(g->mlx, TEX_WIDTH, TEX_HEIGHT);
+	
 	g->tex_north_data = mlx_get_data_addr(g->tex_north, &g->tex_bpp, 
 		&g->tex_size_line, &g->tex_endian);
 	g->tex_south_data = mlx_get_data_addr(g->tex_south, &g->tex_bpp, 

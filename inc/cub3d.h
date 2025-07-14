@@ -123,6 +123,14 @@ typedef struct s_ray
 	int			tex_y;
 } t_ray;
 
+typedef struct s_draw_params
+{
+	int		x;
+	int		start;
+	int		end;
+	t_ray	*ray;
+} t_draw_params;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -192,8 +200,12 @@ bool	check_wall_collision(t_game *game, double x, double y, double margin);
 /*RAYCASTING*/
 void	load_textures(t_game *g);
 void	draw_scene(t_game *g);
-void	draw_textured_line(t_game *game, int x, int start, int end, t_ray *ray);
+void	draw_textured_line(t_game *game, t_draw_params *params);
 int		get_texture_pixel(t_game *game, int tex_num, int tex_x, int tex_y);
+
+/*DRAW*/
+void	put_pixel_to_img(t_game *game, int x, int y, int color);
+void	draw_vertical_line(t_game *game, t_draw_params *params, int color);
 
 /*FREE*/
 void	free_texture(t_texture *texture);

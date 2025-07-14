@@ -42,8 +42,8 @@ static int	parse_textures_and_colors(char **lines, t_map *map)
 
 static int	validate_parsing(t_map *map)
 {
-	if (!map->texture.no || !map->texture.so || 
-		!map->texture.ea || !map->texture.we)
+	if (!map->texture.no || !map->texture.so
+		|| !map->texture.ea || !map->texture.we)
 		return (ft_putstr_fd("Error: Missing textures\n", 2), 0);
 	return (1);
 }

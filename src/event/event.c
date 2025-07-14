@@ -15,7 +15,6 @@
 /*Free the textures and the main image*/
 void	cleanup_game(t_game *game)
 {
-	// Libérer les textures
 	if (game->tex_north)
 		mlx_destroy_image(game->mlx, game->tex_north);
 	if (game->tex_south)
@@ -24,7 +23,6 @@ void	cleanup_game(t_game *game)
 		mlx_destroy_image(game->mlx, game->tex_east);
 	if (game->tex_west)
 		mlx_destroy_image(game->mlx, game->tex_west);
-	// Libérer l'image principale
 	if (game->img)
 		mlx_destroy_image(game->mlx, game->img);
 	if (game->map)

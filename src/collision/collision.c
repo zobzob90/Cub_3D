@@ -16,9 +16,10 @@ bool	is_valid_position(t_game *game, double x, double y)
 {
 	if (x >= 0 && x < game->map->width && y >= 0 && y < game->map->height)
 		if (game->map->grid[(int)y][(int)x] != '1')
-			return(true);
-	return(false);
+			return (true);
+	return (false);
 }
+
 bool	can_move_to(t_game *g, double new_x, double new_y)
 {
 	if (!check_wall_collision(g, new_x, new_y, PLAYER_MARGIN)
@@ -29,12 +30,11 @@ bool	can_move_to(t_game *g, double new_x, double new_y)
 
 void	move_player_safe(t_game *g, double delta_x, double delta_y)
 {
-	double new_x;
+	double	new_x;
 	double	new_y;
 
 	new_x = g->player.x + delta_x;
 	new_y = g->player.y + delta_y;
-	
 	if (can_move_to(g, new_x, new_y))
 	{
 		g->player.x = new_x;
@@ -58,16 +58,13 @@ bool	check_wall_collision(t_game *g, double x, double y, double margin)
 	check_x_max = (int)(x + margin);
 	check_y_min = (int)(y - margin);
 	check_y_max = (int)(y + margin);
-
-	if (check_x_min < 0 || check_x_max >= g->map->width ||
-		check_y_min < 0 || check_y_max >= g->map->height)
+	if (check_x_min < 0 || check_x_max >= g->map->width
+		|| check_y_min < 0 || check_y_max >= g->map->height)
 		return (true);
-
 	if (g->map->grid[check_y_min][check_x_min] == '1' ||
 		g->map->grid[check_y_min][check_x_max] == '1' ||
 		g->map->grid[check_y_max][check_x_min] == '1' ||
 		g->map->grid[check_y_max][check_x_max] == '1')
 		return (true);
-	
 	return (false);
 }

@@ -50,7 +50,8 @@ int	main(int argc, char **argv)
 	init_player_from_map(&game.player);
 	game.map = &map;
 	game.img = mlx_new_image(game.mlx, WIDTH, HEIGHT);
-	game.img_data = mlx_get_data_addr(game.img, &game.bpp, &game.size_line, &game.endian);
+	game.img_data = mlx_get_data_addr(game.img,
+			&game.bpp, &game.size_line, &game.endian);
 	load_textures(&game);
 	draw_scene(&game);
 	mlx_hook(game.win, 2, 1L << 0, handle_key, &game);

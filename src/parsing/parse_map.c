@@ -29,7 +29,7 @@ static int	find_map_start(char	**lines)
 		if (is_texture(lines[i]) || is_color(lines[i]))
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		if (is_map(lines[i]))
 			return (i);
@@ -60,11 +60,45 @@ static void	calculate_map_dim(char **lines, int start, t_map *map)
 	map->width = width;
 }
 
+static void	free_partial_grid(char **grid, int count)
+{
+	while (--count >= 0)
+		free(grid[count]);
+	free(grid);
+}
+
+static int	allocate_grid_row(t_map *map, int i)
+{
+	map->grid[i] = malloc(sizeof(char) * (map->width + 1));
+	if (!map->grid[i])
+	{
+		free_partial_grid(map->grid, i);
+		return (0);
+	}
+	return (1);
+}
+
+static void	fill_grid_row(t_map *map, char **lines, int start, int i)
+{
+	int	j;
+	int	line_lenght;
+
+	line_lenght = ft_strlen(lines[start + i]);
+	j = 0;
+	while (j < map->width)
+	{
+		if (j < line_lenght)
+			map->grid[i][j] = lines[start + i][j];
+		else
+			map->grid[i][j] = ' ';
+		j++;
+	}
+	map->grid[i][map->width] = '\0';
+}
+
 static int	extract_map_grid(char **lines, int start, t_map *map)
 {
 	int	i;
-	int	j;
-	int	line_lenght;
 
 	map->grid = malloc(sizeof(char *) * map->height);
 	if (!map->grid)
@@ -72,28 +106,25 @@ static int	extract_map_grid(char **lines, int start, t_map *map)
 	i = 0;
 	while (i < map->height)
 	{
-		map->grid[i] = malloc(sizeof(char) * (map->width + 1));
-		if (!map->grid[i])
-		{
-			while (--i >= 0)
-				free(map->grid[i]);
-			free(map->grid);
+		if (!allocate_grid_row(map, i))
 			return (0);
-		}
-		line_lenght = ft_strlen(lines[start + i]);
-		j = 0;
-		while (j < map->width)
-		{
-			if (j < line_lenght)
-				map->grid[i][j] = lines[start + i][j];
-			else
-				map->grid[i][j] = ' ';
-			j++;
-		}
-		map->grid[i][map->width] = '\0';
+		fill_grid_row(map, lines, start, i);
 		i++;
 	}
 	return (1);
+}
+
+static int	is_player_char(char c)
+{
+	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
+}
+
+static void	set_player_position(t_map *map, int i, int j)
+{
+	map->player.x = (double)j;
+	map->player.y = (double)i;
+	map->player.orientation = map->grid[i][j];
+	map->grid[i][j] = '0';
 }
 
 static int	find_player(t_map *map)
@@ -102,18 +133,16 @@ static int	find_player(t_map *map)
 	int	j;
 	int	player_count;
 
-	(player_count = 0, i = 0);
+	player_count = 0;
+	i = 0;
 	while (i < map->height)
 	{
 		j = 0;
 		while (j < map->width)
 		{
-			if (map->grid[i][j] == 'N' || map->grid[i][j] == 'S' || map->grid[i][j] == 'W' || map->grid[i][j] == 'E')
+			if (is_player_char(map->grid[i][j]))
 			{
-				map->player.x = (double)j;
-				map->player.y = (double)i;
-				map->player.orientation = map->grid[i][j];
-				map->grid[i][j] = '0';
+				set_player_position(map, i, j);
 				player_count++;
 			}
 			j++;
@@ -130,7 +159,7 @@ int	parse_map(char **lines, t_map *map)
 	int	start;
 
 	start = find_map_start(lines);
-	if(start == -1)
+	if (start == -1)
 		return (ft_putstr_fd("Error: No map found in file\n", 2), 0);
 	calculate_map_dim(lines, start, map);
 	if (map->height == 0 || map->width == 0)

@@ -21,14 +21,12 @@ static bool	check_borders(t_map *map)
 	i = 0;
 	widht = map->width;
 	height = map->height;
-	//check ligne du haut
 	while (i < widht)
 	{
 		if (map->grid[0][i] != '1' && map->grid[0][i] != ' ')
 			return (false);
 		i++;
 	}
-	//ligne du bas
 	i = 0;
 	while (i < widht)
 	{
@@ -70,8 +68,9 @@ static bool	check_inside(t_map *map)
 		j = 1;
 		while (j < map->width - 1)
 		{
-			if (map->grid[i][j] == '0' || map->grid[i][j] == 'N' || map->grid[i][j] == 'S'
-				|| map->grid[i][j] == 'O' || map->grid[i][j] == 'E' || map->grid[i][j] == 'D')
+			if (map->grid[i][j] == '0' || map->grid[i][j] == 'N'
+				|| map->grid[i][j] == 'S' || map->grid[i][j] == 'O'
+				|| map->grid[i][j] == 'E' || map->grid[i][j] == 'D')
 			{
 				if (map->grid[i - 1][j] == ' ' || map->grid[i + 1][j] == ' '
 					|| map->grid[i][j - 1] == ' ' || map->grid[i][j + 1] == ' ')

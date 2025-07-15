@@ -100,7 +100,7 @@ static int	extract_map_grid(char **lines, int start, t_map *map)
 {
 	int	i;
 
-	map->grid = malloc(sizeof(char *) * map->height);
+	map->grid = malloc(sizeof(char *) * (map->height + 1));
 	if (!map->grid)
 		return (0);
 	i = 0;
@@ -111,6 +111,7 @@ static int	extract_map_grid(char **lines, int start, t_map *map)
 		fill_grid_row(map, lines, start, i);
 		i++;
 	}
+	map->grid[map->height] = NULL;
 	return (1);
 }
 

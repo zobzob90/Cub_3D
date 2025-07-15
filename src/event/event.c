@@ -23,10 +23,11 @@ void	cleanup_game(t_game *game)
 		mlx_destroy_image(game->mlx, game->tex_east);
 	if (game->tex_west)
 		mlx_destroy_image(game->mlx, game->tex_west);
+	free_texture(&game->map->texture);
+	if (game->map->grid)
+		ft_free_tab(game->map->grid);
 	if (game->img)
 		mlx_destroy_image(game->mlx, game->img);
-	if (game->map)
-		free(game->map);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
 	if (game->mlx)

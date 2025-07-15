@@ -73,8 +73,16 @@ int	parse_map(char **lines, t_map *map)
 	if (!extract_map_grid(lines, start, map))
 		return (ft_putstr_fd("Error: Failed to extract map grid\n", 2), 0);
 	if (!find_player(map))
+	{
+		free_texture(&map->texture);
+		ft_free_tab(map->grid);
 		return (ft_putstr_fd("Error : Invalid number of player\n", 2), 0);
+	}
 	if (!is_valid_map(map))
+	{
+		free_texture(&map->texture);
+		ft_free_tab(map->grid);
 		return (ft_putstr_fd("Error: Map is invalid\n", 2), 0);
+	}
 	return (1);
 }

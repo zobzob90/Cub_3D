@@ -59,6 +59,7 @@ int	parse_file(char *filename, t_map *map)
 	if (!parse_textures_and_colors(lines, map))
 	{
 		ft_free_tab(lines);
+		free_texture(&map->texture);
 		return (0);
 	}
 	if (!parse_map(lines, map))

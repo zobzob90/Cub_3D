@@ -22,14 +22,11 @@ void	load_textures(t_game *g)
 			&g->tex_width, &g->tex_height);
 	g->tex_west = mlx_xpm_file_to_image(g->mlx, g->map->texture.we,
 			&g->tex_width, &g->tex_height);
-	if (!g->tex_north)
-		g->tex_north = mlx_new_image(g->mlx, TEX_WIDTH, TEX_HEIGHT);
-	if (!g->tex_south)
-		g->tex_south = mlx_new_image(g->mlx, TEX_WIDTH, TEX_HEIGHT);
-	if (!g->tex_east)
-		g->tex_east = mlx_new_image(g->mlx, TEX_WIDTH, TEX_HEIGHT);
-	if (!g->tex_west)
-		g->tex_west = mlx_new_image(g->mlx, TEX_WIDTH, TEX_HEIGHT);
+	if (!g->tex_north || !g->tex_south || !g->tex_east || !g->tex_west)
+	{
+		ft_putstr_fd("Invalid texture path\n", 2);
+		close_win(g);
+	}
 	g->tex_north_data = mlx_get_data_addr(g->tex_north, &g->tex_bpp,
 			&g->tex_size_line, &g->tex_endian);
 	g->tex_south_data = mlx_get_data_addr(g->tex_south, &g->tex_bpp,

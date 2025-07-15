@@ -38,50 +38,6 @@ void	init_player(t_player *player)
 	player->orientation = '\0';
 }
 
-static void	set_north_direction(t_player *player)
-{
-	player->dir_x = 0;
-	player->dir_y = -1;
-	player->plane_x = 0.66;
-	player->plane_y = 0;
-}
-
-static void	set_south_direction(t_player *player)
-{
-	player->dir_x = 0;
-	player->dir_y = 1;
-	player->plane_x = -0.66;
-	player->plane_y = 0;
-}
-
-static void	set_east_direction(t_player *player)
-{
-	player->dir_x = 1;
-	player->dir_y = 0;
-	player->plane_x = 0;
-	player->plane_y = 0.66;
-}
-
-static void	set_west_direction(t_player *player)
-{
-	player->dir_x = -1;
-	player->dir_y = 0;
-	player->plane_x = 0;
-	player->plane_y = -0.66;
-}
-
-static void	set_player_direction(t_player *player)
-{
-	if (player->orientation == 'N')
-		set_north_direction(player);
-	else if (player->orientation == 'S')
-		set_south_direction(player);
-	else if (player->orientation == 'E')
-		set_east_direction(player);
-	else if (player->orientation == 'W')
-		set_west_direction(player);
-}
-
 void	init_player_from_map(t_player *player)
 {
 	set_player_direction(player);

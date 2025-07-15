@@ -56,28 +56,6 @@ static void	init_step_and_side(t_game *g, t_ray *r)
 	}
 }
 
-/*DDA (Digital Differential Analyzer) algorithm*/
-static void	perform_dda(t_game *g, t_ray *r)
-{
-	while (!r->hit)
-	{
-		if (r->side_dist_x < r->side_dist_y)
-		{
-			r->side_dist_x += r->delta_dist_x;
-			r->map_x += r->step_x;
-			r->side = 0;
-		}
-		else
-		{
-			r->side_dist_y += r->delta_dist_y;
-			r->map_y += r->step_y;
-			r->side = 1;
-		}
-		if (g->map->grid[r->map_y][r->map_x] == '1')
-			r->hit = 1;
-	}
-}
-
 /*Calculate the perpendicular distance to the wall
 	in order to avoid the fish-eye effect*/
 static void	calculate_distance(t_game *g, t_ray *r)

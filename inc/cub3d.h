@@ -173,6 +173,12 @@ bool	parse_color(char *line, t_map *map);
 bool	is_valid_map(t_map *map);
 int		parse_map(char **lines, t_map *map);
 
+/*PARSE_GRID*/
+int		extract_map_grid(char **lines, int start, t_map *map);
+
+/*PARSE_PLAYER*/
+int		find_player(t_map *map);
+
 /*PRINCIPAL PARSE*/
 int		parse_file(char *filename, t_map *map);
 
@@ -187,6 +193,7 @@ void	init_texture(t_texture *texture);
 void	init_player(t_player *player);
 void	init_player_from_map(t_player *player);
 void	init_map(t_map *map);
+void	set_player_direction(t_player *player);
 
 /*EVENT*/
 void	cleanup_game(t_game *game);
@@ -202,6 +209,7 @@ void	load_textures(t_game *g);
 void	draw_scene(t_game *g);
 void	draw_textured_line(t_game *game, t_draw_params *params);
 int		get_texture_pixel(t_game *game, int tex_num, int tex_x, int tex_y);
+void	perform_dda(t_game *g, t_ray *r);
 
 /*DRAW*/
 void	put_pixel_to_img(t_game *game, int x, int y, int color);

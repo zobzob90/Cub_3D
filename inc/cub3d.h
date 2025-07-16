@@ -32,7 +32,7 @@
 /*player parameters*/
 # define SPEED 0.1
 # define ROT_SPEED 0.05
-# define PLAYER_MARGIN 0.1
+# define PLAYER_MARGIN 0.2
 
 /*key*/
 # define ESC 65307

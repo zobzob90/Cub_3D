@@ -24,7 +24,7 @@ void	load_textures(t_game *g)
 			&g->tex_width, &g->tex_height);
 	if (!g->tex_north || !g->tex_south || !g->tex_east || !g->tex_west)
 	{
-		ft_putstr_fd("Error: Invalid texture path\n", 2);
+		ft_putstr_fd("Error\nInvalid texture path\n", 2);
 		close_win(g);
 	}
 	g->tex_north_data = mlx_get_data_addr(g->tex_north, &g->tex_bpp,

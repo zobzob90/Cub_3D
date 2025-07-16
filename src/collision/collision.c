@@ -64,7 +64,8 @@ bool	check_wall_collision(t_game *g, double x, double y, double margin)
 	if (g->map->grid[check_y_min][check_x_min] == '1' ||
 		g->map->grid[check_y_min][check_x_max] == '1' ||
 		g->map->grid[check_y_max][check_x_min] == '1' ||
-		g->map->grid[check_y_max][check_x_max] == '1')
+		g->map->grid[check_y_max][check_x_max] == '1' ||
+		g->map->grid[(int)y][(int)x] == '1')
 		return (true);
 	return (false);
 }

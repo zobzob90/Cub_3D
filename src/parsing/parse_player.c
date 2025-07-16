@@ -19,8 +19,8 @@ static int	is_player_char(char c)
 
 static void	set_player_position(t_map *map, int i, int j)
 {
-	map->player.x = (double)j;
-	map->player.y = (double)i;
+	map->player.x = (double)j + 0.5;
+	map->player.y = (double)i + 0.5;
 	map->player.orientation = map->grid[i][j];
 	map->grid[i][j] = '0';
 }

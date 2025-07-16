@@ -12,6 +12,20 @@
 
 #include "cub3d.h"
 
+static void	init_keys(t_game *game)
+{
+	game->keys = malloc(sizeof(t_keys));
+	if (!game->keys)
+		return ;
+	game->keys->w = false;
+	game->keys->s = false;
+	game->keys->a = false;
+	game->keys->d = false;
+	game->keys->up = false;
+	game->keys->down = false;
+	game->keys->left = false;
+	game->keys->right = false;
+}
 /*Initialisation of the game struct*/
 void	init_game(t_game *game)
 {
@@ -34,6 +48,7 @@ void	init_game(t_game *game)
 	game->tex_west = 0;
 	game->tex_west_data = 0;
 	game->tex_width = 0;
+	init_keys(game);
 }
 
 int	main(int argc, char **argv)
@@ -54,8 +69,10 @@ int	main(int argc, char **argv)
 			&game.bpp, &game.size_line, &game.endian);
 	load_textures(&game);
 	draw_scene(&game);
-	mlx_hook(game.win, 2, 1L << 0, handle_key, &game);
+	mlx_hook(game.win, 2, 1L << 0, handle_press_key, &game);
+	mlx_hook(game.win, 3, 1L << 1, handle_release_key, &game);
 	mlx_hook(game.win, 17, 0, close_win, &game);
+	mlx_loop_hook(game.mlx, update_player_movement, &game);
 	mlx_loop(game.mlx);
 	free_map(&map);
 	return (0);

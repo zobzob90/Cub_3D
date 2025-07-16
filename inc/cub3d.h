@@ -26,8 +26,8 @@
 # define PI 3.1415926535
 
 /*screen*/
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1920
+# define HEIGHT 1080
 
 /*player parameters*/
 # define SPEED 0.1
@@ -131,6 +131,19 @@ typedef struct s_draw_params
 	t_ray	*ray;
 } t_draw_params;
 
+typedef struct s_keys
+{
+	bool	w;
+	bool	s;
+	bool	a;
+	bool	d;
+	bool	up;
+	bool	down;
+	bool	left;
+	bool	right;
+} t_keys;
+
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -155,6 +168,7 @@ typedef struct s_game
 	int			tex_size_line;
 	int			tex_endian;
 	t_map		*map;
+	t_keys		*keys;
 } t_game;
 
 /*PARS UTILS*/
@@ -184,8 +198,12 @@ int		parse_file(char *filename, t_map *map);
 
 /*KEY*/
 int		close_win(t_game *game);
+int		handle_press_key(int key, t_game *g);
+int		handle_release_key(int key, t_game *g);
+
+/*Movement*/
 void	rotate(t_game *g, double angle);
-int		handle_key(int key, t_game *g);
+int	update_player_movement(t_game *g);
 
 /*INIT*/
 void	init_color(t_color *color);

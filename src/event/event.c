@@ -30,6 +30,8 @@ void	cleanup_game(t_game *game)
 		mlx_destroy_image(game->mlx, game->img);
 	if (game->win)
 		mlx_destroy_window(game->mlx, game->win);
+	if (game->keys)
+		free(game->keys);
 	if (game->mlx)
 	{
 		mlx_destroy_display(game->mlx);
@@ -63,19 +65,47 @@ void	rotate(t_game *g, double angle)
 		+ g->player.plane_y * cos(angle);
 }
 
-/*Handle the keyboard events*/
-int	handle_key(int key, t_game *g)
+/*Handle the key press*/
+int	handle_press_key(int key, t_game *g)
 {
 	if (key == ESC)
 		close_win(g);
-	if (key == W || key == UP)
-		move_player_safe(g, g->player.dir_x * SPEED, g->player.dir_y * SPEED);
-	if (key == S || key == DOWN)
-		move_player_safe(g, -g->player.dir_x * SPEED, -g->player.dir_y * SPEED);
-	if (key == A || key == LEFT)
-		rotate(g, -ROT_SPEED);
-	if (key == D || key == RIGHT)
-		rotate(g, ROT_SPEED);
-	draw_scene(g);
+	if (key == W)
+		g->keys->w = true;
+	if (key == S)
+		g->keys->s = true;
+	if (key == A)
+		g->keys->a = true;
+	if (key == D)
+		g->keys->d = true;
+	if (key == UP)
+		g->keys->up = true;
+	if (key == DOWN)
+		g->keys->down = true;
+	if (key == LEFT)
+		g->keys->left = true;
+	if (key == RIGHT)
+		g->keys->right = true;
+	return (0);
+}
+/*Handle the key release*/
+int	handle_release_key(int key, t_game *g)
+{
+	if (key == W)
+		g->keys->w = false;
+	if (key == S)
+		g->keys->s = false;
+	if (key == A)
+		g->keys->a = false;
+	if (key == D)
+		g->keys->d = false;
+	if (key == UP)
+		g->keys->up = false;
+	if (key == DOWN)
+		g->keys->down = false;
+	if (key == LEFT)
+		g->keys->left = false;
+	if (key == RIGHT)
+		g->keys->right = false;
 	return (0);
 }

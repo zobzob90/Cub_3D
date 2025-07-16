@@ -37,7 +37,8 @@ SRCS = 	src/main.c \
 		src/parsing/parse_player.c \
 		src/utils/free.c \
 		src/utils/init.c \
-		src/utils/init_dir.c
+		src/utils/init_dir.c \
+		src/move/move.c
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 DEPS = $(OBJS:.o=.d)

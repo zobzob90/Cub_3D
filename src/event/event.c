@@ -88,6 +88,7 @@ int	handle_press_key(int key, t_game *g)
 		g->keys->right = true;
 	return (0);
 }
+
 /*Handle the key release*/
 int	handle_release_key(int key, t_game *g)
 {

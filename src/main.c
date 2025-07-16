@@ -26,6 +26,7 @@ static void	init_keys(t_game *game)
 	game->keys->left = false;
 	game->keys->right = false;
 }
+
 /*Initialisation of the game struct*/
 void	init_game(t_game *game)
 {

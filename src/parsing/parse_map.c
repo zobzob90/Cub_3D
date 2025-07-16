@@ -66,23 +66,23 @@ int	parse_map(char **lines, t_map *map)
 
 	start = find_map_start(lines);
 	if (start == -1)
-		return (ft_putstr_fd("Error: No map found in file\n", 2), 0);
+		return (ft_putstr_fd("Error\nNo map found in file\n", 2), 0);
 	calculate_map_dim(lines, start, map);
 	if (map->height == 0 || map->width == 0)
-		return (ft_putstr_fd("Error: Invalid map dimesions\n", 2), 0);
+		return (ft_putstr_fd("Error\nInvalid map dimesions\n", 2), 0);
 	if (!extract_map_grid(lines, start, map))
-		return (ft_putstr_fd("Error: Failed to extract map grid\n", 2), 0);
+		return (ft_putstr_fd("Error\nFailed to extract map grid\n", 2), 0);
 	if (!find_player(map))
 	{
 		free_texture(&map->texture);
 		ft_free_tab(map->grid);
-		return (ft_putstr_fd("Error : Invalid number of player\n", 2), 0);
+		return (ft_putstr_fd("Error\nInvalid number of player\n", 2), 0);
 	}
 	if (!is_valid_map(map))
 	{
 		free_texture(&map->texture);
 		ft_free_tab(map->grid);
-		return (ft_putstr_fd("Error: Map is invalid\n", 2), 0);
+		return (ft_putstr_fd("Error\nMap is invalid\n", 2), 0);
 	}
 	return (1);
 }

@@ -25,6 +25,7 @@ SRCS = 	src/main.c \
 		src/raycasting/raycaster_dda.c \
 		src/raycasting/draw.c \
 		src/raycasting/draw2.c \
+		src/raycasting/draw_gun.c \
 		src/raycasting/texture.c \
 		src/collision/collision.c \
 		src/parsing/pars_utils.c \

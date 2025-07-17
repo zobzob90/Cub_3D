@@ -27,6 +27,18 @@ static void	init_keys(t_game *game)
 	game->keys->right = false;
 }
 
+static	void init_gun(t_weapon *gun)
+{
+	gun->img = NULL;
+	gun->tex_repos = "texture/xpm/gun.xpm";
+	gun->tex_bpp = 0;
+	gun->tex_data = 0;
+	gun->tex_endian = 0;
+	gun->tex_height = 0;
+	gun->tex_width = 0;
+	gun->tex_size_line = 0;
+}
+
 /*Initialisation of the game struct*/
 void	init_game(t_game *game)
 {
@@ -36,20 +48,21 @@ void	init_game(t_game *game)
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "Cub3D Lite");
 	game->size_line = 0;
-	game->tex_bpp = 0;
+	game->tex_bpp = 32;
 	game->tex_east = 0;
 	game->tex_east_data = 0;
 	game->tex_endian = 0;
 	game->tex_height = 0;
 	game->tex_north = 0;
 	game->tex_north_data = 0;
-	game->tex_size_line = 0;
+	game->tex_size_line = WIDTH;
 	game->tex_south = 0;
 	game->tex_south_data = 0;
 	game->tex_west = 0;
 	game->tex_west_data = 0;
 	game->tex_width = 0;
 	init_keys(game);
+	init_gun(&game->gun);
 }
 
 int	main(int argc, char **argv)
@@ -62,6 +75,7 @@ int	main(int argc, char **argv)
 	if (!parse_file(argv[1], &map))
 		return (ft_putstr_fd("Error: Failed to parse file\n", 2), 1);
 	init_game(&game);
+	printf("%s\n", game.gun.tex_repos);
 	game.player = map.player;
 	init_player_from_map(&game.player);
 	game.map = &map;

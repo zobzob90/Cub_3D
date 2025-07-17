@@ -30,7 +30,7 @@
 # define HEIGHT 1080
 
 /*player parameters*/
-# define SPEED 0.1
+# define SPEED 0.08
 # define ROT_SPEED 0.05
 # define PLAYER_MARGIN 0.2
 
@@ -102,6 +102,20 @@ typedef struct s_map
 	int			num_door;
 } t_map;
 
+typedef struct s_weapon
+{
+	void	*img;
+	char	*tex_repos;
+	char	*tex_fire_1;
+	char	*tex_fire_2;
+	int		tex_height;
+	int		tex_width;
+	char	*tex_data;
+	int		tex_size_line;
+	int		tex_bpp;
+	int		tex_endian;
+} t_weapon;
+
 typedef struct s_ray
 {
 	double		camera_x;
@@ -169,6 +183,7 @@ typedef struct s_game
 	int			tex_endian;
 	t_map		*map;
 	t_keys		*keys;
+	t_weapon	gun;
 } t_game;
 
 /*PARS UTILS*/
@@ -201,9 +216,9 @@ int		close_win(t_game *game);
 int		handle_press_key(int key, t_game *g);
 int		handle_release_key(int key, t_game *g);
 
-/*Movement*/
+/*MOVEMENT*/
 void	rotate(t_game *g, double angle);
-int	update_player_movement(t_game *g);
+int		update_player_movement(t_game *g);
 
 /*INIT*/
 void	init_color(t_color *color);
@@ -228,6 +243,7 @@ void	draw_scene(t_game *g);
 void	draw_textured_line(t_game *game, t_draw_params *params);
 int		get_texture_pixel(t_game *game, int tex_num, int tex_x, int tex_y);
 void	perform_dda(t_game *g, t_ray *r);
+void	draw_gun_overlay(t_game *g);
 
 /*DRAW*/
 void	put_pixel_to_img(t_game *game, int x, int y, int color);

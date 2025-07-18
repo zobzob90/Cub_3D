@@ -14,21 +14,13 @@
 
 int	handle_mouse_move(int x, int y, t_game *g)
 {
-	static int	last_x;
-	int			delta_x;
-
+	int	delta_x;
 	(void)y;
-	if (last_x == -1)
-	{
-		last_x = x;
-		return (0);
-	}
-	delta_x = x - last_x;
+	delta_x = x - WIDTH / 2;
 	if (delta_x < 0)
 		rotate(g, ROT_SPEED * delta_x * MOUSE_SENSITIVITY);
 	else if (delta_x > 0)
 		rotate(g, ROT_SPEED * abs(delta_x) * MOUSE_SENSITIVITY);
-	last_x = x;
 	return (0);
 }
 

@@ -32,6 +32,7 @@ void	rotate(t_game *g, double angle)
 
 int	update_player_movement(t_game *g)
 {
+	mlx_mouse_move(g->mlx, g->win, WIDTH / 2, HEIGHT / 2);
 	if (g->keys->w || g->keys->up)
 		move_player_safe(g, g->player.dir_x * SPEED, g->player.dir_y * SPEED);
 	if (g->keys->s || g->keys->down)
@@ -40,6 +41,7 @@ int	update_player_movement(t_game *g)
 		rotate(g, -ROT_SPEED);
 	if (g->keys->d || g->keys->right)
 		rotate(g, ROT_SPEED);
+
 	draw_scene(g);
 	return (0);
 }

@@ -14,6 +14,8 @@
 
 void	gun_stop_fire(t_game *g)
 {
+	if (g->gun.img)
+		mlx_destroy_image(g->mlx, g->gun.img);
 	g->gun.img = mlx_xpm_file_to_image(g->mlx, g->gun.tex_repos,
 			&g->gun.tex_width, &g->gun.tex_height);
 	g->gun.tex_data = mlx_get_data_addr(g->gun.img, &g->gun.tex_bpp,
@@ -23,6 +25,8 @@ void	gun_stop_fire(t_game *g)
 
 void	gun_fire(t_game *g)
 {
+	if (g->gun.img)
+		mlx_destroy_image(g->mlx, g->gun.img);
 	g->gun.img = mlx_xpm_file_to_image(g->mlx, g->gun.tex_fire,
 			&g->gun.tex_width, &g->gun.tex_height);
 	g->gun.tex_data = mlx_get_data_addr(g->gun.img, &g->gun.tex_bpp,

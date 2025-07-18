@@ -27,7 +27,7 @@ static void	init_keys(t_game *game)
 	game->keys->right = false;
 }
 
-static	void init_gun(t_weapon *gun)
+static void	init_gun(t_weapon *gun)
 {
 	gun->img = NULL;
 	gun->tex_repos = "texture/xpm/gun.xpm";

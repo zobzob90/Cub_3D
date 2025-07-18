@@ -23,6 +23,8 @@ void	cleanup_game(t_game *game)
 		mlx_destroy_image(game->mlx, game->tex_east);
 	if (game->tex_west)
 		mlx_destroy_image(game->mlx, game->tex_west);
+	if (game->gun.img)
+		mlx_destroy_image(game->mlx, game->gun.img);
 	free_texture(&game->map->texture);
 	if (game->map->grid)
 		ft_free_tab(game->map->grid);

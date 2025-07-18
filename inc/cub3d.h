@@ -26,12 +26,12 @@
 # define PI 3.1415926535
 
 /*screen*/
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 800
+# define HEIGHT 600
 
 /*player parameters*/
-# define SPEED 0.08
-# define ROT_SPEED 0.05
+# define SPEED 0.015
+# define ROT_SPEED 0.015
 # define PLAYER_MARGIN 0.2
 
 /*key*/
@@ -108,8 +108,7 @@ typedef struct s_weapon
 {
 	void	*img;
 	char	*tex_repos;
-	char	*tex_fire_1;
-	char	*tex_fire_2;
+	char	*tex_fire;
 	int		tex_height;
 	int		tex_width;
 	char	*tex_data;
@@ -157,8 +156,6 @@ typedef struct s_keys
 	bool	down;
 	bool	left;
 	bool	right;
-	bool	ctrl_g;
-	bool	ctrl_d;
 } t_keys;
 
 
@@ -226,6 +223,7 @@ int		update_player_movement(t_game *g);
 
 /*FIRE*/
 void	gun_fire(t_game *g);
+void	gun_stop_fire(t_game *g);
 
 /*INIT*/
 void	init_color(t_color *color);

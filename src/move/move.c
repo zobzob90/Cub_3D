@@ -12,6 +12,24 @@
 
 #include "cub3d.h"
 
+/*Handle the rotation moves*/
+void	rotate(t_game *g, double angle)
+{
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = g->player.dir_x;
+	old_plane_x = g->player.plane_x;
+	g->player.dir_x = g->player.dir_x * cos(angle)
+		- g->player.dir_y * sin(angle);
+	g->player.dir_y = old_dir_x * sin(angle)
+		+ g->player.dir_y * cos(angle);
+	g->player.plane_x = g->player.plane_x * cos(angle)
+		- g->player.plane_y * sin(angle);
+	g->player.plane_y = old_plane_x * sin(angle)
+		+ g->player.plane_y * cos(angle);
+}
+
 int	update_player_movement(t_game *g)
 {
 	if (g->keys->w || g->keys->up)

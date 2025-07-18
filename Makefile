@@ -21,6 +21,7 @@ endef
 
 SRCS = 	src/main.c \
 		src/event/event.c \
+		src/event/mouse_event.c \
 		src/raycasting/raycaster.c \
 		src/raycasting/raycaster_dda.c \
 		src/raycasting/draw.c \

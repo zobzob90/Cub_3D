@@ -41,32 +41,6 @@ void	cleanup_game(t_game *game)
 	}
 }
 
-/*Clean close of the game*/
-int	close_win(t_game *game)
-{
-	cleanup_game(game);
-	exit(0);
-	return (0);
-}
-
-/*Handle the rotation moves*/
-void	rotate(t_game *g, double angle)
-{
-	double	old_dir_x;
-	double	old_plane_x;
-
-	old_dir_x = g->player.dir_x;
-	old_plane_x = g->player.plane_x;
-	g->player.dir_x = g->player.dir_x * cos(angle)
-		- g->player.dir_y * sin(angle);
-	g->player.dir_y = old_dir_x * sin(angle)
-		+ g->player.dir_y * cos(angle);
-	g->player.plane_x = g->player.plane_x * cos(angle)
-		- g->player.plane_y * sin(angle);
-	g->player.plane_y = old_plane_x * sin(angle)
-		+ g->player.plane_y * cos(angle);
-}
-
 /*Handle the key press*/
 int	handle_press_key(int key, t_game *g)
 {

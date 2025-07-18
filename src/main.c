@@ -12,6 +12,14 @@
 
 #include "cub3d.h"
 
+/*Clean close of the game*/
+int	close_win(t_game *game)
+{
+	cleanup_game(game);
+	exit(0);
+	return (0);
+}
+
 static void	init_keys(t_game *game)
 {
 	game->keys = malloc(sizeof(t_keys));
@@ -88,6 +96,10 @@ int	main(int argc, char **argv)
 	mlx_hook(game.win, 2, 1L << 0, handle_press_key, &game);
 	mlx_hook(game.win, 3, 1L << 1, handle_release_key, &game);
 	mlx_hook(game.win, 17, 0, close_win, &game);
+	mlx_hook(game.win, 4, 1L << 2, handle_mouse_press, &game);
+	mlx_hook(game.win, 5, 1L << 3, handle_mouse_release, &game);
+	mlx_hook(game.win, 6, 1L << 6, handle_mouse_move, &game);
+	mlx_mouse_hide(game.mlx, game.win);
 	mlx_loop_hook(game.mlx, update_player_movement, &game);
 	mlx_loop(game.mlx);
 	free_map(&map);

@@ -26,12 +26,12 @@
 # define PI 3.1415926535
 
 /*screen*/
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1920
+# define HEIGHT 1080
 
 /*player parameters*/
-# define SPEED 0.015
-# define ROT_SPEED 0.015
+# define SPEED 0.05
+# define ROT_SPEED 0.05
 # define PLAYER_MARGIN 0.2
 
 /*key*/
@@ -57,6 +57,7 @@
 # define MOUSE_LEFT 1
 # define MOUSE_RIGHT 2
 # define MOUSE_MIDDLE 3
+# define MOUSE_SENSITIVITY 0.1
 
 typedef struct s_color
 {
@@ -216,6 +217,11 @@ int		parse_file(char *filename, t_map *map);
 int		close_win(t_game *game);
 int		handle_press_key(int key, t_game *g);
 int		handle_release_key(int key, t_game *g);
+
+/*MOUSE*/
+int		handle_mouse_press(int button, int x, int y, t_game *g);
+int 	handle_mouse_release(int button, int x, int y, t_game *g);
+int		handle_mouse_move(int x, int y, t_game *g);
 
 /*MOVEMENT*/
 void	rotate(t_game *g, double angle);

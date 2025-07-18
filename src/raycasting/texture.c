@@ -37,7 +37,6 @@ void	load_textures(t_game *g)
 			&g->tex_size_line, &g->tex_endian);
 	g->tex_west_data = mlx_get_data_addr(g->tex_west, &g->tex_bpp,
 			&g->tex_size_line, &g->tex_endian);
-	printf("[load_texture] gros caca\n");
 	g->gun.tex_data = mlx_get_data_addr(g->gun.img, &g->gun.tex_bpp,
 			&g->gun.tex_size_line, &g->gun.tex_endian);
 }

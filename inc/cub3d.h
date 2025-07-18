@@ -45,6 +45,8 @@
 # define S 115
 # define D 100
 # define SPACE 32
+# define CTRL_G 65507
+# define CTRL_D 65508
 
 /*raycasting optimizations*/
 # define FOV 0.66
@@ -155,6 +157,8 @@ typedef struct s_keys
 	bool	down;
 	bool	left;
 	bool	right;
+	bool	ctrl_g;
+	bool	ctrl_d;
 } t_keys;
 
 
@@ -220,6 +224,9 @@ int		handle_release_key(int key, t_game *g);
 void	rotate(t_game *g, double angle);
 int		update_player_movement(t_game *g);
 
+/*FIRE*/
+void	gun_fire(t_game *g);
+
 /*INIT*/
 void	init_color(t_color *color);
 void	init_texture(t_texture *texture);
@@ -243,7 +250,7 @@ void	draw_scene(t_game *g);
 void	draw_textured_line(t_game *game, t_draw_params *params);
 int		get_texture_pixel(t_game *game, int tex_num, int tex_x, int tex_y);
 void	perform_dda(t_game *g, t_ray *r);
-void	draw_gun_overlay(t_game *g);
+void	draw_gun(t_game *g);
 
 /*DRAW*/
 void	put_pixel_to_img(t_game *game, int x, int y, int color);

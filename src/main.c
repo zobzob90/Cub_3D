@@ -25,12 +25,16 @@ static void	init_keys(t_game *game)
 	game->keys->down = false;
 	game->keys->left = false;
 	game->keys->right = false;
+	game->keys->ctrl_g = false;
+	game->keys->ctrl_d = false;
 }
 
 static	void init_gun(t_weapon *gun)
 {
 	gun->img = NULL;
 	gun->tex_repos = "texture/xpm/gun.xpm";
+	gun->tex_fire_1 = "texture/xpm/gun_fire_1.xpm";
+	gun->tex_fire_2 = "texture/xpm/gun_fire_2.xpm";
 	gun->tex_bpp = 0;
 	gun->tex_data = 0;
 	gun->tex_endian = 0;

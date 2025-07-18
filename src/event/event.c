@@ -86,6 +86,11 @@ int	handle_press_key(int key, t_game *g)
 		g->keys->left = true;
 	if (key == RIGHT)
 		g->keys->right = true;
+	if (key == CTRL_G || key == CTRL_D)
+	{
+		printf("PEW !\n");
+		gun_fire(g);
+	}
 	return (0);
 }
 

@@ -123,6 +123,6 @@ void	draw_scene(t_game *g)
 		cast_single_ray(g, x);
 		x++;
 	}
-	draw_gun_overlay(g);
 	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);
+	draw_gun(g);
 }

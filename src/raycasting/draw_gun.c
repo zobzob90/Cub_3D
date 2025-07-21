@@ -48,7 +48,7 @@ void	draw_gun(t_game *g)
 	gun_y = -1;
 	while (++gun_y < g->gun.tex_height)
 	{
-		screen_x = (WIDTH - g->gun.tex_width) / 2;
+		screen_x = (WIDTH - g->gun.tex_width) / 2 + 150;
 		gun_x = -1;
 		while (++gun_x < g->gun.tex_width)
 		{

@@ -258,10 +258,7 @@ void	draw_textured_line(t_game *game, t_draw_params *params);
 int		get_texture_pixel(t_game *game, int tex_num, int tex_x, int tex_y);
 void	perform_dda(t_game *g, t_ray *r);
 void	draw_gun(t_game *g);
-
-/*DRAW*/
 void	put_pixel_to_img(t_game *game, int x, int y, int color);
-void	draw_vertical_line(t_game *game, t_draw_params *params, int color);
 
 /*FREE*/
 void	free_texture(t_texture *texture);

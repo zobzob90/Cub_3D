@@ -12,6 +12,7 @@
 
 #include "cub3d.h"
 
+/*Load all the .xpm textures*/
 void	load_textures(t_game *g)
 {
 	g->tex_north = mlx_xpm_file_to_image(g->mlx, g->map->texture.no,
@@ -41,6 +42,7 @@ void	load_textures(t_game *g)
 			&g->gun.tex_size_line, &g->gun.tex_endian);
 }
 
+/*Get the color of one pixel(tex_x, tex_y) in the texture*/
 int	get_texture_pixel(t_game *game, int tex_num, int tex_x, int tex_y)
 {
 	char	*tex_data;

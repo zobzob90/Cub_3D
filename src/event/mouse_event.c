@@ -12,27 +12,35 @@
 
 #include "cub3d.h"
 
-void	recapture_mouse(t_game *g)
+void	capture_mouse(t_game *g)
 {
-	mlx_mouse_hide(g->mlx, g->win);
-	g->keys->lock_mouse = true;
+	if (!g->keys->lock_mouse)
+	{
+		mlx_mouse_hide(g->mlx, g->win);
+		g->keys->lock_mouse = true;
+		ft_printf("Mouse mod ON\n");
+	}
+	else if (g->keys->lock_mouse)
+	{
+		mlx_mouse_show(g->mlx, g->win);
+		g->keys->lock_mouse = false;
+		ft_printf("Mouse mod OFF\n");
+	}
 }
 
-void	release_mouse(t_game *g)
-{
-	mlx_mouse_show(g->mlx, g->win);
-	g->keys->lock_mouse = false;
-}
 
 int	handle_mouse_move(int x, int y, t_game *g)
 {
 	int	delta_x;
 	(void)y;
 	delta_x = x - WIDTH / 2;
-	if (delta_x < 0)
-		rotate(g, ROT_SPEED * delta_x * MOUSE_SENSITIVITY);
-	else if (delta_x > 0)
-		rotate(g, ROT_SPEED * abs(delta_x) * MOUSE_SENSITIVITY);
+	if (g->keys->lock_mouse)
+	{
+		if (delta_x < 0)
+			rotate(g, ROT_SPEED * delta_x * MOUSE_SENSITIVITY);
+		else if (delta_x > 0)
+			rotate(g, ROT_SPEED * abs(delta_x) * MOUSE_SENSITIVITY);
+	}
 	return (0);
 }
 
@@ -40,7 +48,7 @@ int	handle_mouse_press(int button, int x, int y, t_game *g)
 {
 	(void)x;
 	(void)y;
-	if (button == MOUSE_LEFT)
+	if (button == MOUSE_LEFT && g->keys->lock_mouse)
 		gun_fire(g);
 	return (0);
 }
@@ -49,7 +57,7 @@ int handle_mouse_release(int button, int x, int y, t_game *g)
 {
 	(void)x;
 	(void)y;
-	if (button == MOUSE_LEFT)
+	if (button == MOUSE_LEFT && g->keys->lock_mouse)
 		gun_stop_fire(g);
 	return (0);
 }

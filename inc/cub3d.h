@@ -59,7 +59,7 @@
 # define MOUSE_LEFT 1
 # define MOUSE_RIGHT 2
 # define MOUSE_MIDDLE 3
-# define MOUSE_SENSITIVITY 0.1
+# define MOUSE_SENSITIVITY 0.007
 
 typedef struct s_color
 {
@@ -225,8 +225,7 @@ int		handle_release_key(int key, t_game *g);
 int		handle_mouse_press(int button, int x, int y, t_game *g);
 int 	handle_mouse_release(int button, int x, int y, t_game *g);
 int		handle_mouse_move(int x, int y, t_game *g);
-void	release_mouse(t_game *g);
-void	recapture_mouse(t_game *game);
+void	capture_mouse(t_game *game);
 
 /*MOVEMENT*/
 void	rotate(t_game *g, double angle);

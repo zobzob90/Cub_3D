@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB_H
-#define CUB_H
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include "libft.h"
 # include <stdbool.h>
@@ -66,7 +66,7 @@ typedef struct s_color
 	int	r;
 	int	g;
 	int	b;
-} t_color;
+}	t_color;
 
 typedef struct s_texture
 {
@@ -74,7 +74,7 @@ typedef struct s_texture
 	char	*so;
 	char	*ea;
 	char	*we;
-} t_texture;
+}	t_texture;
 
 typedef struct s_player
 {
@@ -85,14 +85,14 @@ typedef struct s_player
 	double	plane_x;
 	double	plane_y;
 	char	orientation;
-} t_player;
+}	t_player;
 
 typedef struct s_door
 {
 	int		x;
 	int		y;
 	bool	open;
-} t_door;
+}	t_door;
 
 typedef struct s_map
 {
@@ -105,7 +105,7 @@ typedef struct s_map
 	t_player	player;
 	t_door		door;
 	int			num_door;
-} t_map;
+}	t_map;
 
 typedef struct s_weapon
 {
@@ -118,7 +118,7 @@ typedef struct s_weapon
 	int		tex_size_line;
 	int		tex_bpp;
 	int		tex_endian;
-} t_weapon;
+}	t_weapon;
 
 typedef struct s_ray
 {
@@ -139,7 +139,7 @@ typedef struct s_ray
 	double		wall_x;
 	int			tex_x;
 	int			tex_y;
-} t_ray;
+}	t_ray;
 
 typedef struct s_draw_params
 {
@@ -147,7 +147,7 @@ typedef struct s_draw_params
 	int		start;
 	int		end;
 	t_ray	*ray;
-} t_draw_params;
+}	t_draw_params;
 
 typedef struct s_keys
 {
@@ -160,8 +160,7 @@ typedef struct s_keys
 	bool	left;
 	bool	right;
 	bool	lock_mouse;
-} t_keys;
-
+}	t_keys;
 
 typedef struct s_game
 {
@@ -189,7 +188,7 @@ typedef struct s_game
 	t_map		*map;
 	t_keys		*keys;
 	t_weapon	gun;
-} t_game;
+}	t_game;
 
 /*PARS UTILS*/
 char	**read_files(char *path);
@@ -223,7 +222,7 @@ int		handle_release_key(int key, t_game *g);
 
 /*MOUSE*/
 int		handle_mouse_press(int button, int x, int y, t_game *g);
-int 	handle_mouse_release(int button, int x, int y, t_game *g);
+int		handle_mouse_release(int button, int x, int y, t_game *g);
 int		handle_mouse_move(int x, int y, t_game *g);
 void	capture_mouse(t_game *game);
 

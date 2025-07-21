@@ -85,7 +85,6 @@ int	main(int argc, char **argv)
 	if (!parse_file(argv[1], &map))
 		return (ft_putstr_fd("Error: Failed to parse file\n", 2), 1);
 	init_game(&game);
-	printf("%s\n", game.gun.tex_repos);
 	game.player = map.player;
 	init_player_from_map(&game.player);
 	game.map = &map;
@@ -102,6 +101,5 @@ int	main(int argc, char **argv)
 	mlx_hook(game.win, 6, 1L << 6, handle_mouse_move, &game);
 	mlx_loop_hook(game.mlx, update_player_movement, &game);
 	mlx_loop(game.mlx);
-	free_map(&map);
-	return (0);
+	return (free_map(&map), 0);
 }

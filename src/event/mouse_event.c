@@ -28,10 +28,10 @@ void	capture_mouse(t_game *g)
 	}
 }
 
-
 int	handle_mouse_move(int x, int y, t_game *g)
 {
 	int	delta_x;
+
 	(void)y;
 	delta_x = x - WIDTH / 2;
 	if (g->keys->lock_mouse)
@@ -53,7 +53,7 @@ int	handle_mouse_press(int button, int x, int y, t_game *g)
 	return (0);
 }
 
-int handle_mouse_release(int button, int x, int y, t_game *g)
+int	handle_mouse_release(int button, int x, int y, t_game *g)
 {
 	(void)x;
 	(void)y;

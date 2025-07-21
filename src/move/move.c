@@ -42,7 +42,6 @@ int	update_player_movement(t_game *g)
 		rotate(g, -ROT_SPEED);
 	if (g->keys->d || g->keys->right)
 		rotate(g, ROT_SPEED);
-
 	draw_scene(g);
 	return (0);
 }

@@ -64,6 +64,8 @@ int	handle_press_key(int key, t_game *g)
 		g->keys->right = true;
 	if (key == CTRL_G || key == CTRL_D)
 		gun_fire(g);
+	if (key == ALT_L || key == ALT_R)
+		release_mouse(g);
 	return (0);
 }
 
@@ -88,5 +90,7 @@ int	handle_release_key(int key, t_game *g)
 		g->keys->right = false;
 	if (key == CTRL_G || key == CTRL_D)
 		gun_stop_fire(g);
+	if (key == ALT_L || key == ALT_R)
+		recapture_mouse(g);
 	return (0);
 }

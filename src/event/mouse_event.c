@@ -12,6 +12,18 @@
 
 #include "cub3d.h"
 
+void	recapture_mouse(t_game *g)
+{
+	mlx_mouse_hide(g->mlx, g->win);
+	g->keys->lock_mouse = true;
+}
+
+void	release_mouse(t_game *g)
+{
+	mlx_mouse_show(g->mlx, g->win);
+	g->keys->lock_mouse = false;
+}
+
 int	handle_mouse_move(int x, int y, t_game *g)
 {
 	int	delta_x;

@@ -47,6 +47,8 @@
 # define SPACE 32
 # define CTRL_G 65507
 # define CTRL_D 65508
+# define ALT_L 65513
+# define ALT_R 65514
 
 /*raycasting optimizations*/
 # define FOV 0.66
@@ -157,6 +159,7 @@ typedef struct s_keys
 	bool	down;
 	bool	left;
 	bool	right;
+	bool	lock_mouse;
 } t_keys;
 
 
@@ -222,6 +225,8 @@ int		handle_release_key(int key, t_game *g);
 int		handle_mouse_press(int button, int x, int y, t_game *g);
 int 	handle_mouse_release(int button, int x, int y, t_game *g);
 int		handle_mouse_move(int x, int y, t_game *g);
+void	release_mouse(t_game *g);
+void	recapture_mouse(t_game *game);
 
 /*MOVEMENT*/
 void	rotate(t_game *g, double angle);

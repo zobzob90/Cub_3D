@@ -33,6 +33,7 @@ static void	init_keys(t_game *game)
 	game->keys->down = false;
 	game->keys->left = false;
 	game->keys->right = false;
+	game->keys->lock_mouse = true;
 }
 
 static void	init_gun(t_weapon *gun)

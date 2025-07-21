@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 10:38:14 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/04 11:01:23 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/21 15:00:24 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	free_map(t_map *map)
 {
 	if (map->grid)
 		ft_free_tab(map->grid);
+	if (map->doors)
+		free(map->doors);
 	free_texture(&map->texture);
 }
 

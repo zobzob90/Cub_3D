@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   collision.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdeliere <vdeliere@student.42.fr>          #+#  +:+       +#+        */
+/*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-07-11 09:26:45 by vdeliere          #+#    #+#             */
-/*   Updated: 2025-07-11 09:26:45 by vdeliere         ###   ########.fr       */
+/*   Created: 2025/07/11 09:26:45 by vdeliere          #+#    #+#             */
+/*   Updated: 2025/07/21 15:13:48 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 bool	is_valid_position(t_game *game, double x, double y)
 {
+	char	cell;
+
 	if (x >= 0 && x < game->map->width && y >= 0 && y < game->map->height)
-		if (game->map->grid[(int)y][(int)x] != '1')
+	{
+		cell = game->map->grid[(int)y][(int)x];
+		if (cell != '1' && cell != 'D')
 			return (true);
+	}
 	return (false);
 }
 
@@ -65,7 +70,12 @@ bool	check_wall_collision(t_game *g, double x, double y, double margin)
 		g->map->grid[check_y_min][check_x_max] == '1' ||
 		g->map->grid[check_y_max][check_x_min] == '1' ||
 		g->map->grid[check_y_max][check_x_max] == '1' ||
-		g->map->grid[(int)y][(int)x] == '1')
+		g->map->grid[(int)y][(int)x] == '1' ||
+		g->map->grid[check_y_min][check_x_min] == 'D' ||
+		g->map->grid[check_y_min][check_x_max] == 'D' ||
+		g->map->grid[check_y_max][check_x_min] == 'D' ||
+		g->map->grid[check_y_max][check_x_max] == 'D' ||
+		g->map->grid[(int)y][(int)x] == 'D')
 		return (true);
 	return (false);
 }

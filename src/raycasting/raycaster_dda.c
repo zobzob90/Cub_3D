@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster_dda.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdeliere <vdeliere@student.42.fr>          #+#  +:+       +#+        */
+/*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-07-15 08:45:53 by vdeliere          #+#    #+#             */
-/*   Updated: 2025-07-15 08:45:53 by vdeliere         ###   ########.fr       */
+/*   Created: 2025/07/15 08:45:53 by vdeliere          #+#    #+#             */
+/*   Updated: 2025/07/21 15:15:39 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	perform_dda(t_game *g, t_ray *r)
 			r->map_y += r->step_y;
 			r->side = 1;
 		}
-		if (g->map->grid[r->map_y][r->map_x] == '1')
+		if (g->map->grid[r->map_y][r->map_x] == '1' ||
+			g->map->grid[r->map_y][r->map_x] == 'D')
 			r->hit = 1;
 	}
 }

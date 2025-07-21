@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdeliere <vdeliere@student.42.fr>          #+#  +:+       +#+        */
+/*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-07-16 11:41:28 by vdeliere          #+#    #+#             */
-/*   Updated: 2025-07-16 11:41:28 by vdeliere         ###   ########.fr       */
+/*   Created: 2025/07/16 11:41:28 by vdeliere          #+#    #+#             */
+/*   Updated: 2025/07/21 15:15:52 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	update_player_movement(t_game *g)
 		rotate(g, -ROT_SPEED);
 	if (g->keys->d || g->keys->right)
 		rotate(g, ROT_SPEED);
-
 	draw_scene(g);
 	return (0);
 }

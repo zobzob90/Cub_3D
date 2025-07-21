@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 15:31:53 by vdeliere          #+#    #+#             */
-/*   Updated: 2025/07/11 16:30:06 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/21 15:00:23 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ int	handle_press_key(int key, t_game *g)
 		g->keys->right = true;
 	if (key == CTRL_G || key == CTRL_D)
 		gun_fire(g);
+	if (key == E)
+		handle_door_interaction(g);
 	return (0);
 }
 

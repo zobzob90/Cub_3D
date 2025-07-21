@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:10:47 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/21 15:13:13 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/21 15:39:46 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define SPEED 0.05
 # define ROT_SPEED 0.05
 # define PLAYER_MARGIN 0.2
+# define SPRINT_MULTIPLIER 2.0
 
 /*key*/
 # define ESC 65307
@@ -48,6 +49,7 @@
 # define CTRL_G 65507
 # define CTRL_D 65508
 # define E 101
+# define SHIFT_L 65505
 
 /*raycasting optimizations*/
 # define FOV 0.66
@@ -158,6 +160,7 @@ typedef struct s_keys
 	bool	down;
 	bool	left;
 	bool	right;
+	bool	shift;
 }	t_keys;
 
 typedef struct s_game
@@ -226,6 +229,7 @@ int		handle_mouse_move(int x, int y, t_game *g);
 /*MOVEMENT*/
 void	rotate(t_game *g, double angle);
 int		update_player_movement(t_game *g);
+double	get_movement_speed(t_game *g);
 
 /*FIRE*/
 void	gun_fire(t_game *g);

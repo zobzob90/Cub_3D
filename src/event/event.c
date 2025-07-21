@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 15:31:53 by vdeliere          #+#    #+#             */
-/*   Updated: 2025/07/21 15:00:23 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/21 15:39:44 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	handle_press_key(int key, t_game *g)
 		g->keys->left = true;
 	if (key == RIGHT)
 		g->keys->right = true;
+	if (key == SHIFT_L)
+		g->keys->shift = true;
 	if (key == CTRL_G || key == CTRL_D)
 		gun_fire(g);
 	if (key == E)
@@ -88,6 +90,8 @@ int	handle_release_key(int key, t_game *g)
 		g->keys->left = false;
 	if (key == RIGHT)
 		g->keys->right = false;
+	if (key == SHIFT_L)
+		g->keys->shift = false;
 	if (key == CTRL_G || key == CTRL_D)
 		gun_stop_fire(g);
 	return (0);

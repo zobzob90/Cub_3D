@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:17:14 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/11 17:09:33 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/21 15:39:31 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static void	init_keys(t_game *game)
 	game->keys->down = false;
 	game->keys->left = false;
 	game->keys->right = false;
+	game->keys->shift = false;
 }
 
 static void	init_gun(t_weapon *gun)
@@ -84,7 +85,6 @@ int	main(int argc, char **argv)
 	if (!parse_file(argv[1], &map))
 		return (ft_putstr_fd("Error: Failed to parse file\n", 2), 1);
 	init_game(&game);
-	printf("%s\n", game.gun.tex_repos);
 	game.player = map.player;
 	init_player_from_map(&game.player);
 	game.map = &map;

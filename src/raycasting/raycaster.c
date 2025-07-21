@@ -56,29 +56,9 @@ static void	init_step_and_side(t_game *g, t_ray *r)
 	}
 }
 
-/*DDA (Digital Differential Analyzer) algorithm*/
-static void	perform_dda(t_game *g, t_ray *r)
-{
-	while (!r->hit)
-	{
-		if (r->side_dist_x < r->side_dist_y)
-		{
-			r->side_dist_x += r->delta_dist_x;
-			r->map_x += r->step_x;
-			r->side = 0;
-		}
-		else
-		{
-			r->side_dist_y += r->delta_dist_y;
-			r->map_y += r->step_y;
-			r->side = 1;
-		}
-		if (g->map[r->map_y][r->map_x] == '1')
-			r->hit = 1;
-	}
-}
-/*Calculate the perpendicular distance to the wall in order to avoid the fish-eye effect*/
-static void calculate_distance(t_game *g, t_ray *r)
+/*Calculate the perpendicular distance to the wall
+	in order to avoid the fish-eye effect*/
+static void	calculate_distance(t_game *g, t_ray *r)
 {
 	if (r->side == 0)
 		r->perp_wall_dist = (r->map_x - g->player.x + (1 - r->step_x) / 2.0)
@@ -86,24 +66,16 @@ static void calculate_distance(t_game *g, t_ray *r)
 	else
 		r->perp_wall_dist = (r->map_y - g->player.y + (1 - r->step_y) / 2.0)
 			/ r->ray_dir_y;
-
-	// Calculer la coordonnée exacte où le rayon frappe le mur
 	if (r->side == 0)
 		r->wall_x = g->player.y + r->perp_wall_dist * r->ray_dir_y;
 	else
 		r->wall_x = g->player.x + r->perp_wall_dist * r->ray_dir_x;
 	r->wall_x -= floor(r->wall_x);
-
-	// Calculer la coordonnée X de la texture
 	r->tex_x = (int)(r->wall_x * (double)TEX_WIDTH);
-	
-	// Inverser la texture pour certains murs pour éviter l'effet miroir
 	if (r->side == 0 && r->ray_dir_x > 0)
 		r->tex_x = TEX_WIDTH - r->tex_x - 1;
 	if (r->side == 1 && r->ray_dir_y < 0)
 		r->tex_x = TEX_WIDTH - r->tex_x - 1;
-	
-	// S'assurer que tex_x est dans les limites
 	if (r->tex_x < 0)
 		r->tex_x = 0;
 	if (r->tex_x >= TEX_WIDTH)
@@ -113,23 +85,31 @@ static void calculate_distance(t_game *g, t_ray *r)
 /*Throw a complete ray for a x column*/
 static void	cast_single_ray(t_game *g, int x)
 {
-	t_ray	ray;
-	int		line_height;
-	int		start;
-	int		end;
+	t_ray			ray;
+	int				line_height;
+	int				start;
+	int				end;
+	t_draw_params	params;
 
 	init_ray_vars(g, &ray, x);
 	init_step_and_side(g, &ray);
 	perform_dda(g, &ray);
 	calculate_distance(g, &ray);
-	line_height = (int)(HEIGHT / ray.perp_wall_dist);
+	if (ray.perp_wall_dist > 0)
+		line_height = (int)(HEIGHT / ray.perp_wall_dist);
+	else
+		line_height = HEIGHT;
 	start = -line_height / 2 + HEIGHT / 2;
 	if (start < 0)
 		start = 0;
 	end = line_height / 2 + HEIGHT / 2;
 	if (end >= HEIGHT)
-		end = HEIGHT - 1;	
-	draw_textured_line(g, x, start, end, &ray);
+		end = HEIGHT - 1;
+	params.x = x;
+	params.start = start;
+	params.end = end;
+	params.ray = &ray;
+	draw_textured_line(g, &params);
 }
 
 /*Main function of the raycasting. Draw the scene*/
@@ -144,4 +124,5 @@ void	draw_scene(t_game *g)
 		x++;
 	}
 	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);
+	draw_gun(g);
 }

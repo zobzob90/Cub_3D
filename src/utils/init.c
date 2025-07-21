@@ -38,6 +38,11 @@ void	init_player(t_player *player)
 	player->orientation = '\0';
 }
 
+void	init_player_from_map(t_player *player)
+{
+	set_player_direction(player);
+}
+
 void	init_map(t_map *map)
 {
 	map->grid = NULL;

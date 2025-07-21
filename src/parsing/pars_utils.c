@@ -12,19 +12,12 @@
 
 #include "cub3d.h"
 
-/*Fonction pour lire le fichier de la map*/
-
-char	**read_files(char *path)
+static char	*read_file_content(int fd)
 {
-	int		fd;
 	char	*line;
-	char	**lines;
 	char	*content;
 
 	content = NULL;
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (perror("open"), NULL);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -37,12 +30,24 @@ char	**read_files(char *path)
 			content = ft_strjoin_free(content, line);
 		line = get_next_line(fd);
 	}
+	return (content);
+}
+
+char	**read_files(char *path)
+{
+	int		fd;
+	char	**lines;
+	char	*content;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (perror("open"), NULL);
+	content = read_file_content(fd);
 	close(fd);
 	if (!content || *content == '\0')
 		return (NULL);
 	lines = ft_split(content, '\n');
-	free(content);
-	return (lines);
+	return (free(content), lines);
 }
 
 /*Retourne true ou false si la ligne est une texture*/
@@ -52,11 +57,10 @@ bool	is_texture(const char *line)
 		return (false);
 	while (*line == ' ' || *line == '\t')
 		line++;
-	
-	if ((!ft_strncmp(line, "NO", 2) && (line[2] == ' ' || line[2] == '\t')) ||
-		(!ft_strncmp(line, "SO", 2) && (line[2] == ' ' || line[2] == '\t')) ||
-		(!ft_strncmp(line, "EA", 2) && (line[2] == ' ' || line[2] == '\t')) ||
-		(!ft_strncmp(line, "WE", 2) && (line[2] == ' ' || line[2] == '\t')))
+	if ((!ft_strncmp(line, "NO", 2) && (line[2] == ' ' || line[2] == '\t'))
+		|| (!ft_strncmp(line, "SO", 2) && (line[2] == ' ' || line[2] == '\t'))
+		|| (!ft_strncmp(line, "EA", 2) && (line[2] == ' ' || line[2] == '\t'))
+		|| (!ft_strncmp(line, "WE", 2) && (line[2] == ' ' || line[2] == '\t')))
 		return (true);
 	return (false);
 }

@@ -26,17 +26,13 @@
 # define PI 3.1415926535
 
 /*screen*/
-# define WIDTH 800
-# define HEIGHT 600
-
-/*map*/
-# define TILE_SIZE 1
+# define WIDTH 1920
+# define HEIGHT 1080
 
 /*player parameters*/
-# define SPEED 0.1
+# define SPEED 0.05
 # define ROT_SPEED 0.05
-# define PLAYER_MARGIN 0.1
-# define COLLISION_EPSILON 0.001
+# define PLAYER_MARGIN 0.2
 
 /*key*/
 # define ESC 65307
@@ -49,11 +45,11 @@
 # define S 115
 # define D 100
 # define SPACE 32
+# define CTRL_G 65507
+# define CTRL_D 65508
 
 /*raycasting optimizations*/
 # define FOV 0.66
-# define MAP_WIDTH 6
-# define MAP_HEIGHT 5
 # define TEX_WIDTH 64
 # define TEX_HEIGHT 64
 
@@ -61,6 +57,7 @@
 # define MOUSE_LEFT 1
 # define MOUSE_RIGHT 2
 # define MOUSE_MIDDLE 3
+# define MOUSE_SENSITIVITY 0.1
 
 typedef struct s_color
 {
@@ -75,8 +72,6 @@ typedef struct s_texture
 	char	*so;
 	char	*ea;
 	char	*we;
-	double	x;
-	double	y;
 } t_texture;
 
 typedef struct s_player
@@ -110,6 +105,19 @@ typedef struct s_map
 	int			num_door;
 } t_map;
 
+typedef struct s_weapon
+{
+	void	*img;
+	char	*tex_repos;
+	char	*tex_fire;
+	int		tex_height;
+	int		tex_width;
+	char	*tex_data;
+	int		tex_size_line;
+	int		tex_bpp;
+	int		tex_endian;
+} t_weapon;
+
 typedef struct s_ray
 {
 	double		camera_x;
@@ -131,6 +139,27 @@ typedef struct s_ray
 	int			tex_y;
 } t_ray;
 
+typedef struct s_draw_params
+{
+	int		x;
+	int		start;
+	int		end;
+	t_ray	*ray;
+} t_draw_params;
+
+typedef struct s_keys
+{
+	bool	w;
+	bool	s;
+	bool	a;
+	bool	d;
+	bool	up;
+	bool	down;
+	bool	left;
+	bool	right;
+} t_keys;
+
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -140,9 +169,7 @@ typedef struct s_game
 	int			bpp;
 	int			size_line;
 	int			endian;
-	char		map[MAP_HEIGHT][MAP_WIDTH + 1];
 	t_player	player;
-	// Textures temporaires
 	void		*tex_north;
 	void		*tex_south;
 	void		*tex_east;
@@ -156,8 +183,9 @@ typedef struct s_game
 	int			tex_bpp;
 	int			tex_size_line;
 	int			tex_endian;
-	t_player	player;
-	t_map		*map;  // Pointeur vers la map parsée
+	t_map		*map;
+	t_keys		*keys;
+	t_weapon	gun;
 } t_game;
 
 /*PARS UTILS*/
@@ -176,24 +204,43 @@ bool	parse_color(char *line, t_map *map);
 bool	is_valid_map(t_map *map);
 int		parse_map(char **lines, t_map *map);
 
+/*PARSE_GRID*/
+int		extract_map_grid(char **lines, int start, t_map *map);
+
+/*PARSE_PLAYER*/
+int		find_player(t_map *map);
+
 /*PRINCIPAL PARSE*/
 int		parse_file(char *filename, t_map *map);
 
 /*KEY*/
 int		close_win(t_game *game);
+int		handle_press_key(int key, t_game *g);
+int		handle_release_key(int key, t_game *g);
+
+/*MOUSE*/
+int		handle_mouse_press(int button, int x, int y, t_game *g);
+int 	handle_mouse_release(int button, int x, int y, t_game *g);
+int		handle_mouse_move(int x, int y, t_game *g);
+
+/*MOVEMENT*/
 void	rotate(t_game *g, double angle);
-int		handle_key(int key, t_game *g);
+int		update_player_movement(t_game *g);
+
+/*FIRE*/
+void	gun_fire(t_game *g);
+void	gun_stop_fire(t_game *g);
 
 /*INIT*/
 void	init_color(t_color *color);
 void	init_texture(t_texture *texture);
 void	init_player(t_player *player);
-//void	init_map(t_map *map);
+void	init_player_from_map(t_player *player);
+void	init_map(t_map *map);
+void	set_player_direction(t_player *player);
 
 /*EVENT*/
 void	cleanup_game(t_game *game);
-int		close_win(t_game *game);
-void	rotate(t_game *g, double angle);
 
 /*COLLISION*/
 bool	is_valid_position(t_game *game, double x, double y);
@@ -204,13 +251,17 @@ bool	check_wall_collision(t_game *game, double x, double y, double margin);
 /*RAYCASTING*/
 void	load_textures(t_game *g);
 void	draw_scene(t_game *g);
-int		handle_key(int key, t_game *g);
-void	draw_textured_line(t_game *game, int x, int start, int end, t_ray *ray);
+void	draw_textured_line(t_game *game, t_draw_params *params);
 int		get_texture_pixel(t_game *game, int tex_num, int tex_x, int tex_y);
+void	perform_dda(t_game *g, t_ray *r);
+void	draw_gun(t_game *g);
+
+/*DRAW*/
+void	put_pixel_to_img(t_game *game, int x, int y, int color);
+void	draw_vertical_line(t_game *game, t_draw_params *params, int color);
 
 /*FREE*/
 void	free_texture(t_texture *texture);
 void	free_map(t_map *map);
-void	free_all(t_map *map);
 
 #endif

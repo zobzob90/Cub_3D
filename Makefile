@@ -21,8 +21,12 @@ endef
 
 SRCS = 	src/main.c \
 		src/event/event.c \
+		src/event/mouse_event.c \
 		src/raycasting/raycaster.c \
+		src/raycasting/raycaster_dda.c \
 		src/raycasting/draw.c \
+		src/raycasting/draw2.c \
+		src/raycasting/draw_gun.c \
 		src/raycasting/texture.c \
 		src/collision/collision.c \
 		src/parsing/pars_utils.c \
@@ -31,9 +35,13 @@ SRCS = 	src/main.c \
 		src/parsing/parse_map.c \
 		src/parsing/parse_texture.c \
 		src/parsing/valid_map.c \
-		src/event/event.c \
+		src/parsing/parse_grid.c \
+		src/parsing/parse_player.c \
 		src/utils/free.c \
-		src/utils/init.c 
+		src/utils/init.c \
+		src/utils/init_dir.c \
+		src/move/move.c \
+		src/fire/fire.c
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 DEPS = $(OBJS:.o=.d)

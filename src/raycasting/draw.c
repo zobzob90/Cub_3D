@@ -12,43 +12,6 @@
 
 #include "cub3d.h"
 
-/*Put a pixel inside the image buffer*/
-void	put_pixel_to_img(t_game *game, int x, int y, int color)
-{
-	char	*dst;
-	
-	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
-	{
-		dst = game->img_data + (y * game->size_line + x * (game->bpp / 8));
-		*(unsigned int*)dst = color;
-	}
-}
-
-/*Draw a vertical line in the screen(roof + floor + wall)*/
-void	draw_vertical_line(t_game *game, int x, int start, int end, int color)
-{
-	int	y;
-
-	y = 0;
-	while (y < start)
-	{
-		put_pixel_to_img(game, x, y, 0x000000);
-		y++;
-	}
-	y = start;
-	while (y < end)
-	{
-		put_pixel_to_img(game, x, y, color);
-		y++;
-	}
-	y = end;
-	while (y < HEIGHT)
-	{
-		put_pixel_to_img(game, x, y, 0x444444);
-		y++;
-	}
-}
-
 static int	get_texture_num(t_ray *ray)
 {
 	if (ray->side == 0)
@@ -70,11 +33,14 @@ static int	get_texture_num(t_ray *ray)
 static void	draw_ceiling(t_game *game, int x, int start)
 {
 	int	y;
+	int	ceiling_color;
 
+	ceiling_color = (game->map->ceiling.r << 16)
+		| (game->map->ceiling.g << 8) | game->map->ceiling.b;
 	y = 0;
 	while (y < start)
 	{
-		put_pixel_to_img(game, x, y, 0x000000);
+		put_pixel_to_img(game, x, y, ceiling_color);
 		y++;
 	}
 }
@@ -82,50 +48,46 @@ static void	draw_ceiling(t_game *game, int x, int start)
 static void	draw_floor(t_game *game, int x, int end)
 {
 	int	y;
+	int	floor_color;
 
+	floor_color = (game->map->floor.r << 16)
+		| (game->map->floor.g << 8) | game->map->floor.b;
 	y = end;
 	while (y < HEIGHT)
 	{
-		put_pixel_to_img(game, x, y, 0x444444);
+		put_pixel_to_img(game, x, y, floor_color);
 		y++;
 	}
 }
 
-static void	draw_wall_texture(t_game *game, int x, int start, int end, t_ray *ray)
+static void	draw_wall_texture(t_game *game, t_draw_params *params)
 {
 	int		y;
 	int		tex_num;
 	int		tex_y;
-	int		color;
 	double	step;
 	double	tex_pos;
-	int		line_height;
 
-	tex_num = get_texture_num(ray);
-	line_height = end - start;
-	step = 1.0 * TEX_HEIGHT / line_height;
-	tex_pos = (start - HEIGHT / 2 + line_height / 2) * step;
-	if (tex_pos < 0)
-		tex_pos = 0;
-	
-	y = start;
-	while (y < end)
+	tex_num = get_texture_num(params->ray);
+	step = 1.0 * TEX_HEIGHT / (int)(HEIGHT / params->ray->perp_wall_dist);
+	tex_pos = (params->start - (-(int)(HEIGHT
+					/ params->ray->perp_wall_dist) / 2 + HEIGHT / 2)) * step;
+	y = params->start;
+	while (y < params->end)
 	{
-		tex_y = (int)tex_pos;
+		tex_y = (int)tex_pos % TEX_HEIGHT;
 		if (tex_y < 0)
 			tex_y = 0;
-		if (tex_y >= TEX_HEIGHT)
-			tex_y = TEX_HEIGHT - 1;
 		tex_pos += step;
-		color = get_texture_pixel(game, tex_num, ray->tex_x, tex_y);
-		put_pixel_to_img(game, x, y, color);
+		put_pixel_to_img(game, params->x, y,
+			get_texture_pixel(game, tex_num, params->ray->tex_x, tex_y));
 		y++;
 	}
 }
 
-void	draw_textured_line(t_game *game, int x, int start, int end, t_ray *ray)
+void	draw_textured_line(t_game *game, t_draw_params *params)
 {
-	draw_ceiling(game, x, start);
-	draw_wall_texture(game, x, start, end, ray);
-	draw_floor(game, x, end);
+	draw_ceiling(game, params->x, params->start);
+	draw_wall_texture(game, params);
+	draw_floor(game, params->x, params->end);
 }

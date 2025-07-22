@@ -12,6 +12,12 @@
 
 #include "cub3d.h"
 
+static void	error_texture_path(t_game *g)
+{
+	ft_putstr_fd("Error\nInvalid texture path\n", 2);
+	close_win(g);
+}
+
 /*Load all the .xpm textures*/
 void	load_textures(t_game *g)
 {
@@ -25,11 +31,9 @@ void	load_textures(t_game *g)
 			&g->tex_width, &g->tex_height);
 	g->gun.img = mlx_xpm_file_to_image(g->mlx, g->gun.tex_repos,
 			&g->gun.tex_width, &g->gun.tex_height);
-	if (!g->tex_north || !g->tex_south || !g->tex_east || !g->tex_west)
-	{
-		ft_putstr_fd("Error\nInvalid texture path\n", 2);
-		close_win(g);
-	}
+	if (!g->tex_north || !g->tex_south || !g->tex_east
+		|| !g->tex_west || !g->gun.img)
+		error_texture_path(g);
 	g->tex_north_data = mlx_get_data_addr(g->tex_north, &g->tex_bpp,
 			&g->tex_size_line, &g->tex_endian);
 	g->tex_south_data = mlx_get_data_addr(g->tex_south, &g->tex_bpp,

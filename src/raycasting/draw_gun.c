@@ -23,15 +23,16 @@ static void	put_gun_pixel(t_game *g, int x, int y, unsigned int color)
 	*(unsigned int *)pixel = color;
 }
 
-/*Get the color of a pixel(gun_x, gun_y)*/
-static unsigned int	get_gun_pixel(t_game *g, int gun_x, int gun_y)
+/*Get the color of a pixel from specific texture data*/
+static unsigned int	get_gun_pixel_from_data(char *tex_data, int gun_x,
+	int gun_y, t_game *g)
 {
 	char	*pixel;
 
-	if (!g->gun.tex_data || gun_x < 0 || gun_x >= g->gun.tex_width
+	if (!tex_data || gun_x < 0 || gun_x >= g->gun.tex_width
 		|| gun_y < 0 || gun_y >= g->gun.tex_height)
 		return (0xFF00FF);
-	pixel = g->gun.tex_data + (gun_y * g->gun.tex_size_line
+	pixel = tex_data + (gun_y * g->gun.tex_size_line
 			+ gun_x * (g->gun.tex_bpp / 8));
 	return (*(unsigned int *)pixel);
 }
@@ -55,7 +56,7 @@ void	draw_gun(t_game *g)
 		gun_x = -1;
 		while (++gun_x < g->gun.tex_width)
 		{
-			color = get_gun_pixel(g, gun_x, gun_y);
+			color = get_gun_pixel_from_data(g->gun.tex_data, gun_x, gun_y, g);
 			if (color != 0x00A2E8 && (color & 0xFFFFFF) != 0)
 				put_gun_pixel(g, screen_x, screen_y, color);
 			screen_x++;

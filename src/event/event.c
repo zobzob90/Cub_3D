@@ -94,7 +94,5 @@ int	handle_release_key(int key, t_game *g)
 		g->keys->right = false;
 	if (key == SHIFT_L)
 		g->keys->shift = false;
-	if (key == CTRL_G || key == CTRL_D)
-		gun_stop_fire(g);
 	return (0);
 }

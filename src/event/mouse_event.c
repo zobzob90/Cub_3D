@@ -52,12 +52,3 @@ int	handle_mouse_press(int button, int x, int y, t_game *g)
 		gun_fire(g);
 	return (0);
 }
-
-int	handle_mouse_release(int button, int x, int y, t_game *g)
-{
-	(void)x;
-	(void)y;
-	if (button == MOUSE_LEFT && g->keys->lock_mouse)
-		gun_stop_fire(g);
-	return (0);
-}

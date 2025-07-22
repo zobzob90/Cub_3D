@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:08:39 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/22 14:02:24 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/22 15:46:04 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ int	parse_file(char *filename, t_map *map)
 		return (0);
 	}
 	init_doors_from_map(map);
+	init_npcs_from_map(map);
 	ft_free_tab(lines);
 	return (1);
 }

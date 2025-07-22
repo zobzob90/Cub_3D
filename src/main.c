@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:17:14 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/22 14:11:13 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/22 15:49:32 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ static void	init_keys(t_game *game)
 static void	init_gun(t_weapon *gun)
 {
 	gun->img = NULL;
-	gun->tex_repos = "texture/xpm/gun.xpm";
-	gun->tex_fire = "texture/xpm/gun_fire_1.xpm";
+	gun->tex_repos = "texture/xpm/gun/gun.xpm";
+	gun->tex_fire = "texture/xpm/gun/gun_fire_1.xpm";
 	gun->tex_bpp = 0;
 	gun->tex_data = 0;
 	gun->tex_endian = 0;

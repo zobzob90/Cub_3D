@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:16:35 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/22 13:55:03 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/22 15:46:08 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ bool	is_map(const char *line)
 	while (*line)
 	{
 		if (*line != '0' && *line != '1' && *line != 'N' && *line != 'S'
-			&& *line != 'E' && *line != 'W'
+			&& *line != 'E' && *line != 'W' && *line != 'X'
 			&& *line != ' ' && *line != 'D' && *line != '\n')
 			return (false);
 		line++;

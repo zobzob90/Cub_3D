@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:08:55 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/22 13:55:03 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/22 15:26:49 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ bool	parse_texture(char *line, t_map *map)
 	tokens = ft_split(line, ' ');
 	if (!tokens || !tokens[0] || !tokens[1])
 		return (false);
-	// Vérifier qu'il n'y a que 2 éléments
 	i = 0;
 	while (tokens[i])
 		i++;
@@ -32,25 +31,25 @@ bool	parse_texture(char *line, t_map *map)
 		return (ft_free_tab(tokens), false);
 	if (!ft_strncmp(tokens[0], "NO", 3))
 	{
-		if (map->texture.no) // Déjà défini
+		if (map->texture.no)
 			return (free(path), ft_free_tab(tokens), false);
 		map->texture.no = path;
 	}
 	else if (!ft_strncmp(tokens[0], "SO", 3))
 	{
-		if (map->texture.so) // Déjà défini
+		if (map->texture.so)
 			return (free(path), ft_free_tab(tokens), false);
 		map->texture.so = path;
 	}
 	else if (!ft_strncmp(tokens[0], "EA", 3))
 	{
-		if (map->texture.ea) // Déjà défini
+		if (map->texture.ea)
 			return (free(path), ft_free_tab(tokens), false);
 		map->texture.ea = path;
 	}
 	else if (!ft_strncmp(tokens[0], "WE", 3))
 	{
-		if (map->texture.we) // Déjà défini
+		if (map->texture.we)
 			return (free(path), ft_free_tab(tokens), false);
 		map->texture.we = path;
 	}

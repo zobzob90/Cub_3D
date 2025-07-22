@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:10:47 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/22 14:11:11 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/22 15:46:29 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,17 @@ typedef struct s_door
 	bool	open;
 }	t_door;
 
+typedef struct s_npc
+{
+	double	x;
+	double	y;
+	double	dir_x;
+	double	dir_y;
+	int		hp;
+	int		type;
+	bool	see_player;
+} 	t_npc;
+
 typedef struct s_map
 {
 	char		**grid;
@@ -115,6 +126,8 @@ typedef struct s_map
 	int			num_door;
 	t_door		*doors;
 	int			num_doors;
+	t_npc		*npcs;
+	int			num_npcs;
 }	t_map;
 
 typedef struct s_weapon
@@ -198,6 +211,8 @@ typedef struct s_game
 	int			tex_bpp;
 	int			tex_size_line;
 	int			tex_endian;
+	int			num_npc;
+	t_npc		*npc;
 	t_map		*map;
 	t_keys		*keys;
 	t_weapon	gun;
@@ -249,6 +264,7 @@ double	get_movement_speed(t_game *g);
 /*FIRE*/
 void	gun_fire(t_game *g);
 void	update_gun_animation(t_game	*g);
+
 /*INIT*/
 void	init_color(t_color *color);
 void	init_texture(t_texture *texture);
@@ -256,6 +272,8 @@ void	init_player(t_player *player);
 void	init_player_from_map(t_player *player);
 void	init_map(t_map *map);
 void	init_doors_from_map(t_map *map);
+void	init_npc(t_npc *npc);
+void	init_npcs_from_map(t_map *map);
 void	set_player_direction(t_player *player);
 
 /*EVENT*/

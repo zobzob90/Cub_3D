@@ -68,6 +68,7 @@ SRCS = 	src/main.c \
 		src/utils/free.c \
 		src/utils/init.c \
 		src/utils/init_dir.c \
+		src/utils/init_main_struct.c \
 		src/npc/init_npc.c \
 		src/move/move.c \
 		src/fire/fire.c 

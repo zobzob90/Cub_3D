@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:10:47 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/22 16:40:46 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/22 17:22:41 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -275,6 +275,9 @@ void	init_doors_from_map(t_map *map);
 void	init_npc(t_npc *npc);
 void	init_npcs_from_map(t_map *map);
 void	set_player_direction(t_player *player);
+void	init_keys(t_game *game);
+void	init_gun(t_weapon *gun);
+void	init_game(t_game *game);
 
 /*EVENT*/
 void	cleanup_game(t_game *game);

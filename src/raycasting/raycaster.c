@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdeliere <vdeliere@student.42.fr>          #+#  +:+       +#+        */
+/*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-07-09 14:56:16 by vdeliere          #+#    #+#             */
-/*   Updated: 2025-07-09 14:56:16 by vdeliere         ###   ########.fr       */
+/*   Created: 2025/07/09 14:56:16 by vdeliere          #+#    #+#             */
+/*   Updated: 2025/07/22 14:11:14 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,4 +125,6 @@ void	draw_scene(t_game *g)
 	}
 	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);
 	draw_gun(g);
+	if (g->show_minimap)
+		draw_mini_map(g);
 }

@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:10:47 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/21 15:39:46 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/22 14:11:11 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,10 @@
 # define PLAYER_MARGIN 0.2
 # define SPRINT_MULTIPLIER 2.0
 
+/*minimap*/
+# define MINIMAP_SIZE 150
+# define MINIMAP_CELL 8
+
 /*key*/
 # define ESC 65307
 # define UP 65362
@@ -52,6 +56,7 @@
 # define ALT_R 65514
 # define E 101
 # define SHIFT_L 65505
+# define M 109
 
 /*raycasting optimizations*/
 # define FOV 0.66
@@ -194,6 +199,7 @@ typedef struct s_game
 	t_map		*map;
 	t_keys		*keys;
 	t_weapon	gun;
+	bool		show_minimap;
 }	t_game;
 
 /*PARS UTILS*/
@@ -210,6 +216,7 @@ bool	parse_color(char *line, t_map *map);
 
 /*PARSE_MAP*/
 bool	is_valid_map(t_map *map);
+int		check_file_extension(char *filename);
 int		parse_map(char **lines, t_map *map);
 
 /*PARSE_GRID*/
@@ -273,6 +280,9 @@ int		get_texture_pixel(t_game *game, int tex_num, int tex_x, int tex_y);
 void	perform_dda(t_game *g, t_ray *r);
 void	draw_gun(t_game *g);
 void	put_pixel_to_img(t_game *game, int x, int y, int color);
+
+/*MINIMAP*/
+void	draw_mini_map(t_game *game);
 
 /*FREE*/
 void	free_texture(t_texture *texture);

@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 11:41:28 by vdeliere          #+#    #+#             */
-/*   Updated: 2025/07/21 15:39:29 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/22 09:42:54 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	update_player_movement(t_game *g)
 	update_gun_animation(g);
 	if (g->keys->lock_mouse)
 		mlx_mouse_move(g->mlx, g->win, WIDTH / 2, HEIGHT / 2);
+	double	move_speed;
 	move_speed = get_movement_speed(g);
 	if (g->keys->w || g->keys->up)
 		move_player_safe(g, g->player.dir_x * move_speed,

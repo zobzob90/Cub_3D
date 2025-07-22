@@ -19,6 +19,32 @@ define progress_bar
 	@echo "] Done! 🚀"
 endef
 
+
+INVALID_MAPS = \
+	map/invalid_map/vide.cub \
+	map/invalid_map/map.txt \
+	map/invalid_map/inexistant_map.cub \
+	map/invalid_map/additionnal_element.cub \
+	map/invalid_map/doople_element.cub \
+	map/invalid_map/doople_F_C.cub \
+	map/invalid_map/invalid_path.cub \
+	map/invalid_map/invalid_path_2.cub \
+	map/invalid_map/lower_case.cub \
+	map/invalid_map/missing_F_C.cub \
+	map/invalid_map/missing_link.cub \
+	map/invalid_map/missing_player.cub \
+	map/invalid_map/wrong_border.cub \
+	map/invalid_map/wrong_border_2.cub \
+	map/invalid_map/wrong_char.cub \
+	map/invalid_map/invalid_texture.cub \
+	map/invalid_map/wrong_color.cub \
+	map/invalid_map/wrong_color_2.cub \
+	map/invalid_map/wrong_color_3.cub \
+	map/invalid_map/overflow_color.cub
+
+
+
+
 SRCS = 	src/main.c \
 		src/event/event.c \
 		src/event/mouse_event.c \
@@ -30,6 +56,7 @@ SRCS = 	src/main.c \
 		src/raycasting/draw_gun.c \
 		src/raycasting/texture.c \
 		src/collision/collision.c \
+		src/minimap/draw_minimap.c \
 		src/parsing/pars_utils.c \
 		src/parsing/parse_color.c \
 		src/parsing/parse_file.c \
@@ -84,6 +111,17 @@ fclean: clean
 	@echo "🗑️ Suppression de $(NAME) terminée."
 
 re: fclean all
+
+
+test: all
+	@for file in $(INVALID_MAPS); do \
+		echo ""; \
+		echo "Testing $$file..."; \
+		./$(NAME) $$file || true; \
+	done
+	@echo ""; echo "Testing without arguments..."; \
+	./$(NAME) || true
+
 
 -include $(DEPS)
 

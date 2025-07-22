@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:17:14 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/21 15:39:31 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/22 14:11:13 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	init_game(t_game *game)
 	game->tex_width = 0;
 	init_keys(game);
 	init_gun(&game->gun);
+	game->show_minimap = true;
 }
 
 int	main(int argc, char **argv)
@@ -85,8 +86,10 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (ft_putstr_fd("Usage: ./cub3D <map.cub>\n", 2), 1);
+	if (!check_file_extension(argv[1]))
+		return (ft_putstr_fd("Error\nInvalid file extension : Please use .cub files.\n", 2), 1);
 	if (!parse_file(argv[1], &map))
-		return (ft_putstr_fd("Error: Failed to parse file\n", 2), 1);
+		return (ft_putstr_fd("Error\nFailed to parse file\n", 2), 1);
 	init_game(&game);
 	game.player = map.player;
 	init_player_from_map(&game.player);

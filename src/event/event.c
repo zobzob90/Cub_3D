@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 15:31:53 by vdeliere          #+#    #+#             */
-/*   Updated: 2025/07/21 15:39:44 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/22 14:13:07 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ int	handle_press_key(int key, t_game *g)
 		capture_mouse(g);
 	if (key == E)
 		handle_door_interaction(g);
+	if (key == M)
+	{
+		g->show_minimap = !g->show_minimap;
+		printf("Minimap toggled: %d\n", g->show_minimap);
+	}
 	return (0);
 }
 

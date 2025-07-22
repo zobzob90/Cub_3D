@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:13:33 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/11 16:51:05 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/22 14:03:49 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,20 @@ static bool	check_inside(t_map *map)
 		i++;
 	}
 	return (true);
+}
+
+int	check_file_extension(char *filename)
+{
+	int	len;
+
+	if (!filename)
+		return (0);
+	len = ft_strlen(filename);
+	if (len < 4)
+		return (0);
+	if (ft_strncmp(filename + len - 4, ".cub", 4) == 0)
+		return (1);
+	return (0);
 }
 
 bool	is_valid_map(t_map *map)

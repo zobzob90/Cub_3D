@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:10:47 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/22 15:46:29 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/22 16:40:46 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,6 +290,9 @@ void	handle_door_interaction(t_game *game);
 bool	is_door(t_game *game, int x, int y);
 void	toggle_door(t_game *game, int x, int y);
 t_door	*find_door(t_game *game, int x, int y);
+
+/*NPC*/
+void	init_npcs_from_map(t_map *map);
 
 /*RAYCASTING*/
 void	load_textures(t_game *g);

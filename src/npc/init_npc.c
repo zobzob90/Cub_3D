@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:17:16 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/22 15:46:08 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/22 17:18:44 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	init_npc(t_npc *npc)
 	npc->see_player = false;
 }
 
-void	init_npcs_from_map(t_map *map)
+static	int	count_npc(t_map *map)
 {
 	int	i;
 	int	j;
 	int	npc_count;
 
-	npc_count = 0;
 	i = 0;
+	npc_count = 0;
 	while (i < map->height)
 	{
 		j = 0;
@@ -42,15 +42,15 @@ void	init_npcs_from_map(t_map *map)
 		}
 		i++;
 	}
-	map->num_npcs = npc_count;
-	if (npc_count == 0)
-	{
-		map->npcs = NULL;
-		return ;
-	}
-	map->npcs = malloc(sizeof(t_npc) * npc_count);
-	if (!map->npcs)
-		return ;
+	return (npc_count);
+}
+
+static void	place_npc(t_map *map)
+{
+	int	i;
+	int	j;
+	int	npc_count;
+
 	npc_count = 0;
 	i = 0;
 	while (i < map->height)
@@ -70,4 +70,18 @@ void	init_npcs_from_map(t_map *map)
 		}
 		i++;
 	}
+}
+
+void	init_npcs_from_map(t_map *map)
+{
+	map->num_npcs = count_npc(map);
+	if (map->num_npcs == 0)
+	{
+		map->npcs = NULL;
+		return ;
+	}
+	map->npcs = malloc(sizeof(t_npc) * map->num_npcs);
+	if (!map->npcs)
+		return ;
+	place_npc(map);
 }

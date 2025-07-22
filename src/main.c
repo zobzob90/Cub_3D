@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:17:14 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/11 17:09:33 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/21 15:39:31 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ static void	init_keys(t_game *game)
 	game->keys->left = false;
 	game->keys->right = false;
 	game->keys->lock_mouse = false;
+	game->keys->shift = false;
 }
 
 static void	init_gun(t_weapon *gun)

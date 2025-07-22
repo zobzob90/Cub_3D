@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:10:47 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/11 16:30:01 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/21 15:39:46 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define SPEED 0.05
 # define ROT_SPEED 0.05
 # define PLAYER_MARGIN 0.2
+# define SPRINT_MULTIPLIER 2.0
 
 /*key*/
 # define ESC 65307
@@ -49,6 +50,8 @@
 # define CTRL_D 65508
 # define ALT_L 65513
 # define ALT_R 65514
+# define E 101
+# define SHIFT_L 65505
 
 /*raycasting optimizations*/
 # define FOV 0.66
@@ -105,6 +108,8 @@ typedef struct s_map
 	t_player	player;
 	t_door		door;
 	int			num_door;
+	t_door		*doors;
+	int			num_doors;
 }	t_map;
 
 typedef struct s_weapon
@@ -160,6 +165,7 @@ typedef struct s_keys
 	bool	left;
 	bool	right;
 	bool	lock_mouse;
+	bool	shift;
 }	t_keys;
 
 typedef struct s_game
@@ -229,6 +235,7 @@ void	capture_mouse(t_game *game);
 /*MOVEMENT*/
 void	rotate(t_game *g, double angle);
 int		update_player_movement(t_game *g);
+double	get_movement_speed(t_game *g);
 
 /*FIRE*/
 void	gun_fire(t_game *g);
@@ -240,6 +247,7 @@ void	init_texture(t_texture *texture);
 void	init_player(t_player *player);
 void	init_player_from_map(t_player *player);
 void	init_map(t_map *map);
+void	init_doors_from_map(t_map *map);
 void	set_player_direction(t_player *player);
 
 /*EVENT*/
@@ -250,6 +258,12 @@ bool	is_valid_position(t_game *game, double x, double y);
 bool	can_move_to(t_game *game, double new_x, double new_y);
 void	move_player_safe(t_game *game, double delta_x, double delta_y);
 bool	check_wall_collision(t_game *game, double x, double y, double margin);
+
+/*DOOR MANAGEMENT*/
+void	handle_door_interaction(t_game *game);
+bool	is_door(t_game *game, int x, int y);
+void	toggle_door(t_game *game, int x, int y);
+t_door	*find_door(t_game *game, int x, int y);
 
 /*RAYCASTING*/
 void	load_textures(t_game *g);

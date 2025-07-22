@@ -48,6 +48,8 @@
 # define SPACE 32
 # define CTRL_G 65507
 # define CTRL_D 65508
+# define ALT_L 65513
+# define ALT_R 65514
 # define E 101
 # define SHIFT_L 65505
 
@@ -60,7 +62,7 @@
 # define MOUSE_LEFT 1
 # define MOUSE_RIGHT 2
 # define MOUSE_MIDDLE 3
-# define MOUSE_SENSITIVITY 0.01
+# define MOUSE_SENSITIVITY 0.007
 
 typedef struct s_color
 {
@@ -104,6 +106,8 @@ typedef struct s_map
 	t_color		floor;
 	t_color		ceiling;
 	t_player	player;
+	t_door		door;
+	int			num_door;
 	t_door		*doors;
 	int			num_doors;
 }	t_map;
@@ -160,6 +164,7 @@ typedef struct s_keys
 	bool	down;
 	bool	left;
 	bool	right;
+	bool	lock_mouse;
 	bool	shift;
 }	t_keys;
 
@@ -225,6 +230,7 @@ int		handle_release_key(int key, t_game *g);
 int		handle_mouse_press(int button, int x, int y, t_game *g);
 int		handle_mouse_release(int button, int x, int y, t_game *g);
 int		handle_mouse_move(int x, int y, t_game *g);
+void	capture_mouse(t_game *game);
 
 /*MOVEMENT*/
 void	rotate(t_game *g, double angle);
@@ -266,10 +272,7 @@ void	draw_textured_line(t_game *game, t_draw_params *params);
 int		get_texture_pixel(t_game *game, int tex_num, int tex_x, int tex_y);
 void	perform_dda(t_game *g, t_ray *r);
 void	draw_gun(t_game *g);
-
-/*DRAW*/
 void	put_pixel_to_img(t_game *game, int x, int y, int color);
-void	draw_vertical_line(t_game *game, t_draw_params *params, int color);
 
 /*FREE*/
 void	free_texture(t_texture *texture);

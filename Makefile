@@ -42,7 +42,7 @@ SRCS = 	src/main.c \
 		src/utils/init.c \
 		src/utils/init_dir.c \
 		src/move/move.c \
-		src/fire/fire.c
+		src/fire/fire.c 
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 DEPS = $(OBJS:.o=.d)

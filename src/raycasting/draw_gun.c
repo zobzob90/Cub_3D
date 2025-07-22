@@ -12,6 +12,7 @@
 
 #include "cub3d.h"
 
+/*Put a pixel(x,y) of the gun in the main image*/
 static void	put_gun_pixel(t_game *g, int x, int y, unsigned int color)
 {
 	char	*pixel;
@@ -22,6 +23,7 @@ static void	put_gun_pixel(t_game *g, int x, int y, unsigned int color)
 	*(unsigned int *)pixel = color;
 }
 
+/*Get the color of a pixel(gun_x, gun_y)*/
 static unsigned int	get_gun_pixel(t_game *g, int gun_x, int gun_y)
 {
 	char	*pixel;
@@ -34,6 +36,7 @@ static unsigned int	get_gun_pixel(t_game *g, int gun_x, int gun_y)
 	return (*(unsigned int *)pixel);
 }
 
+/*Draw the gun pixel by pixel, ignoring the #00A2E8 color*/
 void	draw_gun(t_game *g)
 {
 	int				screen_x;
@@ -48,7 +51,7 @@ void	draw_gun(t_game *g)
 	gun_y = -1;
 	while (++gun_y < g->gun.tex_height)
 	{
-		screen_x = (WIDTH - g->gun.tex_width) / 2;
+		screen_x = (WIDTH - g->gun.tex_width) / 2 + 150;
 		gun_x = -1;
 		while (++gun_x < g->gun.tex_width)
 		{

@@ -30,10 +30,12 @@ void	rotate(t_game *g, double angle)
 		+ g->player.plane_y * cos(angle);
 }
 
+/*Update the player position and rotation safely*/
 int	update_player_movement(t_game *g)
 {
+	if (g->keys->lock_mouse)
+		mlx_mouse_move(g->mlx, g->win, WIDTH / 2, HEIGHT / 2);
 	double	move_speed;
-
 	mlx_mouse_move(g->mlx, g->win, WIDTH / 2, HEIGHT / 2);
 	move_speed = get_movement_speed(g);
 	if (g->keys->w || g->keys->up)

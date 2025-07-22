@@ -12,6 +12,8 @@
 
 #include "cub3d.h"
 
+/*Return the number of the texture to use
+0 = North, 1 = South, 2 = East, 3 = West*/
 static int	get_texture_num(t_ray *ray)
 {
 	if (ray->side == 0)
@@ -30,6 +32,7 @@ static int	get_texture_num(t_ray *ray)
 	}
 }
 
+/*Draw the ceiling, filling the pixel from y = 0 to start*/
 static void	draw_ceiling(t_game *game, int x, int start)
 {
 	int	y;
@@ -45,6 +48,7 @@ static void	draw_ceiling(t_game *game, int x, int start)
 	}
 }
 
+/*Draw the floor, filling the pixel from end to HEIGHT*/
 static void	draw_floor(t_game *game, int x, int end)
 {
 	int	y;
@@ -60,6 +64,7 @@ static void	draw_floor(t_game *game, int x, int end)
 	}
 }
 
+/*Draw the texture of a wall with a vertical maping*/
 static void	draw_wall_texture(t_game *game, t_draw_params *params)
 {
 	int		y;
@@ -85,6 +90,7 @@ static void	draw_wall_texture(t_game *game, t_draw_params *params)
 	}
 }
 
+/*Draw a complete vertical line(ceiling + wall + floor)*/
 void	draw_textured_line(t_game *game, t_draw_params *params)
 {
 	draw_ceiling(game, params->x, params->start);

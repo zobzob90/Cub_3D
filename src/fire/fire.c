@@ -12,6 +12,7 @@
 
 #include "cub3d.h"
 
+/*Put back the default sprite of the gun*/
 void	gun_stop_fire(t_game *g)
 {
 	if (g->gun.img)
@@ -23,6 +24,7 @@ void	gun_stop_fire(t_game *g)
 	draw_gun(g);
 }
 
+/*Make the gun firing*/
 void	gun_fire(t_game *g)
 {
 	if (g->gun.img)

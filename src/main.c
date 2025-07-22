@@ -33,6 +33,7 @@ static void	init_keys(t_game *game)
 	game->keys->down = false;
 	game->keys->left = false;
 	game->keys->right = false;
+	game->keys->lock_mouse = false;
 	game->keys->shift = false;
 }
 
@@ -99,9 +100,7 @@ int	main(int argc, char **argv)
 	mlx_hook(game.win, 4, 1L << 2, handle_mouse_press, &game);
 	mlx_hook(game.win, 5, 1L << 3, handle_mouse_release, &game);
 	mlx_hook(game.win, 6, 1L << 6, handle_mouse_move, &game);
-	mlx_mouse_hide(game.mlx, game.win);
 	mlx_loop_hook(game.mlx, update_player_movement, &game);
 	mlx_loop(game.mlx);
-	free_map(&map);
-	return (0);
+	return (free_map(&map), 0);
 }

@@ -33,14 +33,19 @@ void	rotate(t_game *g, double angle)
 /*Update the player position and rotation safely*/
 int	update_player_movement(t_game *g)
 {
+	double	move_speed;
+
+	update_gun_animation(g);
 	if (g->keys->lock_mouse)
 		mlx_mouse_move(g->mlx, g->win, WIDTH / 2, HEIGHT / 2);
 	double	move_speed;
 	move_speed = get_movement_speed(g);
 	if (g->keys->w || g->keys->up)
-		move_player_safe(g, g->player.dir_x * move_speed, g->player.dir_y * move_speed);
+		move_player_safe(g, g->player.dir_x * move_speed,
+			g->player.dir_y * move_speed);
 	if (g->keys->s || g->keys->down)
-		move_player_safe(g, -g->player.dir_x * move_speed, -g->player.dir_y * move_speed);
+		move_player_safe(g, -g->player.dir_x * move_speed,
+			-g->player.dir_y * move_speed);
 	if (g->keys->a || g->keys->left)
 		rotate(g, -ROT_SPEED);
 	if (g->keys->d || g->keys->right)

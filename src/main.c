@@ -48,6 +48,8 @@ static void	init_gun(t_weapon *gun)
 	gun->tex_height = 0;
 	gun->tex_width = 0;
 	gun->tex_size_line = 0;
+	gun->fire_timer = 0;
+	gun->fire_duration = 5;
 }
 
 /*Initialisation of the game struct*/
@@ -101,7 +103,6 @@ int	main(int argc, char **argv)
 	mlx_hook(game.win, 3, 1L << 1, handle_release_key, &game);
 	mlx_hook(game.win, 17, 0, close_win, &game);
 	mlx_hook(game.win, 4, 1L << 2, handle_mouse_press, &game);
-	mlx_hook(game.win, 5, 1L << 3, handle_mouse_release, &game);
 	mlx_hook(game.win, 6, 1L << 6, handle_mouse_move, &game);
 	mlx_loop_hook(game.mlx, update_player_movement, &game);
 	mlx_loop(game.mlx);

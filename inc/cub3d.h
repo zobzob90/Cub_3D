@@ -128,6 +128,8 @@ typedef struct s_weapon
 	int		tex_size_line;
 	int		tex_bpp;
 	int		tex_endian;
+	int		fire_timer;
+	int		fire_duration;
 }	t_weapon;
 
 typedef struct s_ray
@@ -246,8 +248,7 @@ double	get_movement_speed(t_game *g);
 
 /*FIRE*/
 void	gun_fire(t_game *g);
-void	gun_stop_fire(t_game *g);
-
+void	update_gun_animation(t_game	*g);
 /*INIT*/
 void	init_color(t_color *color);
 void	init_texture(t_texture *texture);

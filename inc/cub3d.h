@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:10:47 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/23 17:04:58 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/23 17:15:31 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,6 +311,7 @@ t_door	*find_door(t_game *game, int x, int y);
 
 /*NPC*/
 void	load_pig_sprite(t_game *game);
+void	update_single_npc(t_game *game, t_npc *npc);
 void	update_npc(t_game *game);
 void	draw_npcs_sprites(t_game *game);
 void	draw_sprite_column_with_zbuffer(t_game *game, int sprite_screen_x, int sprite_height, int sprite_width, double sprite_distance, int anim_frame);

@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 13:26:42 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/23 17:05:43 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/23 17:34:45 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	draw_sprite_column(t_game *game, int sprite_screen_x, int sprite_height, in
     stripe = draw_start_x;
     while (stripe < draw_end_x)
     {
-        tex_x = (int)(256 * (stripe - (-sprite_width / 2 + sprite_screen_x)) * game->enemy_sprite[0].width / sprite_width) / 256;
-        if (tex_x < 0 || tex_x >= game->enemy_sprite[0].width)
+        tex_x = (int)(256 * (stripe - (-sprite_width / 2 + sprite_screen_x)) * game->sprite[0].width / sprite_width) / 256;
+        if (tex_x < 0 || tex_x >= game->sprite[0].width)
         {
             stripe++;
             continue;
@@ -63,10 +63,10 @@ void	draw_sprite_column(t_game *game, int sprite_screen_x, int sprite_height, in
         while (y < draw_end_y)
         {
             d = (y) * 256 - HEIGHT * 128 + sprite_height * 128;
-            tex_y = ((d * game->enemy_sprite[0].height) / sprite_height) / 256;
-            if (tex_y >= 0 && tex_y < game->enemy_sprite[0].height)
+            tex_y = ((d * game->sprite[0].height) / sprite_height) / 256;
+            if (tex_y >= 0 && tex_y < game->sprite[0].height)
             {
-                color = get_pixel_from_sprite(&game->enemy_sprite[0], tex_x, tex_y);
+                color = get_pixel_from_sprite(&game->sprite[0], tex_x, tex_y);
                 if (color != 0xFF00FF && color != 0x000000 && (color & 0xFF000000) != 0)
                     put_pixel_to_img(game, stripe, y, color);
             }
@@ -106,17 +106,17 @@ void	draw_sprite_column_with_zbuffer(t_game *game, int sprite_screen_x, int spri
     {
         if (sprite_distance + 0.1 < game->z_buffer[stripe])
         {
-            tex_x = (int)(256 * (stripe - (-sprite_width / 2 + sprite_screen_x)) * game->enemy_sprite[anim_frame].width / sprite_width) / 256;
-            if (tex_x >= 0 && tex_x < game->enemy_sprite[anim_frame].width)
+            tex_x = (int)(256 * (stripe - (-sprite_width / 2 + sprite_screen_x)) * game->sprite[anim_frame].width / sprite_width) / 256;
+            if (tex_x >= 0 && tex_x < game->sprite[anim_frame].width)
             {
                 y = draw_start_y;
                 while (y < draw_end_y)
                 {
                     d = (y) * 256 - HEIGHT * 128 + sprite_height * 128;
-                    tex_y = ((d * game->enemy_sprite[anim_frame].height) / sprite_height) / 256;
-                    if (tex_y >= 0 && tex_y < game->enemy_sprite[anim_frame].height)
+                    tex_y = ((d * game->sprite[anim_frame].height) / sprite_height) / 256;
+                    if (tex_y >= 0 && tex_y < game->sprite[anim_frame].height)
                     {
-                        color = get_pixel_from_sprite(&game->enemy_sprite[anim_frame], tex_x, tex_y);
+                        color = get_pixel_from_sprite(&game->sprite[anim_frame], tex_x, tex_y);
                         if ((color & 0x00FFFFFF) != 0x00FF00FF && (color & 0x00FFFFFF) != 0x00000000)
                             put_pixel_to_img(game, stripe, y, color);
                     }

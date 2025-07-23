@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 10:38:14 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/23 17:04:58 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/23 17:33:17 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ void	cleanup_game(t_game *game)
 		mlx_destroy_image(game->mlx, game->tex_west);
 	if (game->gun.img)
 		mlx_destroy_image(game->mlx, game->gun.img);
-	if (game->enemy_sprite[0].img)
-		mlx_destroy_image(game->mlx, game->enemy_sprite[0].img);
-	if (game->enemy_sprite[1].img)
-		mlx_destroy_image(game->mlx, game->enemy_sprite[1].img);
-	if (game->enemy_sprite[2].img)
-		mlx_destroy_image(game->mlx, game->enemy_sprite[2].img);
+	if (game->sprite[0].img)
+		mlx_destroy_image(game->mlx, game->sprite[0].img);
+	if (game->sprite[1].img)
+		mlx_destroy_image(game->mlx, game->sprite[1].img);
+	if (game->sprite[2].img)
+		mlx_destroy_image(game->mlx, game->sprite[2].img);
 	free_texture(&game->map->texture);
 	if (game->map->grid)
 		ft_free_tab(game->map->grid);

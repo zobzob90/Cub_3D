@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:10:47 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/23 17:15:31 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/23 17:28:57 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,7 +229,7 @@ typedef struct s_game
 	t_weapon	gun;
 	int			num_npc;
 	t_npc		*npc;
-	t_sprite	enemy_sprite[3];  // Tableau pour 3 frames d'animation
+	t_sprite	sprite[3];  // Tableau pour 3 frames d'animation
 	double		z_buffer[WIDTH];
 	bool		show_minimap;
 }	t_game;

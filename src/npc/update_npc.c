@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 12:57:41 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/23 17:14:59 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/23 17:25:26 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ static bool	npc_moving(t_game *game, double new_x, double new_y)
 
 	map_x = (int)new_x;
 	map_y = (int)new_y;
-	if (map_x < 0 || map_x >= game->map->width ||
-		map_y < 0 || map_y >= game->map->height)
+	if (map_x < 0 || map_x >= game->map->width
+		|| map_y < 0 || map_y >= game->map->height)
 		return (false);
-	if (game->map->grid[map_y][map_x] == '1' || game->map->grid[map_y][map_x] == 'D')
+	if (game->map->grid[map_y][map_x] == '1'
+		|| game->map->grid[map_y][map_x] == 'D')
 		return (false);
 	return (true);
 }
@@ -59,7 +60,7 @@ void	update_npc(t_game *game)
 {
 	int		i;
 	t_npc	*npc;
-	
+
 	i = 0;
 	while (i < game->map->num_npcs)
 	{

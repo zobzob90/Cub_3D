@@ -39,6 +39,7 @@ int	main(int argc, char **argv)
 	game.img_data = mlx_get_data_addr(game.img,
 			&game.bpp, &game.size_line, &game.endian);
 	load_textures(&game);
+	load_pig_sprite(&game);
 	draw_scene(&game);
 	mlx_hook(game.win, 2, 1L << 0, handle_press_key, &game);
 	mlx_hook(game.win, 3, 1L << 1, handle_release_key, &game);

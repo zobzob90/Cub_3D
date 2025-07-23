@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 17:21:18 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/22 17:21:29 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/23 14:01:37 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ void	init_game(t_game *game)
 	game->tex_width = 0;
 	init_keys(game);
 	init_gun(&game->gun);
+	load_pig_sprite(game);
 	game->show_minimap = true;
 }

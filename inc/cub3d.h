@@ -6,14 +6,14 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:10:47 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/22 17:22:41 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/23 17:04:58 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "libft.h"
+# include "../libft/libft.h"
 # include <stdbool.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -102,6 +102,17 @@ typedef struct s_door
 	bool	open;
 }	t_door;
 
+typedef struct s_sprite
+{
+	void 	*img;
+	char	*img_data;
+	int		width;
+	int		height;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}	t_sprite;
+
 typedef struct s_npc
 {
 	double	x;
@@ -111,6 +122,8 @@ typedef struct s_npc
 	int		hp;
 	int		type;
 	bool	see_player;
+	int		anim_frame;
+	int		anim_timer;
 } 	t_npc;
 
 typedef struct s_map
@@ -211,11 +224,13 @@ typedef struct s_game
 	int			tex_bpp;
 	int			tex_size_line;
 	int			tex_endian;
-	int			num_npc;
-	t_npc		*npc;
 	t_map		*map;
 	t_keys		*keys;
 	t_weapon	gun;
+	int			num_npc;
+	t_npc		*npc;
+	t_sprite	enemy_sprite[3];  // Tableau pour 3 frames d'animation
+	double		z_buffer[WIDTH];
 	bool		show_minimap;
 }	t_game;
 
@@ -295,7 +310,11 @@ void	toggle_door(t_game *game, int x, int y);
 t_door	*find_door(t_game *game, int x, int y);
 
 /*NPC*/
-void	init_npcs_from_map(t_map *map);
+void	load_pig_sprite(t_game *game);
+void	update_npc(t_game *game);
+void	draw_npcs_sprites(t_game *game);
+void	draw_sprite_column_with_zbuffer(t_game *game, int sprite_screen_x, int sprite_height, int sprite_width, double sprite_distance, int anim_frame);
+int		is_transparent_pixel(int color);
 
 /*RAYCASTING*/
 void	load_textures(t_game *g);

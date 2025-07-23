@@ -42,36 +42,36 @@ INVALID_MAPS = \
 	map/invalid_map/wrong_color_3.cub \
 	map/invalid_map/overflow_color.cub
 
-
-
-
 SRCS = 	src/main.c \
-		src/event/event.c \
-		src/event/mouse_event.c \
-		src/event/door.c \
-		src/raycasting/raycaster.c \
-		src/raycasting/raycaster_dda.c \
-		src/raycasting/draw.c \
-		src/raycasting/draw2.c \
-		src/raycasting/draw_gun.c \
-		src/raycasting/texture.c \
-		src/collision/collision.c \
-		src/minimap/draw_minimap.c \
-		src/parsing/pars_utils.c \
-		src/parsing/parse_color.c \
-		src/parsing/parse_file.c \
-		src/parsing/parse_map.c \
-		src/parsing/parse_texture.c \
-		src/parsing/valid_map.c \
-		src/parsing/parse_grid.c \
-		src/parsing/parse_player.c \
-		src/utils/free.c \
-		src/utils/init.c \
-		src/utils/init_dir.c \
-		src/utils/init_main_struct.c \
-		src/npc/init_npc.c \
-		src/move/move.c \
-		src/fire/fire.c 
+        src/event/event.c \
+        src/event/mouse_event.c \
+        src/event/door.c \
+        src/raycasting/raycaster.c \
+        src/raycasting/raycaster_dda.c \
+        src/raycasting/draw.c \
+        src/raycasting/draw2.c \
+        src/raycasting/draw_gun.c \
+        src/raycasting/texture.c \
+        src/collision/collision.c \
+        src/minimap/draw_minimap.c \
+        src/parsing/pars_utils.c \
+        src/parsing/parse_color.c \
+        src/parsing/parse_file.c \
+        src/parsing/parse_map.c \
+        src/parsing/parse_texture.c \
+        src/parsing/valid_map.c \
+        src/parsing/parse_grid.c \
+        src/parsing/parse_player.c \
+        src/utils/free.c \
+        src/utils/init.c \
+        src/utils/init_dir.c \
+        src/utils/init_main_struct.c \
+        src/npc/init_npc.c \
+        src/npc/update_npc.c \
+        src/npc/draw_npc.c \
+        src/npc/load_sprite.c \
+        src/move/move.c \
+        src/fire/fire.c
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 DEPS = $(OBJS:.o=.d)

@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 10:14:10 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/22 10:49:28 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/23 12:54:51 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,34 @@ static void	render_player(t_game *game)
 	}
 }
 
+static void	draw_npc(t_game *game)
+{
+	int	i;
+	int	px;
+	int	py;
+	int	x;
+	int	y;
+
+	i = 0;
+	while (i < game->map->num_npcs)
+	{
+		px = 10 + (int)game->map->npcs[i].x * MINIMAP_CELL;
+		py = 10 + (int)game->map->npcs[i].y * MINIMAP_CELL;
+		y = -1;
+		while (y <= 1)
+		{
+			x = -1;
+			while (x <= 1)
+			{
+				put_pixel_to_img(game, px + x, py + y, 0xFF0000);
+				x++;	
+			}
+			y++;
+		}
+		i++;
+ 	}
+}
+
 void	draw_mini_map(t_game *game)
 {
 	int				i;
@@ -80,4 +108,5 @@ void	draw_mini_map(t_game *game)
 		i++;
 	}
 	render_player(game);
+	draw_npc(game);
 }

@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 15:17:16 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/22 17:18:44 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/23 17:04:58 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	init_npc(t_npc *npc)
 	npc->hp = 100;
 	npc->type = 0;
 	npc->see_player = false;
+	npc->anim_frame = 0;
+	npc->anim_timer = 0;
 }
 
 static	int	count_npc(t_map *map)

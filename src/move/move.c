@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/16 11:41:28 by vdeliere          #+#    #+#             */
-/*   Updated: 2025/07/22 14:25:18 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/23 14:34:07 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ int	update_player_movement(t_game *g)
 		rotate(g, -ROT_SPEED);
 	if (g->keys->d || g->keys->right)
 		rotate(g, ROT_SPEED);
+	update_npc(g);
 	draw_scene(g);
 	return (0);
 }

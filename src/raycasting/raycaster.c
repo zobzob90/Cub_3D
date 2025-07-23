@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:56:16 by vdeliere          #+#    #+#             */
-/*   Updated: 2025/07/22 14:11:14 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/23 15:55:52 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ static void	cast_single_ray(t_game *g, int x)
 	params.start = start;
 	params.end = end;
 	params.ray = &ray;
+	g->z_buffer[x] = ray.perp_wall_dist;
 	draw_textured_line(g, &params);
 }
 
@@ -124,6 +125,7 @@ void	draw_scene(t_game *g)
 		x++;
 	}
 	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);
+	draw_npcs_sprites(g);
 	draw_gun(g);
 	if (g->show_minimap)
 		draw_mini_map(g);

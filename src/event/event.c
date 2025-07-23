@@ -6,40 +6,11 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 15:31:53 by vdeliere          #+#    #+#             */
-/*   Updated: 2025/07/22 14:13:07 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/23 15:28:27 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-/*Free the textures and the main image*/
-void	cleanup_game(t_game *game)
-{
-	if (game->tex_north)
-		mlx_destroy_image(game->mlx, game->tex_north);
-	if (game->tex_south)
-		mlx_destroy_image(game->mlx, game->tex_south);
-	if (game->tex_east)
-		mlx_destroy_image(game->mlx, game->tex_east);
-	if (game->tex_west)
-		mlx_destroy_image(game->mlx, game->tex_west);
-	if (game->gun.img)
-		mlx_destroy_image(game->mlx, game->gun.img);
-	free_texture(&game->map->texture);
-	if (game->map->grid)
-		ft_free_tab(game->map->grid);
-	if (game->img)
-		mlx_destroy_image(game->mlx, game->img);
-	if (game->win)
-		mlx_destroy_window(game->mlx, game->win);
-	if (game->keys)
-		free(game->keys);
-	if (game->mlx)
-	{
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
-	}
-}
 
 /*Handle the key press*/
 int	handle_press_key(int key, t_game *g)

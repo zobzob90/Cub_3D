@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:10:47 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/23 17:28:57 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/24 16:40:42 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,30 @@ typedef struct s_door
 	int		y;
 	bool	open;
 }	t_door;
+
+typedef struct s_sprite_draw
+{
+	int	draw_start_y;
+	int	draw_end_y;
+	int	draw_start_x;
+	int	draw_end_x;
+	int	sprite_screen_x;
+	int	stripe;
+	int	y;
+}	t_sprite_draw;
+
+typedef struct s_zbuffer_draw
+{
+	int		draw_start_y;
+	int		draw_end_y;
+	int		draw_start_x;
+	int		draw_end_x;
+	int		sprite_screen_x;
+	int		stripe;
+	int		y;
+	double	sprite_distance;
+	int		anim_frame;
+}	t_zbuffer_draw;
 
 typedef struct s_sprite
 {
@@ -314,8 +338,15 @@ void	load_pig_sprite(t_game *game);
 void	update_single_npc(t_game *game, t_npc *npc);
 void	update_npc(t_game *game);
 void	draw_npcs_sprites(t_game *game);
-void	draw_sprite_column_with_zbuffer(t_game *game, int sprite_screen_x, int sprite_height, int sprite_width, double sprite_distance, int anim_frame);
+void	draw_sprite_column(t_game *game, int sprite_screen_x, int sprite_height, int sprite_width);
+void	draw_sprite_column_with_zbuffer(t_game *game, t_zbuffer_draw *draw, int sprite_height, int sprite_width);
+void	calculate_sprite_transform(t_game *game, t_npc *npc, double *trans_x, double *trans_y);
+int		get_pixel_from_sprite(t_sprite *sprite, int x, int y);
 int		is_transparent_pixel(int color);
+void	init_sprite_bounds(t_sprite_draw *draw, int sprite_screen_x, int sprite_height, int sprite_width);
+void	init_zbuffer_bounds(t_zbuffer_draw *draw, int sprite_screen_x, int sprite_height, int sprite_width);
+void	draw_sprite_pixel(t_game *game, t_sprite_draw *draw, int sprite_height, int sprite_width);
+void	draw_zbuffer_pixel(t_game *game, t_zbuffer_draw *draw, int sprite_height, int sprite_width);
 
 /*RAYCASTING*/
 void	load_textures(t_game *g);
@@ -324,6 +355,8 @@ void	draw_textured_line(t_game *game, t_draw_params *params);
 int		get_texture_pixel(t_game *game, int tex_num, int tex_x, int tex_y);
 void	perform_dda(t_game *g, t_ray *r);
 void	draw_gun(t_game *g);
+void	draw_crosshair(t_game *g);
+void	draw_advanced_crosshair(t_game *g);
 void	put_pixel_to_img(t_game *game, int x, int y, int color);
 
 /*MINIMAP*/

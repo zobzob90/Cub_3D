@@ -69,6 +69,8 @@ SRCS = 	src/main.c \
         src/npc/init_npc.c \
         src/npc/update_npc.c \
         src/npc/draw_npc.c \
+		src/npc/draw_npc_utils.c\
+		src/npc/draw_npc_utils_2.c \
         src/npc/load_sprite.c \
         src/move/move.c \
         src/fire/fire.c

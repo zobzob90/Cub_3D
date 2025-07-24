@@ -127,6 +127,7 @@ void	draw_scene(t_game *g)
 	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);
 	draw_npcs_sprites(g);
 	draw_gun(g);
+	draw_crosshair(g);
 	if (g->show_minimap)
 		draw_mini_map(g);
 }

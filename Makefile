@@ -62,6 +62,7 @@ SRCS = 	src/main.c \
         src/parsing/parse_file.c \
         src/parsing/parse_map.c \
         src/parsing/parse_texture.c \
+		src/parsing/parse_texture_utils.c\
         src/parsing/valid_map.c \
         src/parsing/parse_grid.c \
         src/parsing/parse_player.c \

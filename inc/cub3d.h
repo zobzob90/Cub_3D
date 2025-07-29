@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:10:47 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/23 17:28:57 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:48:06 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,30 @@ typedef struct s_door
 	int		y;
 	bool	open;
 }	t_door;
+
+typedef struct s_sprite_draw
+{
+	int	draw_start_y;
+	int	draw_end_y;
+	int	draw_start_x;
+	int	draw_end_x;
+	int	sprite_screen_x;
+	int	stripe;
+	int	y;
+}	t_sprite_draw;
+
+typedef struct s_zbuffer_draw
+{
+	int		draw_start_y;
+	int		draw_end_y;
+	int		draw_start_x;
+	int		draw_end_x;
+	int		sprite_screen_x;
+	int		stripe;
+	int		y;
+	double	sprite_distance;
+	int		anim_frame;
+}	t_zbuffer_draw;
 
 typedef struct s_sprite
 {
@@ -235,102 +259,119 @@ typedef struct s_game
 }	t_game;
 
 /*PARS UTILS*/
-char	**read_files(char *path);
-bool	is_texture(const char *line);
-bool	is_color(const char *line);
-bool	is_map(const char *line);
+char			**read_files(char *path);
+bool			is_texture(const char *line);
+bool			is_color(const char *line);
+bool			is_map(const char *line);
 
 /*PARSE_TEXTURE*/
-bool	parse_texture(char *line, t_map *map);
+bool			parse_texture(char *line, t_map *map);
 
 /*PARSE_COLORS*/
-bool	parse_color(char *line, t_map *map);
+bool			parse_color(char *line, t_map *map);
 
 /*PARSE_MAP*/
-bool	is_valid_map(t_map *map);
-int		check_file_extension(char *filename);
-int		parse_map(char **lines, t_map *map);
+bool			is_valid_map(t_map *map);
+int				check_file_extension(char *filename);
+int				parse_map(char **lines, t_map *map);
 
 /*PARSE_GRID*/
-int		extract_map_grid(char **lines, int start, t_map *map);
+int				extract_map_grid(char **lines, int start, t_map *map);
 
 /*PARSE_PLAYER*/
-int		find_player(t_map *map);
+int				find_player(t_map *map);
+
+/*PRINCIPAL PARSE UTILS*/
+int				is_empty_line(char *line);
+int				process_config_line(char *line, t_map *map, int *parsed_count);
+int				parse_textures_and_colors(char **lines, t_map *map);
+int				validate_parsing(t_map *map);
 
 /*PRINCIPAL PARSE*/
-int		parse_file(char *filename, t_map *map);
+int				parse_file(char *filename, t_map *map);
 
 /*KEY*/
-int		close_win(t_game *game);
-int		handle_press_key(int key, t_game *g);
-int		handle_release_key(int key, t_game *g);
+int				close_win(t_game *game);
+int				handle_press_key(int key, t_game *g);
+int				handle_release_key(int key, t_game *g);
 
 /*MOUSE*/
-int		handle_mouse_press(int button, int x, int y, t_game *g);
-int		handle_mouse_release(int button, int x, int y, t_game *g);
-int		handle_mouse_move(int x, int y, t_game *g);
-void	capture_mouse(t_game *game);
+int				handle_mouse_press(int button, int x, int y, t_game *g);
+int				handle_mouse_move(int x, int y, t_game *g);
+void			capture_mouse(t_game *game);
 
 /*MOVEMENT*/
-void	rotate(t_game *g, double angle);
-int		update_player_movement(t_game *g);
-double	get_movement_speed(t_game *g);
+void			rotate(t_game *g, double angle);
+int				update_player_movement(t_game *g);
+double			get_movement_speed(t_game *g);
 
 /*FIRE*/
-void	gun_fire(t_game *g);
-void	update_gun_animation(t_game	*g);
+void			gun_fire(t_game *g);
+void			update_gun_animation(t_game	*g);
 
 /*INIT*/
-void	init_color(t_color *color);
-void	init_texture(t_texture *texture);
-void	init_player(t_player *player);
-void	init_player_from_map(t_player *player);
-void	init_map(t_map *map);
-void	init_doors_from_map(t_map *map);
-void	init_npc(t_npc *npc);
-void	init_npcs_from_map(t_map *map);
-void	set_player_direction(t_player *player);
-void	init_keys(t_game *game);
-void	init_gun(t_weapon *gun);
-void	init_game(t_game *game);
+void			init_color(t_color *color);
+void			init_texture(t_texture *texture);
+void			init_player(t_player *player);
+void			init_player_from_map(t_player *player);
+void			init_map(t_map *map);
+void			init_doors_from_map(t_map *map);
+void			init_npc(t_npc *npc);
+void			init_npcs_from_map(t_map *map);
+void			set_player_direction(t_player *player);
+void			init_keys(t_game *game);
+void			init_gun(t_weapon *gun);
+void			init_game(t_game *game);
 
 /*EVENT*/
-void	cleanup_game(t_game *game);
+void			cleanup_game(t_game *game);
 
 /*COLLISION*/
-bool	is_valid_position(t_game *game, double x, double y);
-bool	can_move_to(t_game *game, double new_x, double new_y);
-void	move_player_safe(t_game *game, double delta_x, double delta_y);
-bool	check_wall_collision(t_game *game, double x, double y, double margin);
+bool			is_valid_position(t_game *game, double x, double y);
+bool			can_move_to(t_game *game, double new_x, double new_y);
+void			move_player_safe(t_game *game, double delta_x, double delta_y);
+bool			check_wall_collision(t_game *game, double x, double y, double margin);
 
 /*DOOR MANAGEMENT*/
-void	handle_door_interaction(t_game *game);
-bool	is_door(t_game *game, int x, int y);
-void	toggle_door(t_game *game, int x, int y);
-t_door	*find_door(t_game *game, int x, int y);
+void			handle_door_interaction(t_game *game);
+bool			is_door(t_game *game, int x, int y);
+void			toggle_door(t_game *game, int x, int y);
+t_door			*find_door(t_game *game, int x, int y);
 
 /*NPC*/
-void	load_pig_sprite(t_game *game);
-void	update_single_npc(t_game *game, t_npc *npc);
-void	update_npc(t_game *game);
-void	draw_npcs_sprites(t_game *game);
-void	draw_sprite_column_with_zbuffer(t_game *game, int sprite_screen_x, int sprite_height, int sprite_width, double sprite_distance, int anim_frame);
-int		is_transparent_pixel(int color);
+void			load_pig_sprite(t_game *game);
+void			update_single_npc(t_game *game, t_npc *npc);
+void			update_npc(t_game *game);
+void			draw_npcs_sprites(t_game *game);
+void			draw_sprite_column(t_game *game, int sprite_screen_x, int sprite_height, int sprite_width);
+void			draw_sprite_column_with_zbuffer(t_game *game, t_zbuffer_draw *draw, int sprite_height, int sprite_width);
+void			calculate_sprite_transform(t_game *game, t_npc *npc, double *trans_x, double *trans_y);
+int				get_pixel_from_sprite(t_sprite *sprite, int x, int y);
+int				is_transparent_pixel(int color);
+void			init_sprite_bounds(t_sprite_draw *draw, int sprite_screen_x, int sprite_height, int sprite_width);
+void			init_zbuffer_bounds(t_zbuffer_draw *draw, int sprite_screen_x, int sprite_height, int sprite_width);
+void			draw_sprite_pixel(t_game *game, t_sprite_draw *draw, int sprite_height, int sprite_width);
+void			draw_zbuffer_pixel(t_game *game, t_zbuffer_draw *draw, int sprite_height, int sprite_width);
 
 /*RAYCASTING*/
-void	load_textures(t_game *g);
-void	draw_scene(t_game *g);
-void	draw_textured_line(t_game *game, t_draw_params *params);
-int		get_texture_pixel(t_game *game, int tex_num, int tex_x, int tex_y);
-void	perform_dda(t_game *g, t_ray *r);
-void	draw_gun(t_game *g);
-void	put_pixel_to_img(t_game *game, int x, int y, int color);
+void			load_textures(t_game *g);
+void			draw_scene(t_game *g);
+void			draw_textured_line(t_game *game, t_draw_params *params);
+int				get_texture_pixel(t_game *game, int tex_num, int tex_x, int tex_y);
+void			perform_dda(t_game *g, t_ray *r);
+void			draw_gun(t_game *g);
+void			draw_crosshair(t_game *g);
+void			draw_advanced_crosshair(t_game *g);
+void			put_pixel_to_img(t_game *game, int x, int y, int color);
 
 /*MINIMAP*/
-void	draw_mini_map(t_game *game);
+void			draw_npc(t_game *game);
+void			render_player(t_game *game);
+unsigned int	get_minimap_color(char cell);
+void			draw_mini_map(t_game *game);
 
 /*FREE*/
-void	free_texture(t_texture *texture);
-void	free_map(t_map *map);
+void			free_texture(t_texture *texture);
+void			free_map(t_map *map);
 
 #endif

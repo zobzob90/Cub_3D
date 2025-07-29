@@ -1,7 +1,7 @@
-NO ./texture/xpm/wall_north.xpm
-SO ./texture/xpm/wall_south.xpm
-WE ./texture/xpm/wall_west.xpm
-EA ./texture/xpm/wall_east.xpm
+NO ./texture/xpm/wall/wall_north.xpm
+SO ./texture/xpm/wall/wall_south.xpm
+WE ./texture/xpm/wall/wall_west.xpm
+EA ./texture/xpm/wall/wall_east.xpm
 
 C 20,20
 

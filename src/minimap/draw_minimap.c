@@ -6,79 +6,34 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 10:14:10 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/23 12:54:51 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/29 13:20:06 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../inc/cub3d.h"
 
-static unsigned int	get_minimap_color(char cell)
+static void	draw_minimap_cell(t_game *game, int px, int py, unsigned int color)
 {
-	if (cell == '1')
-		return (0x888888);
-	else if (cell == 'D')
-		return (0xFFD700);
-	else if (cell == 'O')
-		return (0xFF8800);
-	return (0x222222);
-}
-
-static void	render_player(t_game *game)
-{
-	int	px;
-	int	py;
 	int	y;
 	int	x;
 
-	px = 10 + (int)game->player.x * MINIMAP_CELL;
-	py = 10 + (int)game->player.y * MINIMAP_CELL;
-	y = -2;
-	x = -2;
-	while (y <= 2)
+	y = 0;
+	while (y < MINIMAP_CELL)
 	{
-		while (x <= 2)
+		x = 0;
+		while (x < MINIMAP_CELL)
 		{
-			put_pixel_to_img(game, px + x, py + y, 0x00FF00);
+			put_pixel_to_img(game, px + x, py + y, color);
 			x++;
 		}
 		y++;
 	}
 }
 
-static void	draw_npc(t_game *game)
-{
-	int	i;
-	int	px;
-	int	py;
-	int	x;
-	int	y;
-
-	i = 0;
-	while (i < game->map->num_npcs)
-	{
-		px = 10 + (int)game->map->npcs[i].x * MINIMAP_CELL;
-		py = 10 + (int)game->map->npcs[i].y * MINIMAP_CELL;
-		y = -1;
-		while (y <= 1)
-		{
-			x = -1;
-			while (x <= 1)
-			{
-				put_pixel_to_img(game, px + x, py + y, 0xFF0000);
-				x++;	
-			}
-			y++;
-		}
-		i++;
- 	}
-}
-
-void	draw_mini_map(t_game *game)
+static void	draw_minimap_grid(t_game *game)
 {
 	int				i;
 	int				j;
-	int				y;
-	int				x;
 	int				px;
 	int				py;
 	unsigned int	color;
@@ -92,21 +47,16 @@ void	draw_mini_map(t_game *game)
 			px = 10 + j * MINIMAP_CELL;
 			py = 10 + i * MINIMAP_CELL;
 			color = get_minimap_color(game->map->grid[i][j]);
-			y = 0;
-			while (y < MINIMAP_CELL)
-			{
-				x = 0;
-				while (x < MINIMAP_CELL)
-				{
-					put_pixel_to_img(game, px + x, py + y, color);
-					x++;
-				}
-				y++;
-			}
+			draw_minimap_cell(game, px, py, color);
 			j++;
 		}
 		i++;
 	}
+}
+
+void	draw_mini_map(t_game *game)
+{
+	draw_minimap_grid(game);
 	render_player(game);
 	draw_npc(game);
 }

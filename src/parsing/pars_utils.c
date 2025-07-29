@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:16:35 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/22 15:46:08 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/29 13:27:51 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ bool	is_color(const char *line)
 		return (false);
 	while (*line == ' ' || *line == '\t')
 		line++;
-	if ((*line == 'F' || *line == 'C') && (*(line + 1) == ' ' || *(line + 1) == '\t'))
+	if ((*line == 'F' || *line == 'C')
+		&& (*(line + 1) == ' ' || *(line + 1) == '\t'))
 		return (true);
 	return (false);
 }

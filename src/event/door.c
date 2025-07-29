@@ -6,61 +6,35 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 14:52:07 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/21 15:16:55 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/29 13:14:35 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/cub3d.h"
 
-bool	is_door(t_game *game, int x, int y)
+static bool	check_door_at_position(t_game *game, int check_x, int check_y,
+								double check_distance)
 {
-	if (x < 0 || y < 0 || x >= game->map->width || y >= game->map->height)
-		return (false);
-	return (game->map->grid[y][x] == 'D' || game->map->grid[y][x] == 'O');
-}
+	double	distance;
 
-t_door	*find_door(t_game *game, int x, int y)
-{
-	int	i;
-
-	i = 0;
-	while (i < game->map->num_doors)
+	distance = sqrt(pow(game->player.x - check_x - 0.5, 2)
+			+ pow(game->player.y - check_y - 0.5, 2));
+	if (distance <= check_distance && is_door(game, check_x, check_y))
 	{
-		if (game->map->doors[i].x == x && game->map->doors[i].y == y)
-			return (&game->map->doors[i]);
-		i++;
+		toggle_door(game, check_x, check_y);
+		return (true);
 	}
-	return (NULL);
+	return (false);
 }
 
-void	toggle_door(t_game *game, int x, int y)
+static bool	search_door_around_player(t_game *game, int player_x, int player_y)
 {
-	t_door	*door;
-
-	door = find_door(game, x, y);
-	if (door)
-	{
-		door->open = !door->open;
-		if (door->open)
-			game->map->grid[y][x] = 'O';
-		else
-			game->map->grid[y][x] = 'D';
-	}
-}
-
-void	handle_door_interaction(t_game *game)
-{
-	int		player_x;
-	int		player_y;
 	double	check_distance;
 	int		check_x;
 	int		check_y;
 	int		dx;
 	int		dy;
-	double	distance;
 
-	player_x = (int)game->player.x;
-	player_y = (int)game->player.y;
 	check_distance = 1.5;
 	dy = -1;
 	while (dy <= 1)
@@ -70,15 +44,21 @@ void	handle_door_interaction(t_game *game)
 		{
 			check_x = player_x + dx;
 			check_y = player_y + dy;
-			distance = sqrt(pow(game->player.x - check_x - 0.5, 2) + 
-							pow(game->player.y - check_y - 0.5, 2));
-			if (distance <= check_distance && is_door(game, check_x, check_y))
-			{
-				toggle_door(game, check_x, check_y);
-				return ;
-			}
+			if (check_door_at_position(game, check_x, check_y, check_distance))
+				return (true);
 			dx++;
 		}
 		dy++;
 	}
+	return (false);
+}
+
+void	handle_door_interaction(t_game *game)
+{
+	int	player_x;
+	int	player_y;
+
+	player_x = (int)game->player.x;
+	player_y = (int)game->player.y;
+	search_door_around_player(game, player_x, player_y);
 }

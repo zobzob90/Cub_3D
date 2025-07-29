@@ -46,6 +46,7 @@ SRCS = 	src/main.c \
         src/event/event.c \
         src/event/mouse_event.c \
         src/event/door.c \
+		src/event/door_utils.c \
         src/raycasting/raycaster.c \
         src/raycasting/raycaster_dda.c \
         src/raycasting/draw.c \
@@ -53,9 +54,11 @@ SRCS = 	src/main.c \
         src/raycasting/draw_gun.c \
         src/raycasting/texture.c \
         src/collision/collision.c \
+		src/minimap/minimap_utils.c\
         src/minimap/draw_minimap.c \
         src/parsing/pars_utils.c \
         src/parsing/parse_color.c \
+		src/parsing/parse_file_utils.c\
         src/parsing/parse_file.c \
         src/parsing/parse_map.c \
         src/parsing/parse_texture.c \
@@ -64,7 +67,8 @@ SRCS = 	src/main.c \
         src/parsing/parse_player.c \
         src/utils/free.c \
         src/utils/init.c \
-        src/utils/init_dir.c \
+		src/utils/init_dir.c\
+		src/utils/init_map.c\
         src/utils/init_main_struct.c \
         src/npc/init_npc.c \
         src/npc/update_npc.c \

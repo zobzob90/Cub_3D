@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:13:33 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/22 15:27:18 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/29 13:29:25 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ static bool	check_inside(t_map *map)
 		while (j < map->width - 1)
 		{
 			if (map->grid[i][j] == '0' || map->grid[i][j] == 'N'
-				|| map->grid[i][j] == 'S' || map->grid[i][j] == 'O' || map->grid[i][j] == 'X'
+				|| map->grid[i][j] == 'S' || map->grid[i][j] == 'O'
+				|| map->grid[i][j] == 'X'
 				|| map->grid[i][j] == 'E' || map->grid[i][j] == 'D')
 			{
 				if (map->grid[i - 1][j] == ' ' || map->grid[i + 1][j] == ' '

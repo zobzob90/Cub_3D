@@ -6,11 +6,58 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:08:55 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/22 15:26:49 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:50:19 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../inc/cub3d.h"
+
+static bool	assign_texture_path_noso(char *direction, char *path, t_map *map)
+{
+	if (!ft_strncmp(direction, "NO", 3))
+	{
+		if (map->texture.no)
+			return (false);
+		map->texture.no = path;
+	}
+	else if (!ft_strncmp(direction, "SO", 3))
+	{
+		if (map->texture.so)
+			return (false);
+		map->texture.so = path;
+	}
+	else
+		return (false);
+	return (true);
+}
+
+static bool	assign_texture_path_eawe(char *direction, char *path, t_map *map)
+{
+	if (!ft_strncmp(direction, "EA", 3))
+	{
+		if (map->texture.ea)
+			return (false);
+		map->texture.ea = path;
+	}
+	else if (!ft_strncmp(direction, "WE", 3))
+	{
+		if (map->texture.we)
+			return (false);
+		map->texture.we = path;
+	}
+	else
+		return (false);
+	return (true);
+}
+
+static bool	assign_texture_path(char *direction, char *path, t_map *map)
+{
+	if (assign_texture_path_noso(direction, path, map))
+		return (true);
+	if (assign_texture_path_eawe(direction, path, map))
+		return (true);
+	return (false);
+}
 
 bool	parse_texture(char *line, t_map *map)
 {
@@ -29,31 +76,7 @@ bool	parse_texture(char *line, t_map *map)
 	path = ft_strdup(tokens[1]);
 	if (!path)
 		return (ft_free_tab(tokens), false);
-	if (!ft_strncmp(tokens[0], "NO", 3))
-	{
-		if (map->texture.no)
-			return (free(path), ft_free_tab(tokens), false);
-		map->texture.no = path;
-	}
-	else if (!ft_strncmp(tokens[0], "SO", 3))
-	{
-		if (map->texture.so)
-			return (free(path), ft_free_tab(tokens), false);
-		map->texture.so = path;
-	}
-	else if (!ft_strncmp(tokens[0], "EA", 3))
-	{
-		if (map->texture.ea)
-			return (free(path), ft_free_tab(tokens), false);
-		map->texture.ea = path;
-	}
-	else if (!ft_strncmp(tokens[0], "WE", 3))
-	{
-		if (map->texture.we)
-			return (free(path), ft_free_tab(tokens), false);
-		map->texture.we = path;
-	}
-	else
+	if (!assign_texture_path(tokens[0], path, map))
 	{
 		free(path);
 		ft_free_tab(tokens);

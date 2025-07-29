@@ -6,18 +6,18 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:08:24 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/22 13:55:48 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:37:51 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../inc/cub3d.h"
 
 static bool	is_valid_color(int value)
 {
 	return (value >= 0 && value <= 255);
 }
 
-static int	is_valid_number_string(char *str)
+static int	is_val_numb(char *str)
 {
 	int	i;
 
@@ -49,16 +49,36 @@ static int	parse_rgb(char *str, t_color *color)
 		i++;
 	if (i != 3)
 		return (ft_free_tab(rgb), 0);
-	if (!is_valid_number_string(rgb[0]) || !is_valid_number_string(rgb[1]) || !is_valid_number_string(rgb[2]))
+	if (!is_val_numb(rgb[0]) || !is_val_numb(rgb[1]) || !is_val_numb(rgb[2]))
 		return (ft_free_tab(rgb), 0);
 	r = ft_atoi(rgb[0]);
 	g = ft_atoi(rgb[1]);
 	b = ft_atoi(rgb[2]);
 	if (!is_valid_color(r) || !is_valid_color(g) || !is_valid_color(b))
 		return (ft_free_tab(rgb), 0);
-	color->r = r, color->g = g, color->b = b;
-	ft_free_tab(rgb);
-	return (1);
+	color->r = r;
+	color->g = g;
+	color->b = b;
+	return (ft_free_tab(rgb), 1);
+}
+
+static bool	assign_color_to_map(char *type, t_color color, t_map *map)
+{
+	if (!ft_strncmp(type, "F", 1))
+	{
+		if (map->floor.r != -1)
+			return (false);
+		map->floor = color;
+	}
+	else if (!ft_strncmp(type, "C", 1))
+	{
+		if (map->ceiling.r != -1)
+			return (false);
+		map->ceiling = color;
+	}
+	else
+		return (false);
+	return (true);
 }
 
 bool	parse_color(char *line, t_map *map)
@@ -77,19 +97,7 @@ bool	parse_color(char *line, t_map *map)
 		return (ft_free_tab(tokens), false);
 	if (!parse_rgb(tokens[1], &color))
 		return (ft_free_tab(tokens), false);
-	if (!ft_strncmp(tokens[0], "F", 1))
-	{
-		if (map->floor.r != -1)
-			return (ft_free_tab(tokens), false);
-		map->floor = color;
-	}
-	else if (!ft_strncmp(tokens[0], "C", 1))
-	{
-		if (map->ceiling.r != -1)
-			return (ft_free_tab(tokens), false);
-		map->ceiling = color;
-	}
-	else
+	if (!assign_color_to_map(tokens[0], color, map))
 		return (ft_free_tab(tokens), false);
 	ft_free_tab(tokens);
 	return (true);

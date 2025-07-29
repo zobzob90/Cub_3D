@@ -6,11 +6,11 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 17:21:18 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/23 14:01:37 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:23:19 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../inc/cub3d.h"
 
 void	init_keys(t_game *game)
 {

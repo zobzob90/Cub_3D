@@ -6,11 +6,11 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 10:38:14 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/23 17:33:17 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:23:28 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../inc/cub3d.h"
 
 void	free_texture(t_texture *texture)
 {
@@ -35,8 +35,7 @@ void	free_map(t_map *map)
 	free_texture(&map->texture);
 }
 
-/*Free the textures and the main image*/
-void	cleanup_game(t_game *game)
+static void	cleanup_game_utils(t_game *game)
 {
 	if (game->tex_north)
 		mlx_destroy_image(game->mlx, game->tex_north);
@@ -55,6 +54,12 @@ void	cleanup_game(t_game *game)
 	if (game->sprite[2].img)
 		mlx_destroy_image(game->mlx, game->sprite[2].img);
 	free_texture(&game->map->texture);
+}
+
+/*Free the textures and the main image*/
+void	cleanup_game(t_game *game)
+{
+	cleanup_game_utils(game);
 	if (game->map->grid)
 		ft_free_tab(game->map->grid);
 	if (game->img)

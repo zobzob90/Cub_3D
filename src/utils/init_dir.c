@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_dir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdeliere <vdeliere@student.42.fr>          #+#  +:+       +#+        */
+/*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-07-15 08:47:37 by vdeliere          #+#    #+#             */
-/*   Updated: 2025-07-15 08:47:37 by vdeliere         ###   ########.fr       */
+/*   Created: 2025/07/29 15:23:03 by ertrigna          #+#    #+#             */
+/*   Updated: 2025/07/29 15:23:24 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../../inc/cub3d.h"
 
 static void	set_north_direction(t_player *player)
 {

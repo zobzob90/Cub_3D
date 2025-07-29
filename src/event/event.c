@@ -6,46 +6,52 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 15:31:53 by vdeliere          #+#    #+#             */
-/*   Updated: 2025/07/23 15:28:27 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/29 13:08:25 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/*Handle the key press*/
-int	handle_press_key(int key, t_game *g)
+static void	handle_control_key(int key, t_game *game)
 {
 	if (key == ESC)
-		close_win(g);
+		close_win(game);
 	if (key == W)
-		g->keys->w = true;
+		game->keys->w = true;
 	if (key == S)
-		g->keys->s = true;
+		game->keys->s = true;
 	if (key == A)
-		g->keys->a = true;
+		game->keys->a = true;
 	if (key == D)
-		g->keys->d = true;
+		game->keys->d = true;
 	if (key == UP)
-		g->keys->up = true;
+		game->keys->up = true;
 	if (key == DOWN)
-		g->keys->down = true;
+		game->keys->down = true;
 	if (key == LEFT)
-		g->keys->left = true;
+		game->keys->left = true;
 	if (key == RIGHT)
-		g->keys->right = true;
+		game->keys->right = true;
+}
+
+/*Handle the key press*/
+int	handle_press_key(int key, t_game *game)
+{
 	if (key == SHIFT_L)
-		g->keys->shift = true;
+		game->keys->shift = true;
 	if (key == CTRL_G || key == CTRL_D)
-		gun_fire(g);
+		gun_fire(game);
 	if (key == ALT_L || key == ALT_R)
-		capture_mouse(g);
+		capture_mouse(game);
 	if (key == E)
-		handle_door_interaction(g);
+		handle_door_interaction(game);
 	if (key == M)
 	{
-		g->show_minimap = !g->show_minimap;
-		printf("Minimap toggled: %d\n", g->show_minimap);
+		game->show_minimap = !game->show_minimap;
+		printf("Minimap toggled: %d\n", game->show_minimap);
 	}
+	else
+		handle_control_key(key, game);
 	return (0);
 }
 

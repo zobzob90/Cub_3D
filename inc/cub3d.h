@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:10:47 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/29 14:48:06 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/29 17:31:42 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -263,6 +263,11 @@ char			**read_files(char *path);
 bool			is_texture(const char *line);
 bool			is_color(const char *line);
 bool			is_map(const char *line);
+
+/*PARSE TEXTURE UTILS*/
+int				assign_texture_path_noso(char *direction, char *path, t_map *map);
+int				assign_texture_path_eawe(char *direction, char *path, t_map *map);
+int				assign_texture_path(char *direction, char *path, t_map *map);
 
 /*PARSE_TEXTURE*/
 bool			parse_texture(char *line, t_map *map);

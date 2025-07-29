@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:08:48 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/11 16:51:33 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/29 17:26:57 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,26 @@ static void	calculate_map_dim(char **lines, int start, t_map *map)
 	map->width = width;
 }
 
+static int	validate_after_map(char **lines, int start, int map_height)
+{
+	int	i;
+	int	j;
+
+	i = start + map_height;
+	while (lines[i])
+	{
+		j = 0;
+		while (lines[i][j])
+		{
+			if (lines[i][j] != ' ' && lines[i][j] != '\t' && lines[i][j] != '\n')
+				return (0);
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
 int	parse_map(char **lines, t_map *map)
 {
 	int	start;
@@ -70,6 +90,8 @@ int	parse_map(char **lines, t_map *map)
 	calculate_map_dim(lines, start, map);
 	if (map->height == 0 || map->width == 0)
 		return (ft_putstr_fd("Error\nInvalid map dimesions\n", 2), 0);
+	if (!validate_after_map(lines, start, map->height))
+		return (ft_putstr_fd("Error\nInvalid content after map\n", 2), 0);
 	if (!extract_map_grid(lines, start, map))
 		return (ft_putstr_fd("Error\nFailed to extract map grid\n", 2), 0);
 	if (!find_player(map))

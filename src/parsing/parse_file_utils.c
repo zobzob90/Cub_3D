@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/29 14:45:33 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/29 14:49:37 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/29 17:27:01 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	process_config_line(char *line, t_map *map, int *parsed_count)
 	if (is_texture(line))
 	{
 		if (!parse_texture(line, map))
-			return (ft_putstr_fd("Error\nInvalid texture\n", 2), 0);
+			return (0);
 		(*parsed_count)++;
 	}
 	else if (is_color(line))

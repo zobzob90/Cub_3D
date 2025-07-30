@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/01 14:10:47 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/29 17:31:42 by ertrigna         ###   ########.fr       */
+/*   Created: 2025/07/30 16:01:01 by ertrigna          #+#    #+#             */
+/*   Updated: 2025/07/30 16:04:48 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ typedef struct s_zbuffer_draw
 
 typedef struct s_sprite
 {
-	void 	*img;
+	void	*img;
 	char	*img_data;
 	int		width;
 	int		height;
@@ -148,7 +148,7 @@ typedef struct s_npc
 	bool	see_player;
 	int		anim_frame;
 	int		anim_timer;
-} 	t_npc;
+}	t_npc;
 
 typedef struct s_map
 {
@@ -181,6 +181,15 @@ typedef struct s_weapon
 	int		fire_timer;
 	int		fire_duration;
 }	t_weapon;
+
+typedef struct s_line
+{
+	int		dx;
+	int		dy;
+	int		steps;
+	float	x_inc;
+	float	y_inc;
+}	t_line;
 
 typedef struct s_ray
 {
@@ -253,7 +262,7 @@ typedef struct s_game
 	t_weapon	gun;
 	int			num_npc;
 	t_npc		*npc;
-	t_sprite	sprite[3];  // Tableau pour 3 frames d'animation
+	t_sprite	sprite[3];
 	double		z_buffer[WIDTH];
 	bool		show_minimap;
 }	t_game;
@@ -265,8 +274,10 @@ bool			is_color(const char *line);
 bool			is_map(const char *line);
 
 /*PARSE TEXTURE UTILS*/
-int				assign_texture_path_noso(char *direction, char *path, t_map *map);
-int				assign_texture_path_eawe(char *direction, char *path, t_map *map);
+int				assign_texture_path_noso(char *direction,
+					char *path, t_map *map);
+int				assign_texture_path_eawe(char *direction,
+					char *path, t_map *map);
 int				assign_texture_path(char *direction, char *path, t_map *map);
 
 /*PARSE_TEXTURE*/
@@ -335,7 +346,8 @@ void			cleanup_game(t_game *game);
 bool			is_valid_position(t_game *game, double x, double y);
 bool			can_move_to(t_game *game, double new_x, double new_y);
 void			move_player_safe(t_game *game, double delta_x, double delta_y);
-bool			check_wall_collision(t_game *game, double x, double y, double margin);
+bool			check_wall_collision(t_game *game, double x,
+					double y, double margin);
 
 /*DOOR MANAGEMENT*/
 void			handle_door_interaction(t_game *game);
@@ -348,25 +360,54 @@ void			load_pig_sprite(t_game *game);
 void			update_single_npc(t_game *game, t_npc *npc);
 void			update_npc(t_game *game);
 void			draw_npcs_sprites(t_game *game);
-void			draw_sprite_column(t_game *game, int sprite_screen_x, int sprite_height, int sprite_width);
-void			draw_sprite_column_with_zbuffer(t_game *game, t_zbuffer_draw *draw, int sprite_height, int sprite_width);
-void			calculate_sprite_transform(t_game *game, t_npc *npc, double *trans_x, double *trans_y);
+void			draw_sprite_column(t_game *game, int sprite_screen_x,
+					int sprite_height, int sprite_width);
+void			draw_sprite_column_with_zbuffer(t_game *game,
+					t_zbuffer_draw *draw, int sprite_height, int sprite_width);
+void			calculate_sprite_transform(t_game *game,
+					t_npc *npc, double *trans_x, double *trans_y);
+double			calculate_sprite_distance(t_npc *npc, t_player *player);
+void			setup_sprite_draw(t_zbuffer_draw *draw, t_npc *npc,
+					int sprite_screen_x, double transform_y);
+void			init_sprite_bounds(t_sprite_draw *draw, int sprite_screen_x,
+					int sprite_height, int sprite_width);
 int				get_pixel_from_sprite(t_sprite *sprite, int x, int y);
 int				is_transparent_pixel(int color);
-void			init_sprite_bounds(t_sprite_draw *draw, int sprite_screen_x, int sprite_height, int sprite_width);
-void			init_zbuffer_bounds(t_zbuffer_draw *draw, int sprite_screen_x, int sprite_height, int sprite_width);
-void			draw_sprite_pixel(t_game *game, t_sprite_draw *draw, int sprite_height, int sprite_width);
-void			draw_zbuffer_pixel(t_game *game, t_zbuffer_draw *draw, int sprite_height, int sprite_width);
+void			init_sprite_bounds(t_sprite_draw *draw,
+					int sprite_screen_x, int sprite_height, int sprite_width);
+void			init_zbuffer_bounds(t_zbuffer_draw *draw,
+					int sprite_screen_x, int sprite_height, int sprite_width);
+void			draw_sprite_pixel(t_game *game,
+					t_sprite_draw *draw, int sprite_height, int sprite_width);
+void			draw_zbuffer_pixel(t_game *game,
+					t_zbuffer_draw *draw, int sprite_height, int sprite_width);
+void			render_zbuffer_column(t_game *game, t_zbuffer_draw *draw,
+					int sprite_height, int tex_x);
 
 /*RAYCASTING*/
 void			load_textures(t_game *g);
 void			draw_scene(t_game *g);
 void			draw_textured_line(t_game *game, t_draw_params *params);
-int				get_texture_pixel(t_game *game, int tex_num, int tex_x, int tex_y);
+int				get_texture_pixel(t_game *game,
+					int tex_num, int tex_x, int tex_y);
 void			perform_dda(t_game *g, t_ray *r);
 void			draw_gun(t_game *g);
+/*CROSSHAIR*/
+typedef struct s_cross_params
+{
+	int	center_x;
+	int	center_y;
+	int	gap;
+}	t_cross_params;
+
 void			draw_crosshair(t_game *g);
+void			draw_dynamic_crosshair(t_game *g);
+void			draw_crosshair_line(t_game *g, int coords[4]);
+void			draw_center_dot(t_game *g, int center_x, int center_y);
+int				calculate_gap(t_game *g);
+void			draw_horizontal_lines(t_game *g, t_cross_params params);
 void			draw_advanced_crosshair(t_game *g);
+void			draw_dynamic_crosshair(t_game *g);
 void			put_pixel_to_img(t_game *game, int x, int y, int color);
 
 /*MINIMAP*/

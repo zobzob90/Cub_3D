@@ -43,16 +43,18 @@ INVALID_MAPS = \
 	map/invalid_map/overflow_color.cub
 
 SRCS = 	src/main.c \
-        src/event/event.c \
-        src/event/mouse_event.c \
-        src/event/door.c \
+		src/event/event.c \
+		src/event/mouse_event.c \
+		src/event/door.c \
 		src/event/door_utils.c \
-        src/raycasting/raycaster.c \
-        src/raycasting/raycaster_dda.c \
-        src/raycasting/draw.c \
-        src/raycasting/draw2.c \
-        src/raycasting/draw_gun.c \
+		src/raycasting/raycaster.c \
+		src/raycasting/raycaster_dda.c \
+		src/raycasting/draw.c \
+		src/raycasting/draw2.c \
+		src/raycasting/draw_gun.c \
         src/raycasting/texture.c \
+		src/raycasting/draw_cross.c \
+		src/raycasting/draw_cross_utils.c \
         src/collision/collision.c \
 		src/minimap/minimap_utils.c\
         src/minimap/draw_minimap.c \

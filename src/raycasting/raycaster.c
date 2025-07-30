@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 14:56:16 by vdeliere          #+#    #+#             */
-/*   Updated: 2025/07/29 13:13:15 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/30 14:17:12 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,8 @@ static void	cast_single_ray(t_game *g, int x)
 	int				end;
 	t_draw_params	params;
 
-	init_ray_vars(g, &ray, x);
-	init_step_and_side(g, &ray);
-	perform_dda(g, &ray);
-	calculate_distance(g, &ray);
+	(init_ray_vars(g, &ray, x), init_step_and_side(g, &ray));
+	(perform_dda(g, &ray), calculate_distance(g, &ray));
 	if (ray.perp_wall_dist > 0)
 		line_height = (int)(HEIGHT / ray.perp_wall_dist);
 	else
@@ -127,7 +125,7 @@ void	draw_scene(t_game *g)
 	mlx_put_image_to_window(g->mlx, g->win, g->img, 0, 0);
 	draw_npcs_sprites(g);
 	draw_gun(g);
-	draw_crosshair(g);
+	draw_dynamic_crosshair(g);
 	if (g->show_minimap)
 		draw_mini_map(g);
 }

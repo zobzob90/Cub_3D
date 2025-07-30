@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:08:48 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/29 17:26:57 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/30 14:36:45 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ static int	validate_after_map(char **lines, int start, int map_height)
 		j = 0;
 		while (lines[i][j])
 		{
-			if (lines[i][j] != ' ' && lines[i][j] != '\t' && lines[i][j] != '\n')
+			if (lines[i][j] != ' ' && lines[i][j] != '\t'
+					&& lines[i][j] != '\n')
 				return (0);
 			j++;
 		}

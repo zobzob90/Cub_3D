@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 14:17:14 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/29 17:35:05 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/30 16:12:14 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ int	main(int argc, char **argv)
 	game.img = mlx_new_image(game.mlx, WIDTH, HEIGHT);
 	game.img_data = mlx_get_data_addr(game.img,
 			&game.bpp, &game.size_line, &game.endian);
-	(load_textures(&game), load_pig_sprite(&game), draw_scene(&game));
+	load_textures(&game);
+	draw_scene(&game);
 	mlx_hook(game.win, 2, 1L << 0, handle_press_key, &game);
 	mlx_hook(game.win, 3, 1L << 1, handle_release_key, &game);
 	mlx_hook(game.win, 17, 0, close_win, &game);

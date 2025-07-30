@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 12:32:33 by vdeliere          #+#    #+#             */
-/*   Updated: 2025/07/24 17:37:37 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/30 14:09:39 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,79 +62,5 @@ void	draw_gun(t_game *g)
 			screen_x++;
 		}
 		screen_y++;
-	}
-}
-
-static void	draw_crosshair_line(t_game *g, int start_x, int start_y,
-							int end_x, int end_y)
-{
-	int	dx;
-	int	dy;
-	int	steps;
-	int	i;
-	float	x_inc;
-	float	y_inc;
-	float	x;
-	float	y;
-
-	dx = end_x - start_x;
-	dy = end_y - start_y;
-	if (abs(dx) > abs(dy))
-		steps = abs(dx);
-	else
-		steps = abs(dy);
-	x_inc = (float)dx / steps;
-	y_inc = (float)dy / steps;
-	x = start_x;
-	y = start_y;
-	i = 0;
-	while (i <= steps)
-	{
-		put_gun_pixel(g, (int)x, (int)y, 0xFF0000);
-		x += x_inc;
-		y += y_inc;
-		i++;
-	}
-}
-
-void	draw_crosshair(t_game *g)
-{
-	int	center_x;
-	int	center_y;
-	int	size;
-
-	center_x = WIDTH / 2;
-	center_y = HEIGHT / 2 + 100;
-	size = 15;
-	draw_crosshair_line(g, center_x - size, center_y, center_x + size, center_y);
-	draw_crosshair_line(g, center_x, center_y - size, center_x, center_y + size);
-}
-
-void	draw_advanced_crosshair(t_game *g)
-{
-	int	center_x;
-	int	center_y;
-	int	outer_size;
-	int	inner_size;
-	int	thickness;
-	int	i;
-
-	center_x = WIDTH / 2;
-	center_y = HEIGHT / 2 + 100;
-	outer_size = 20;
-	inner_size = 5;
-	thickness = 2;
-	i = -thickness;
-	while (i <= thickness)
-	{
-		draw_crosshair_line(g, center_x - outer_size, center_y + i, 
-			center_x - inner_size, center_y + i);
-		draw_crosshair_line(g, center_x + inner_size, center_y + i,
-			center_x + outer_size, center_y + i);
-		draw_crosshair_line(g, center_x + i, center_y - outer_size,
-			center_x + i, center_y - inner_size);
-		draw_crosshair_line(g, center_x + i, center_y + inner_size,
-			center_x + i, center_y + outer_size);
-		i++;
 	}
 }

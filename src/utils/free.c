@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 10:38:14 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/29 15:23:28 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/30 16:52:15 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,25 @@ void	cleanup_game(t_game *game)
 	cleanup_game_utils(game);
 	if (game->map->grid)
 		ft_free_tab(game->map->grid);
-	if (game->img)
+	if (game->map->doors)
+		free(game->map->doors);
+	if (game->map->npcs)
+		free(game->map->npcs);
+	if (game->keys && game->keys->lock_mouse && game->win && game->mlx)
+	{
+		mlx_mouse_show(game->mlx, game->win);
+		game->keys->lock_mouse = false;
+	}
+	if (game->img && game->mlx)
 		mlx_destroy_image(game->mlx, game->img);
-	if (game->win)
-		mlx_destroy_window(game->mlx, game->win);
+	if (game->win && game->mlx)
+	{
+		(mlx_do_sync(game->mlx), mlx_destroy_window(game->mlx, game->win));
+	}
 	if (game->keys)
 		free(game->keys);
 	if (game->mlx)
 	{
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
+		(mlx_destroy_display(game->mlx), free(game->mlx));
 	}
 }

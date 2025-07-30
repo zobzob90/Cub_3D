@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 16:32:03 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/24 16:40:42 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/30 14:27:50 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	draw_sprite_column_with_zbuffer(t_game *game, t_zbuffer_draw *draw,
 	}
 }
 
-void	calculate_sprite_transform(t_game *game, t_npc *npc, double *trans_x, double *trans_y)
+void	calculate_sprite_transform(t_game *game, t_npc *npc,
+		double *trans_x, double *trans_y)
 {
 	double	sprite_x;
 	double	sprite_y;

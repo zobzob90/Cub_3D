@@ -1,7 +1,7 @@
-NO ./texture/xpm/alien_wall.xpm
-SO ./texture/xpm/alien_puss.xpm
-WE ./texture/xpm/alien.xpm
-EA ./texture/xpm/wall_futur_2.xpm
+NO ./texture/xpm/wall/alien_wall.xpm
+SO ./texture/xpm/wall/alien_puss.xpm
+WE ./texture/xpm/wall/alien.xpm
+EA ./texture/xpm/wall/wall_futur_2.xpm
 
 F 0,0,0
 C 0,255,0

@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 11:08:39 by ertrigna          #+#    #+#             */
-/*   Updated: 2025/07/29 17:26:21 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/07/30 14:28:49 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	parse_file(char *filename, t_map *map)
 	if (!check_file_extension(filename))
 	{
 		ft_free_tab(lines);
-		return (ft_putstr_fd("Error\nInvalid file extension : Please use .cub files.\n", 2), 0);
+		return (ft_putstr_fd("Error\nInvalid file extension.\n", 2), 0);
 	}
 	init_map(map);
 	result = parse_file_content(lines, map);

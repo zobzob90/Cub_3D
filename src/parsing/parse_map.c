@@ -92,7 +92,10 @@ int	parse_map(char **lines, t_map *map)
 	if (map->height == 0 || map->width == 0)
 		return (ft_putstr_fd("Error\nInvalid map dimesions\n", 2), 0);
 	if (!validate_after_map(lines, start, map->height))
+	{
+		free_texture(&map->texture);
 		return (ft_putstr_fd("Error\nInvalid content after map\n", 2), 0);
+	}
 	if (!extract_map_grid(lines, start, map))
 		return (ft_putstr_fd("Error\nFailed to extract map grid\n", 2), 0);
 	if (!find_player(map))

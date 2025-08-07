@@ -6,7 +6,7 @@
 /*   By: ertrigna <ertrigna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 16:19:31 by vdeliere          #+#    #+#             */
-/*   Updated: 2025/07/30 16:33:31 by ertrigna         ###   ########.fr       */
+/*   Updated: 2025/08/07 14:01:16 by ertrigna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	capture_mouse(t_game *g)
 	}
 	else if (g->keys->lock_mouse)
 	{
-		if (mlx_mouse_show(g->mlx, g->win) == 0)
+		if (mlx_mouse_show(g->mlx, g->win) != 0)
 		{
 			g->keys->lock_mouse = false;
 			ft_printf("Mouse mod OFF\n");

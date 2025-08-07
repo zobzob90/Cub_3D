@@ -11,12 +11,12 @@ MLX_LIB = $(MLX_DIR)/libmlx_Linux.a
 BUILD_DIR = build
 
 define progress_bar
-	@echo -n "["
+	@echo -n "$(1) ["
 	@for i in $$(seq 1 20); do \
-		sleep 0.005; \
+		sleep 0.02; \
 		printf "#"; \
 	done
-	@echo "] Done! 🚀"
+	@echo "] Done! ✅"
 endef
 
 
@@ -90,14 +90,19 @@ MLX_FLAGS =  -L$(MLX_DIR) -lmlx_Linux -L/usr/lib/x11 -lXext -lX11 -lm
 all: $(MLX_LIB) $(LIBFT_LIB) $(NAME)
 
 $(MLX_LIB):
-	@$(MAKE) -C $(MLX_DIR)
+	@echo "📦 Compilation de MLX..."
+	@$(MAKE) -C $(MLX_DIR) > /dev/null 2>&1
+	$(call progress_bar,MLX)
 
 $(LIBFT_LIB):
-	@$(MAKE) -C $(LIBFT_DIR)
+	@echo "📚 Compilation de libft..."
+	@$(MAKE) -C $(LIBFT_DIR) > /dev/null 2>&1
+	$(call progress_bar,LIBFT)
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(INC) $(OBJS) -L$(LIBFT_DIR) -lft $(MLX_FLAGS) -lreadline -o $(NAME)
-	$(progress_bar)
+	@echo "🔗 Liaison de $(NAME)..."
+	@$(CC) $(CFLAGS) $(INC) $(OBJS) -L$(LIBFT_DIR) -lft $(MLX_FLAGS) -lreadline -o $(NAME) 2>/dev/null
+	$(call progress_bar,CUB3D)
 	@echo "✅ Compilation de $(NAME) terminée."
 	@echo "\033[32m" 
 	@echo "\033[5m"  # Active le clignotement
@@ -107,18 +112,18 @@ $(NAME): $(OBJS)
 
 $(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -I$(MLX_DIR) $(INC) -MMD -MP -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(MLX_DIR) $(INC) -MMD -MP -c $< -o $@ 2>/dev/null
 
 clean:
 	@rm -rf $(BUILD_DIR)
-	@$(MAKE) clean -C $(LIBFT_DIR)
-	@$(MAKE) clean -C $(MLX_DIR)
+	@$(MAKE) clean -C $(LIBFT_DIR) > /dev/null 2>&1
+	@$(MAKE) clean -C $(MLX_DIR) > /dev/null 2>&1
 	@echo "🧹 Suppression des fichiers objets et dépendances terminée."
 
 fclean: clean
 	@rm -f $(NAME)
-	@$(MAKE) fclean -C $(LIBFT_DIR)
-	@$(MAKE) clean -C $(MLX_DIR)
+	@$(MAKE) fclean -C $(LIBFT_DIR) > /dev/null 2>&1
+	@$(MAKE) clean -C $(MLX_DIR) > /dev/null 2>&1
 	@echo "🗑️ Suppression de $(NAME) terminée."
 
 re: fclean all

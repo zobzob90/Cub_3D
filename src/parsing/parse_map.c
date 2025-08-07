@@ -60,7 +60,8 @@ static void	calculate_map_dim(char **lines, int start, t_map *map)
 	map->width = width;
 }
 
-static int	validate_after_map(char **lines, int start, int map_height)
+static int	validate_after_map(char **lines, int start, int map_height,
+		t_map *map)
 {
 	int	i;
 	int	j;
@@ -73,7 +74,7 @@ static int	validate_after_map(char **lines, int start, int map_height)
 		{
 			if (lines[i][j] != ' ' && lines[i][j] != '\t'
 					&& lines[i][j] != '\n')
-				return (0);
+				return (free_texture(&map->texture), 0);
 			j++;
 		}
 		i++;
@@ -91,7 +92,7 @@ int	parse_map(char **lines, t_map *map)
 	calculate_map_dim(lines, start, map);
 	if (map->height == 0 || map->width == 0)
 		return (ft_putstr_fd("Error\nInvalid map dimesions\n", 2), 0);
-	if (!validate_after_map(lines, start, map->height))
+	if (!validate_after_map(lines, start, map->height, map))
 		return (ft_putstr_fd("Error\nInvalid content after map\n", 2), 0);
 	if (!extract_map_grid(lines, start, map))
 		return (ft_putstr_fd("Error\nFailed to extract map grid\n", 2), 0);

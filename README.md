@@ -1,42 +1,57 @@
-# 🕹️ Cub3D
+🕹️ Cub3D
 
-Un moteur 3D inspiré de *Duke Nukem 3D*, réalisé en **C** avec la **MiniLibX** dans le cadre du cursus 42.  
-Ce projet implémente le raycasting, un système de portes interactives, des PNJ animés, un mini-map et la gestion de textures PNG/XPM.
+Un moteur 3D inspiré de Duke Nukem 3D, réalisé en C avec la MiniLibX dans le cadre du cursus 42.
+Le projet implémente :
 
----
-## 🚀 Installation & Lancement
+    🎯 Raycasting façon Wolfenstein 3D
 
-bash
+    🚪 Portes interactives
+
+    🧍 PNJ animés
+
+    🗺 Mini-map
+
+    🖼 Textures PNG/XPM
+
+    ✅ Parsing strict des maps
+
+🚀 Installation & Lancement
+
 git clone git@github.com:zobzob90/Cub_3D.git
 cd cub3d
 make
 ./cub3D map/valid_map/tuto.cub
+
+📌 Pour tester toutes les maps invalides :
+
 make test
-test toutes les maps invalides
 
-🏷️ Badges
+| Partie             | État         |
+| ------------------ | ------------ |
+| Norminette         | ✅ OK         |
+| Partie obligatoire | ✅ OK         |
+| Bonus              | ✅ Fait       |
+| **Score final**    | 🏆 125 / 100 |
 
-Norminette Mandatory Bonus Score
-✅ Statut du Projet
-✅ Norminette : OK
-✅ Partie obligatoire : OK
-✅ Bonus : Fait
-🏆 Score final : 125/100
 
-## Screenshot
-<img width="1902" height="1064" alt="image" src="https://github.com/user-attachments/assets/2651c012-a039-476c-adf6-0f3fea82a9a8" />
+📸 Screenshot
+<img width="1902" height="1064" alt="Cub3D Screenshot" src="https://github.com/user-attachments/assets/2651c012-a039-476c-adf6-0f3fea82a9a8" />
 
 - 🎮 Contrôles
 
-W / A / S / D    → déplacement
-Alt puis ← / →   → rotation de la caméra
-E                → ouvrir / fermer une porte
-M                → Afficher / Fermer Minimap
-Clic gauche      → tirer
-Shit             → Sprinter
-ESC              → quitter le jeu
+| Touche / Action   | Effet                        |
+| ----------------- | ---------------------------- |
+| **W / A / S / D** | Déplacement                  |
+| **Alt** + ← / →   | Rotation caméra              |
+| **E**             | Ouvrir / fermer une porte    |
+| **M**             | Afficher / fermer la minimap |
+| **Clic gauche**   | Tirer                        |
+| **Shift**         | Sprinter                     |
+| **ESC**           | Quitter le jeu               |
 
-- Arborescence
+
+📂 Arborescence
+
 cub3d/
 ├── inc/                     # Headers principaux
 │   └── cub3d.h
@@ -46,36 +61,37 @@ cub3d/
 │   ├── get_next_line/
 │   └── libft.h
 ├── map/                     # Maps de test
-│   ├── valid_map/           # Maps valides (jouables)
-│   └── invalid_map/         # Maps invalides (tests parsing)
+│   ├── valid_map/           # Maps valides
+│   └── invalid_map/         # Maps invalides
 ├── mlx/                     # MiniLibX (librairie graphique)
 ├── src/
 │   ├── collision/           # Gestion des collisions
-│   ├── event/               # Gestion des événements clavier/souris
+│   ├── event/               # Événements clavier / souris
 │   ├── fire/                # Système de tir
-│   ├── minimap/             # Affichage de la mini-carte
-│   ├── move/                # Déplacement du joueur
-│   ├── npc/                 # Gestion des PNJ et sprites animés
-│   ├── parsing/             # Parsing et validation des fichiers .cub
+│   ├── minimap/              # Mini-carte
+│   ├── move/                # Déplacement joueur
+│   ├── npc/                 # PNJ & sprites animés
+│   ├── parsing/             # Parsing fichiers .cub
 │   ├── raycasting/          # Moteur de rendu 3D
 │   └── utils/               # Fonctions utilitaires
 ├── texture/                 # Textures PNG & XPM
-│   ├── wall/ gun/ npc/
-│   └── ...
 ├── main.c                   # Point d'entrée
 ├── Makefile                 # Compilation
 
-- 🛠️ Technologies
+🛠️ Technologies
 
-Langage : C
-Graphisme : MiniLibX (X11 / PNG / XPM)
-Compilation : Makefile
-Conforme à la Norme 42
+    Langage : C
 
+    Graphisme : MiniLibX (X11 / PNG / XPM)
+
+    Compilation : Makefile
+
+    Norme : Conforme à la Norme 42
 
 📜 Licence
 
 Projet réalisé dans le cadre du cursus 42 – pas de licence commerciale.
 🙋‍♂️ Auteur
+
 👤 zobzob90
 🔗 github.com/zobzob90

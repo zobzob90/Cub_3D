@@ -52,30 +52,30 @@ make test
 
 ## 📂 Arborescence
 
-cub3d/
-├── inc/ # Headers principaux
-│ └── cub3d.h
-├── libft/ # Libft + printf + get_next_line
-│ ├── ft_*.c
-│ ├── ft_printf/
-│ ├── get_next_line/
-│ └── libft.h
-├── map/ # Maps de test
-│ ├── valid_map/ # Maps valides
-│ └── invalid_map/ # Maps invalides
-├── mlx/ # MiniLibX (librairie graphique)
-├── src/
-│ ├── collision/ # Gestion des collisions
-│ ├── event/ # Événements clavier / souris
-│ ├── fire/ # Système de tir
-│ ├── minimap/ # Mini-carte
-│ ├── move/ # Déplacement joueur
-│ ├── npc/ # PNJ & sprites animés
-│ ├── parsing/ # Parsing fichiers .cub
-│ ├── raycasting/ # Moteur de rendu 3D
-│ └── utils/ # Fonctions utilitaires
-├── texture/ # Textures PNG & XPM
-├── main.c # Point d'entrée
+    cub3d/
+    ├── inc/ # Headers principaux
+    │ └── cub3d.h
+    ├── libft/ # Libft + printf + get_next_line
+    │ ├── ft_*.c
+    │ ├── ft_printf/
+    │ ├── get_next_line/
+    │ └── libft.h
+    ├── map/ # Maps de test
+    │ ├── valid_map/ # Maps valides
+    │ └── invalid_map/ # Maps invalides
+    ├── mlx/ # MiniLibX (librairie graphique)
+    ├── src/
+    │ ├── collision/ # Gestion des collisions
+    │ ├── event/ # Événements clavier / souris
+    │ ├── fire/ # Système de tir
+    │ ├── minimap/ # Mini-carte
+    │ ├── move/ # Déplacement joueur
+    │ ├── npc/ # PNJ & sprites animés
+    │ ├── parsing/ # Parsing fichiers .cub
+    │ ├── raycasting/ # Moteur de rendu 3D
+    │ └── utils/ # Fonctions utilitaires
+    ├── texture/ # Textures PNG & XPM
+    ├── main.c # Point d'entrée
 
 ## 🛠️ Technologies
 
@@ -89,7 +89,7 @@ cub3d/
 
 ## 📜 Licence
 
-Projet réalisé dans le cadre du cursus 42 – pas de licence commerciale.
-🙋‍♂️ Auteur
-👤 zobzob90
-🔗 github.com/zobzob90
+    Projet réalisé dans le cadre du cursus 42 – pas de licence commerciale.
+    🙋‍♂️ Auteur
+    👤 zobzob90
+    🔗 github.com/zobzob90

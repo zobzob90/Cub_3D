@@ -17,14 +17,17 @@ Le projet implémente :
 
 🚀 Installation & Lancement
 
-git clone git@github.com:zobzob90/Cub_3D.git
-cd cub3d
-make
-./cub3D map/valid_map/tuto.cub
+    git clone git@github.com:zobzob90/Cub_3D.git
+    
+    cd cub3d
+    
+    make
+    
+    ./cub3D map/valid_map/tuto.cub
 
 📌 Pour tester toutes les maps invalides :
 
-make test
+    make test
 
 | Partie             | État         |
 | ------------------ | ------------ |
